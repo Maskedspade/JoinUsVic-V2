@@ -6,8 +6,18 @@ Project Setup based on [Create React App](https://github.com/facebook/create-rea
 
 ## Getting Started
 
-1. Install dependencies: `npm install` in project root directory
-2. Run the react app in the development mode by `npm start`
-3. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-4.
+**WARNING: Please mind node version and use v.8.9.4. To use this version: run `nvm use 8.9.4`**
+
+1. To setup React: install dependencies: `npm install` in project root directory
+    - To start your React server in development mode on PORT 3000: run `npm start`
+2. To setup Rails (server end): go to 'joinusvicdata-app' folder => run `bundle install`
+3. Create 2 new local databases in psql: run `psql` => run `CREATE DATABASE joinusvic;` & `CREATE DATABASE joinusvic_test;`
+
+**WARNING: If you're working with Vagrant or vitual machines, run `rails s -b 0.0.0.0` to bind**
+4. Now seed your database!! Run `bin/rails db:setup`
+    - To start your Rails server: run `rails s`
+
+### To View
+  * Open [http://localhost:3000](http://localhost:3000) to view it in the browser
+  * Open [http://localhost:8080](http://localhost:8080) to view it in the browser
 
