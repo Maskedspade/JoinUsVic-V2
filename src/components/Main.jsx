@@ -20,7 +20,7 @@ export default class Main extends Component {
 
   componentDidMount() {
     // ajax call get user keywords input
-    axios.get('http:/\/localhost:3000/api/keywords')
+    axios.get('keywords')
     .then(response => {
         console.log(response.data);
         this.setState({
