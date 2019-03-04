@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react';
 import LocationDescription from './LocationDescription';
 import axios from 'axios';
-const options = [
-  {key: 'tourist', text: 'Toursit Stuff', value: 'tourist'},
-  {key: 'kombocha', text: 'Kombocha', value: 'kombocha'},
-  {key: 'animals', text: 'Where the animals go...', value: 'animals'}
-];
 
 
 export default class Main extends Component {
@@ -30,17 +25,16 @@ export default class Main extends Component {
   }
 
   render() {
+    let options = this.state.keywordList.map( keyword => {
+        return {
+            key:keyword.id,
+            text:keyword.name,
+            value:keyword.id
+        }
+    });
+
     return (
       <div className="main-all">
-        <div>
-            {this.state.keywordList.map( keyword => {
-                return(
-                    <div key={keyword.id}>
-                        <h1>{keyword.name}</h1>
-                    </div>
-                )
-            })}
-        </div>
         <LocationDescription />
         <Dropdown
             fluid
