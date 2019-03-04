@@ -39,7 +39,7 @@ Location.destroy_all
 loc1 = Location.create! ({
   name: 'Victoria public',
   address: 'Victoria, BC, Canada',
-  description: 'Capital of BC, Canada.',
+  description: 'Capital of British Columbia, Canada.',
   website: 'https://www.victoria.ca/#'
 })
 
@@ -150,14 +150,14 @@ loc10 = Location.create!({
 loc11 = Location.create!({
   name: 'The Bubble Tea Place',
   address: '532 Fisgard Street (Chinatown)',
-  description: 'Literally the name.'
+  description: 'Literally the name. It comes with a lot of bubbles.'
 })
 
 
 loc12 = Location.create!({
   name: 'Chattime',
   address: '1306 Douglas Street',
-  description: 'Chatime (Chinese: 日出茶太) is a Taiwanese global franchise teahouse chain based in Taiwan. Chatime is the largest teahouse franchise in the world. Its expansion and growth model is through franchising.
+  description: 'Chatime is a Taiwanese global franchise teahouse chain based in Taiwan. Chatime is the largest teahouse franchise in the world. Its expansion and growth model is through franchising.
   The one in Victoria is right on the main road (Douglas) in the center of the city!',
   website: 'http://chatime.com/index_nr.html#home'
 })
