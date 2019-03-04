@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import NavBar from './components/NavBar';
 import Main from './components/Main';
 import FunFacts from './components/FunFacts';
@@ -10,11 +10,20 @@ class App extends Component {
 
     this.state = {
       funfact_page: false,
+      funfactList: []
     };
   }
 
   componentDidMount() {
-    // TODO: ajax call get funfacts
+    axios.get('funfacts')
+    .then(response => {
+        console.log(response.data);
+        this.setState({
+            funfactList: response.data
+        });
+    })
+    // TODO: create a 404 page component to handle errors instead of console logging
+    .catch(error => console.log(error));
   }
 
   render() {
@@ -22,7 +31,7 @@ class App extends Component {
       <div className="app">
         <NavBar />
         <Main />
-        <FunFacts />
+        <FunFacts funfactList={this.state.funfactList}/>
       </div>
     );
   }
