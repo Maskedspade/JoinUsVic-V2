@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react';
-import axios from 'axios';
 import LocationDescription from './LocationDescription';
-
+import axios from 'axios';
 const options = [
   {key: 'tourist', text: 'Toursit Stuff', value: 'tourist'},
   {key: 'kombocha', text: 'Kombocha', value: 'kombocha'},
@@ -19,7 +18,6 @@ export default class Main extends Component {
   }
 
   componentDidMount() {
-    // ajax call get user keywords input
     axios.get('keywords')
     .then(response => {
         console.log(response.data);
