@@ -1,11 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
 
 import NavBar from './components/NavBar';
 import Main from './components/Main';
 import FunFacts from './components/FunFacts';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
@@ -14,25 +13,19 @@ class App extends React.Component {
     };
   }
 
-  render() {
-    const keywords_info = this.props.keywords_info;
-    const funfacts_info = this.props.funfacts_info;
-    const locations_info = this.props.locations_info;
+  componentDidMount() {
+    // TODO: ajax call get funfacts
+  }
 
+  render() {
     return (
       <div className="app">
         <NavBar />
         <Main />
-        <FunFacts funfacts_sub={funfacts_info}/>
+        <FunFacts />
       </div>
     );
   }
 }
 
 export default App
-
-// <Main locations_sub={locations_info} funfacts_sub={funfacts_info}/>
-
-
-// displays the app view
-// components: Canvas(with 3d model and product description on click), NavBar, FunFacts(with form)

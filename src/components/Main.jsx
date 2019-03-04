@@ -1,56 +1,7 @@
 import React, { Component } from 'react';
-import { Dropdown, } from 'semantic-ui-react';
-
+import { Dropdown } from 'semantic-ui-react';
+import axios from 'axios';
 import LocationDescription from './LocationDescription';
-
-// the 'text' within the options below needs to have the @keyword.name
-// this jsx will be given all the @keywords to read each name of the array
-
-// const options = [];
-// @keywords.forEach((keyword) => {
-//   options.push({
-//     key: keyword.id,
-//     text: keyword.name,
-//     value: keyword.name
-//   });
-// });
-
-// below is just hard coded for testing
-
-    // # @locations_data = {
-    // #   id1: {
-    // #     name: "Parliament Legislation",
-    // #     description: "tourism",
-    // #     rating: 5,
-    // #     website: 'www.yahoo.com',
-    // #     created_at: 2019030111111,
-    // #     updated_at: 2019030111111
-    // #   },
-    // #   id2: {
-    // #     name: "Empress Hotel",
-    // #     description: "tourism",
-    // #     rating: 3,
-    // #     website: 'www.lighthouse.ca',
-    // #     created_at: 2019030122222,
-    // #     updated_at: 2019030122222
-    // #   },
-    // #   id3: {
-    // #     name: "Pet Zoo",
-    //      description: "where animals go",
-    //      rating: 5,
-    //      website: 'www.google.com',
-    //      created_at: 2019030133333,
-    //      updated_at: 2019030133333
-    //    }
-    //  }
-    //   return(
-    //     <div key={props.info.created_at}>
-    //       {props.info.name}
-    //       {props.info.description}
-    //       {props.info.rating}
-    //     </div>
-    //   );
-    // }
 
 const options = [
   {key: 'tourist', text: 'Toursit Stuff', value: 'tourist'},
@@ -62,13 +13,45 @@ const options = [
 export default class Main extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+        keywordList: []
+    }
+  }
+
+  componentDidMount() {
+    // ajax call get user keywords input
+    axios.get('http:/\/localhost:3000/api/keywords')
+    .then(response => {
+        console.log(response.data);
+        this.setState({
+            keywordList: response.data
+        });
+    })
+    // TODO: create a 404 page component to handle errors instead of console logging
+    .catch(error => console.log(error));
   }
 
   render() {
     return (
-      <div>
+      <div className="main-all">
+        <div>
+            {this.state.keywordList.map( keyword => {
+                return(
+                    <div key={keyword.id}>
+                        <h1>{keyword.name}</h1>
+                    </div>
+                )
+            })}
+        </div>
         <LocationDescription />
-        <Dropdown />
+        <Dropdown
+            fluid
+            multiple
+            selection
+            placeholder='What can Victoria offer you today? ...'
+            options={options}
+            className="main-dropdown"
+        />
       </div>
     );
   }
