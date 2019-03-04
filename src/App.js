@@ -1,28 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { Component } from 'react'
+import './App.css'
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {bananasReceived: ""}
+    this.getBananas = this.getBananas.bind(this)
+  }
+  getBananas() {
+    this.setState({bananasReceived: "Where are my bananas?"})
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
+        <button
+          onClick={this.getBananas}
+          style={{marginTop: '25vh'}}
           >
-            Learn React
-          </a>
-        </header>
+          Get Bananas
+        </button>
+        <p>{this.state.bananasReceived}</p>
       </div>
     );
   }
 }
-
-export default App;
+export default App

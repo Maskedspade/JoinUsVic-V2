@@ -1,0 +1,10 @@
+class CreateRatings < ActiveRecord::Migration[5.1]
+  def change
+    create_table :ratings do |t|
+      t.float :score, :default => 0.0
+      t.integer :location_id, :null => false, :references => [:location, :id]
+
+      t.timestamps
+    end
+  end
+end
