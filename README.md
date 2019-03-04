@@ -4,6 +4,10 @@ JoinUsVic is a web app that provides insightful information about downtown Victo
 
 Project Setup based on [Create React App](https://github.com/facebook/create-react-app).
 
+This is Version II of the project. [Version I](https://github.com/yhfreeman/JoinUsVic-V1) is also available where the set up of Rails and React App are not separated. We later found out that separating the two would help with future deployment of the app. 
+
+*If the project runs on VM in development mode, we suggest creating an `.env` file => add `CHOKIDAR_USEPOLLING=true` which could be necessary for auto refresh on change in React*
+
 ## Getting Started
 
 **WARNING: Please mind node version and use v.8.9.4. To use this version: run `nvm use 8.9.4`**
@@ -14,10 +18,11 @@ Project Setup based on [Create React App](https://github.com/facebook/create-rea
 3. Create 2 new local databases in psql: run `psql` => run `CREATE DATABASE joinusvic;` & `CREATE DATABASE joinusvic_test;`
 
 **WARNING: If you're working with Vagrant or vitual machines, run `rails s -b 0.0.0.0` to bind**
+
 4. Now seed your database!! Run `bin/rails db:setup`
     - To start your Rails server: run `rails s`
 
 ### To View
-  * Open [http://localhost:3000](http://localhost:3000) to view it in the browser
-  * Open [http://localhost:8080](http://localhost:8080) to view it in the browser
+  * Open [http://localhost:3000](http://localhost:3000) to view Rails in the browser
+  * Open [http://localhost:8080](http://localhost:8080) to view our app in the browser
 
