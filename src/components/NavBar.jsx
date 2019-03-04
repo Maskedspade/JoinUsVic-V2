@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Menu, Item, Image } from 'semantic-ui-react';
+import { Menu, Image } from 'semantic-ui-react';
 
 export default class NavBar extends Component {
   state = {}
 
   handleItemClick = (e, { name }) =>
-    this.setState({ activeItem: name })
+    this.setState({
+      activeItem: name
+    })
 
   render() {
     const { activeItem } = this.state
@@ -13,7 +15,7 @@ export default class NavBar extends Component {
     return (
       <Menu>
         <Menu.Item name='logo'>
-          <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size='small'/>
+          <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size='tiny'/>
         </Menu.Item>
         <Menu.Menu position='right'>
           <Menu.Item
