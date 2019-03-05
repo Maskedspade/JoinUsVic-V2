@@ -2,7 +2,7 @@
 .env
 
 # dependencies
-/node_modules
+/app/client/node_modules
 /.pnp
 .pnp.js
 
