@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Menu, Image } from 'semantic-ui-react';
 
+import '../App.css';
+
 export default class NavBar extends Component {
   state = {}
 
@@ -15,8 +17,8 @@ export default class NavBar extends Component {
 
     return (
       <Menu>
-        <Menu.Item name='logo'>
-          <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size='tiny'/>
+        <Menu.Item name='nav-logo'>
+          <Image src='https://react.semantic-ui.com/images/wireframe/image.png'/>
         </Menu.Item>
         <Menu.Menu position='right'>
           <Menu.Item
