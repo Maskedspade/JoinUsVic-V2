@@ -1,5 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-.env
+/app/client/.env
 
 # dependencies
 /app/client/node_modules
@@ -26,5 +26,5 @@ yarn-error.log*
 # randos
 ../../log/development.log
 ../../tmp/pids/
-log/development.log
+/log/development.log
 tmp/pids/
