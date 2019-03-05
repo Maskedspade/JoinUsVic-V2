@@ -24,7 +24,7 @@ export default class Main extends Component {
       this.setState({
           keywordsList: keywordsRes.data,
           locationsList: locationsRes.data,
-          locationSelected: locationsRes.data[0]
+          locationSelected: locationsRes.data[4]
       });
     }))
     // TODO: create a 404 page component to handle errors instead of console logging
