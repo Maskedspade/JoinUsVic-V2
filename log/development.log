@@ -1564,3 +1564,21 @@ Completed 200 OK in 14ms (Views: 9.8ms | ActiveRecord: 3.1ms)
 Completed 200 OK in 24ms (Views: 16.2ms | ActiveRecord: 7.4ms)
 
 
+Started GET "/api/keywords" for 127.0.0.1 at 2019-03-05 20:07:39 +0000
+Processing by KeywordsController#index as HTML
+  [1m[36mKeyword Load (0.4ms)[0m  [1m[34mSELECT "keywords".* FROM "keywords" ORDER BY "keywords"."id" ASC[0m
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/funfacts" for 127.0.0.1 at 2019-03-05 20:07:40 +0000
+Started GET "/api/locations" for 127.0.0.1 at 2019-03-05 20:07:40 +0000
+Processing by FunfactsController#index as HTML
+Processing by LocationsController#index as HTML
+  [1m[36mFunfact Load (0.6ms)[0m  [1m[34mSELECT "funfacts".* FROM "funfacts" ORDER BY "funfacts"."id" ASC[0m
+  [1m[36mLocation Load (0.7ms)[0m  [1m[34mSELECT "locations".* FROM "locations" ORDER BY "locations"."id" ASC[0m
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.6ms)
+
+
+Completed 200 OK in 9ms (Views: 8.4ms | ActiveRecord: 0.7ms)
+
+
