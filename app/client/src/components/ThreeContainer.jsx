@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react';
 import axios from 'axios';
-import * as THREE from 'three';
+import THREE from './threeJSimport';
 
 export default class ThreeContainer extends Component {
   componentDidMount() {
@@ -23,6 +23,8 @@ export default class ThreeContainer extends Component {
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
     });
+
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     // create the shape
     var geometry = new THREE.BoxGeometry(1,1,1);
