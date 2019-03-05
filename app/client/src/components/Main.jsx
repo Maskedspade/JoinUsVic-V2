@@ -8,24 +8,32 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        keywordList: []
-    }
+        keywordsList: [],
+        locationsList: [],
+        locationSelected: null
+    };
   }
 
   componentDidMount() {
-    axios.get('keywords')
-    .then(response => {
-        console.log(response.data);
-        this.setState({
-            keywordList: response.data
-        });
-    })
+    axios.all([
+      axios.get('keywords'),
+      axios.get('locations')
+    ])
+    .then(axios.spread((keywordsRes, locationsRes) => {
+      console.log(keywordsRes.data, locationsRes.data);
+      this.setState({
+          keywordsList: keywordsRes.data,
+          locationsList: locationsRes.data,
+          locationSelected: locationsRes.data[0]
+      });
+    }))
     // TODO: create a 404 page component to handle errors instead of console logging
     .catch(error => console.log(error));
   }
 
   render() {
-    let options = this.state.keywordList.map( keyword => {
+    console.log(this.state.locationSelected)
+    let options = this.state.keywordsList.map( keyword => {
         return {
             key:keyword.id,
             text:keyword.name,
@@ -35,8 +43,8 @@ export default class Main extends Component {
 
     return (
       <div className="main-all">
+        <LocationDescription location={this.state.locationSelected}/>
 
-        <LocationDescription />
         <Dropdown
             fluid
             multiple

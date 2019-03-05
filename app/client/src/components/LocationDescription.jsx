@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import { Header } from 'semantic-ui-react';
+import { Item } from 'semantic-ui-react';
+
+const DescriptionCard = ( {location} ) => {
+  return (
+    <Item>
+      HI
+    </Item>
+  )
+}
+
 
 export default class LocationDescription extends Component
 {
-  constructor(props) {
-    super(props)
-  }
+
 
   render() {
-    return(
-      <Header as='h1'>Location Description</Header>
-    );
+    const info = this.props.location;
+    console.log(typeof info.name);
+    return (
+      <h1>hi</h1>
+    )
   }
 }
