@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dropdown, Sidebar, Segment, Button, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import LocationDescription from './LocationDescription';
-// import ThreeContainer from './ThreeContainer';
+import ThreeContainer from './ThreeContainer';
 import axios from 'axios';
 
 const DescriptionSidebar = ({ animation, visible, direction, locationSelected }) => {
@@ -79,10 +79,12 @@ export default class Main extends Component {
       <div className="main-wrapper">
         <Button onClick={this.handlePush('push', 'right')}>Push</Button>
 
+        <ThreeContainer className="three"/>
+
         <Sidebar.Pushable as={Segment}>
           <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={this.state.locationSelected}/>
           <Sidebar.Pusher>
-            <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
+            <div></div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
 
