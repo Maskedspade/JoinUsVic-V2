@@ -14,7 +14,7 @@ const DescriptionSidebar = ({ animation, visible, direction, locationSelected })
       visible={visible}
       direction={direction}
       width='very wide'
-    >1
+    >
       <LocationDescription location={locationSelected} />
     </Sidebar>
   )
@@ -84,7 +84,7 @@ export default class Main extends Component {
         <Sidebar.Pushable as={Segment}>
           <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={this.state.locationSelected}/>
           <Sidebar.Pusher>
-            <div></div>
+            <Image  src='https://react.semantic-ui.com/images/wireframe/image.png' />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
 
