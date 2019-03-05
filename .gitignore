@@ -22,3 +22,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# randos
+../../log/development.log
+../../tmp/pids/
+log/development.log
+tmp/pids/
