@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
-import { Dropdown, Sidebar, Segment, Image } from 'semantic-ui-react';
+import { Dropdown, Sidebar, Segment, Button, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import LocationDescription from './LocationDescription';
+// import ThreeContainer from './ThreeContainer';
 import axios from 'axios';
 
-const DescriptionSidebar = ({ animation, visible }) => {
+const DescriptionSidebar = ({ animation, visible, direction, locationSelected }) => {
   return (
     <Sidebar
       inverted
       vertical
       animation={animation}
       visible={visible}
+      direction={direction}
       width='very wide'
-    >
-      <LocationDescription location={this.state.locationSelected} />
+    >1
+      <LocationDescription location={locationSelected} />
     </Sidebar>
   )
 }
 
-DescriptionSidebar.proptypes = {
-  animation: PropTypes.string,
-  visible: PropTypes.bool
+DescriptionSidebar.propTypes = {
+  animation: PropTypes.string.isRequired,
+  direction: PropTypes.string.isRequired,
+  visible: PropTypes.bool.isRequired
 }
 
 export default class Main extends Component {
@@ -31,8 +34,10 @@ export default class Main extends Component {
         locationsList: [],
         locationSelected: null,
         visible: false,
-        animation: 'push'
+        animation: 'push',
+        direction: 'right'
     };
+    this.handlePush = this.handlePush.bind(this)
   }
 
   componentDidMount() {
@@ -47,13 +52,20 @@ export default class Main extends Component {
           locationSelected: locationsRes.data[4]
       });
     }))
-    // TODO: create a 404 page component to handle errors instead of console logging
     .catch(error => console.log(error));
+  }
+
+  handlePush = (animation, direction) => () => {
+    this.setState({
+      animation,
+      direction,
+      visible: !this.state.visible
+    })
   }
 
   render() {
 
-    const { keywordsList, locationsList, locationSelected, visible, animation } = this.state
+    const { keywordsList, locationsList, locationSelected, visible, animation, direction } = this.state
 
     const options = keywordsList.map( keyword => {
         return {
@@ -65,13 +77,15 @@ export default class Main extends Component {
 
     return (
       <div className="main-wrapper">
-        <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} />
+        <Button onClick={this.handlePush('push', 'right')}>Push</Button>
 
+        <Sidebar.Pushable as={Segment}>
+          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={this.state.locationSelected}/>
           <Sidebar.Pusher>
             <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
+
         <Dropdown
             fluid
             multiple
