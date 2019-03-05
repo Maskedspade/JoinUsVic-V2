@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Sidebar, Segment, Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import LocationDescription from './LocationDescription';
 import ThreeContainer from './ThreeContainer';
 import axios from 'axios';
+
 
 export default class Main extends Component {
   constructor(props) {
@@ -9,7 +12,9 @@ export default class Main extends Component {
     this.state = {
         keywordsList: [],
         locationsList: [],
-        locationSelected: null
+        locationSelected: null,
+        visible: false,
+        animation: 'push'
     };
   }
 
@@ -19,11 +24,10 @@ export default class Main extends Component {
       axios.get('locations')
     ])
     .then(axios.spread((keywordsRes, locationsRes) => {
-      console.log(keywordsRes.data, locationsRes.data);
       this.setState({
           keywordsList: keywordsRes.data,
           locationsList: locationsRes.data,
-          locationSelected: locationsRes.data[0]
+          locationSelected: locationsRes.data[4]
       });
     }))
     // TODO: create a 404 page component to handle errors instead of console logging
@@ -31,8 +35,9 @@ export default class Main extends Component {
   }
 
   render() {
-    console.log(this.state.locationSelected)
-    let options = this.state.keywordsList.map( keyword => {
+    const { keywordsList, locationsList, locationSelected, visible, animation } = this.state
+
+    const options = keywordsList.map( keyword => {
         return {
             key:keyword.id,
             text:keyword.name,
@@ -41,8 +46,18 @@ export default class Main extends Component {
     });
 
     return (
-      <div className="main-all">
+      <div className="main-wrapper">
+
         <ThreeContainer />
+
+        <Dropdown
+            fluid
+            multiple
+            selection
+            placeholder='What can Victoria offer you today? ...'
+            options={options}
+            className="main-dropdown"
+        />
       </div>
     );
   }
