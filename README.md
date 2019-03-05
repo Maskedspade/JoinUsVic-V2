@@ -1,28 +1,24 @@
-JoinUsVic is a web app that provides insightful information about downtown Victoria manifested through 3D model rendered by WebGL inside the web browser.
+# README
 
-## Project Setup
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-Project Setup based on [Create React App](https://github.com/facebook/create-react-app).
+Things you may want to cover:
 
-This is Version II of the project. [Version I](https://github.com/yhfreeman/JoinUsVic-V1) is also available where the set up of Rails and React App are not separated. We later found out that separating the two would help with future deployment of the app. 
+* Ruby version
 
-*If the project runs on VM in development mode, we suggest creating an `.env` file => add `CHOKIDAR_USEPOLLING=true` which could be necessary for auto refresh on change in React*
+* System dependencies
 
-## Getting Started
+* Configuration
 
-**WARNING: Please mind node version and use v.8.9.4. To use this version: run `nvm use 8.9.4`**
+* Database creation
 
-1. To setup React: install dependencies: `npm install` in project root directory
-    - To start your React server in development mode on PORT 3000: run `npm start`
-2. To setup Rails (server end): go to 'joinusvicdata-app' folder => run `bundle install`
-3. Create 2 new local databases in psql: run `psql` => run `CREATE DATABASE joinusvic;` & `CREATE DATABASE joinusvic_test;`
+* Database initialization
 
-**WARNING: If you're working with Vagrant or vitual machines, run `rails s -b 0.0.0.0` to bind**
+* How to run the test suite
 
-4. Now seed your database!! Run `bin/rails db:setup`
-    - To start your Rails server: run `rails s`
+* Services (job queues, cache servers, search engines, etc.)
 
-### To View
-  * Open [http://localhost:3000](http://localhost:3000) to view Rails in the browser
-  * Open [http://localhost:8080](http://localhost:8080) to view our app in the browser
+* Deployment instructions
 
+* ...
