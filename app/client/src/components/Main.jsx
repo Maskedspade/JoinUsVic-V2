@@ -1,8 +1,27 @@
 import React, { Component } from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Sidebar, Segment, Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import LocationDescription from './LocationDescription';
 import axios from 'axios';
 
+const DescriptionSidebar = ({ animation, visible }) => {
+  return (
+    <Sidebar
+      inverted
+      vertical
+      animation={animation}
+      visible={visible}
+      width='very wide'
+    >
+      <LocationDescription location={this.state.locationSelected} />
+    </Sidebar>
+  )
+}
+
+DescriptionSidebar.proptypes = {
+  animation: PropTypes.string,
+  visible: PropTypes.bool
+}
 
 export default class Main extends Component {
   constructor(props) {
@@ -10,7 +29,9 @@ export default class Main extends Component {
     this.state = {
         keywordsList: [],
         locationsList: [],
-        locationSelected: null
+        locationSelected: null,
+        visible: false,
+        animation: 'push'
     };
   }
 
@@ -20,7 +41,6 @@ export default class Main extends Component {
       axios.get('locations')
     ])
     .then(axios.spread((keywordsRes, locationsRes) => {
-      console.log(keywordsRes.data, locationsRes.data);
       this.setState({
           keywordsList: keywordsRes.data,
           locationsList: locationsRes.data,
@@ -32,8 +52,10 @@ export default class Main extends Component {
   }
 
   render() {
-    console.log(this.state.locationSelected)
-    let options = this.state.keywordsList.map( keyword => {
+
+    const { keywordsList, locationsList, locationSelected, visible, animation } = this.state
+
+    const options = keywordsList.map( keyword => {
         return {
             key:keyword.id,
             text:keyword.name,
@@ -42,8 +64,14 @@ export default class Main extends Component {
     });
 
     return (
-      <div className="main-all">
-        <LocationDescription location={this.state.locationSelected}/>
+      <div className="main-wrapper">
+        <Sidebar.Pushable as={Segment}>
+          <DescriptionSidebar animation={animation} visible={visible} />
+
+          <Sidebar.Pusher>
+            <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
         <Dropdown
             fluid
             multiple
