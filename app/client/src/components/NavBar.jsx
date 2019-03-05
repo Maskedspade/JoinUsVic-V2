@@ -4,10 +4,11 @@ import { Menu, Image } from 'semantic-ui-react';
 export default class NavBar extends Component {
   state = {}
 
-  handleItemClick = (e, { name }) =>
-    this.setState({
+  handleItemClick = (e, { name }) => {
+    return this.setState({
       activeItem: name
     })
+  }
 
   render() {
     const { activeItem } = this.state

@@ -9,7 +9,6 @@ class App extends Component {
     super(props);
 
     this.state = {
-      funfact_page: false,
       funfactList: []
     };
   }
@@ -29,12 +28,13 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <NavBar />
+        <NavBar toggle={this.toggleFunfact} />
         <Main />
-        <FunFacts funfactList={this.state.funfactList}/>
+        <FunFacts funfactList={this.state.funfactList} funfactShow={this.state.funfact_page} />
       </div>
     );
   }
 }
+
 
 export default App
