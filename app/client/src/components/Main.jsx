@@ -48,7 +48,7 @@ export default class Main extends Component {
     return (
       <div className="main-wrapper">
 
-        <ThreeContainer />
+        <ThreeContainer className="three"/>
 
         <Dropdown
             fluid
