@@ -3,7 +3,6 @@ import { Dropdown } from 'semantic-ui-react';
 import LocationDescription from './LocationDescription';
 import axios from 'axios';
 
-
 export default class Main extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +42,8 @@ export default class Main extends Component {
 
     return (
       <div className="main-all">
-        <LocationDescription location={this.state.locationSelected}/>
+        <Yuhan />
+        <LocationDescription location={this.state.locationSelected} />
 
         <Dropdown
             fluid

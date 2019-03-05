@@ -8,8 +8,6 @@ export default class FunFacts extends Component {
 
   // add the "Have funfacts for us?" slider
   render() {
-    const { funfactShow } = this.props;
-
            // funfactList: this.props.funfactList
     return(
       <div>
