@@ -50,6 +50,7 @@ body {
 .main-wrapper .main-dropdown {
   width: 35em !important;
   top: 8em;
+  background: transparent !important;
 }
 
 .ui.sidebar {
