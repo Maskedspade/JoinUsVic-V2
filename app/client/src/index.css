@@ -1,0 +1,45 @@
+.main-wrapper .main-model, .main-wrapper, .nav-wrapper {
+  left: 0;
+  right: 0;
+}
+
+.nav-wrapper {
+  position: fixed;
+  top: 0;
+}
+
+.main-wrapper .main-model, .main-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.main-wrapper .main-dropdown {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0) !important;
+}
+
+body {
+  position: relative;
+}
+
+.nav-wrapper {
+  height: 4em;
+  padding: 0 5em;
+  z-index: 9999;
+}
+.nav-wrapper .nav-logo {
+  height: 2.5em;
+  width: 4em;
+}
+
+.main-wrapper .btn-building {
+  margin-top: 50px;
+}
+.main-wrapper .main-dropdown {
+  width: 35em !important;
+  top: 8em;
+}
+
+/*# sourceMappingURL=index.css.map */
