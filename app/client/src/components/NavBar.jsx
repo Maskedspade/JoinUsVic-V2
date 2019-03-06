@@ -16,9 +16,10 @@ export default class NavBar extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu>
-        <Menu.Item name='nav-logo'>
-          <Image src='https://react.semantic-ui.com/images/wireframe/image.png'/>
+      <Menu className="nav-wrapper">
+        <Menu.Item />
+        <Menu.Item>
+          <Image src='https://react.semantic-ui.com/images/wireframe/image.png' className="nav-logo"/>
         </Menu.Item>
         <Menu.Menu position='right'>
           <Menu.Item
@@ -34,6 +35,7 @@ export default class NavBar extends Component {
             content='ContactUs'
             onClick={this.handleItemClick}
           />
+          <Menu.Item />
         </Menu.Menu>
       </Menu>
     )

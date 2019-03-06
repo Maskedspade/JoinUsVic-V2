@@ -33,8 +33,9 @@ export default class Main extends Component {
         keywordsList: [],
         locationsList: [],
         locationSelected: null,
+        selectorShowed: true,
         visible: false,
-        animation: 'push',
+        animation: 'overlay',
         direction: 'right'
     };
     this.handlePush = this.handlePush.bind(this)
@@ -57,6 +58,7 @@ export default class Main extends Component {
 
   handlePush = (animation, direction) => () => {
     this.setState({
+      selectorShowed: !this.state.selectorShowed,
       animation,
       direction,
       visible: !this.state.visible
@@ -77,25 +79,24 @@ export default class Main extends Component {
 
     return (
       <div className="main-wrapper">
-        <Button onClick={this.handlePush('push', 'right')}>Push</Button>
-
-        <ThreeContainer className="three"/>
-
         <Sidebar.Pushable as={Segment}>
           <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={this.state.locationSelected}/>
           <Sidebar.Pusher>
-            <Image  src='https://react.semantic-ui.com/images/wireframe/image.png' />
+            <div className="main-model">
+              {this.state.selectorShowed && <Dropdown
+                fluid
+                multiple
+                selection
+                placeholder='What can Victoria offer you today? ...'
+                options={options}
+                className="main-dropdown"
+              /> }
+              <Button className="btn-building" onClick={this.handlePush('overlay', 'right')}>Show</Button>
+            </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
 
-        <Dropdown
-            fluid
-            multiple
-            selection
-            placeholder='What can Victoria offer you today? ...'
-            options={options}
-            className="main-dropdown"
-        />
+
       </div>
     );
   }

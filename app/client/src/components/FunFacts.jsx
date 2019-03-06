@@ -11,7 +11,7 @@ export default class FunFacts extends Component {
            // funfactList: this.props.funfactList
     return(
       <div>
-        <h1>HELLO</h1>
+
       </div>
     );
   }
