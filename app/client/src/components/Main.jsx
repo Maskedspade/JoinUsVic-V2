@@ -125,8 +125,6 @@ export default class Main extends Component {
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-
-
       </div>
     );
   }
