@@ -16,7 +16,6 @@ class App extends Component {
   componentDidMount() {
     axios.get('funfacts')
     .then(response => {
-        console.log(response.data);
         this.setState({
             funfactList: response.data
         });
