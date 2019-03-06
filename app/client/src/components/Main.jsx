@@ -39,8 +39,8 @@ export default class Main extends Component {
         animation: 'overlay',
         direction: 'right'
     };
-    this.handlePush = this.handlePush.bind(this)
-    this.getSelectedKeywords = this.getSelectedKeywords.bind(this)
+    this.handlePush = this.handlePush.bind(this);
+    // this.getSelectedKeywords = this.getSelectedKeywords.bind(this);
   }
 
   // get keywords and locations from database
@@ -71,11 +71,24 @@ export default class Main extends Component {
   }
 
   // handles user's keyword selection
-  getSelectedKeywords = (e, {value}) => {
-    console.log(value);
-    let keyword_name = e.target.textContent;
-    console.log(keyword_name);
-  }
+  // the value is an array of keyword id in database
+  // tracks locations correlated to keywords
+  // getLocationsOnKeywords = (e, {value}) => {
+  //   console.log(value)
+  //   console.log(this.state.locationsList[0])
+  //   value.forEach( (item) => {
+  //     console.log(item)
+  //   })
+    // this.setState({
+    //   ...this.state,
+    //   keywordsSelected: value
+    // }, () => {
+    //   console.log('finished');
+    // })
+    // console.log(this.state.keywordsSelected);
+    // let keyword_name = e.target.textContent;
+    // console.log(keyword_name);
+  // }
 
   render() {
     const { keywordsList, locationsList, locationSelected, visible, animation, direction } = this.state
