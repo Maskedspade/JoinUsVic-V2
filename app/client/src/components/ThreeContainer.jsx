@@ -6,12 +6,12 @@ import THREE from './threeJSimport';
 
 export default class ThreeContainer extends Component {
   componentDidMount() {
+    // call the method in order to execute across the state
     this.setupTHREE();
 
     // because we don't have access to tag 'canvas' before realy DOM finishes its rendering,
     // we wait till DOM's rendered and then add inline CSS by appending attribtues to 'canvas' tag
     const canvas = document.querySelector('canvas');
-
     canvas.style.width='100%';
     canvas.style.height='100%';
   }
@@ -22,12 +22,14 @@ export default class ThreeContainer extends Component {
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
     const renderer = new THREE.WebGLRenderer();
+    renderer.setClearColor(0x000000);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // append 'canvas' tag inside the 'main-model' div
     const mainModel = document.getElementsByClassName('main-model')[0];
     mainModel.appendChild(renderer.domElement);
 
+    // ** DYNAMIC: adjust renderer and camera according to the event of window resizing **
     window.addEventListener('resize', function() {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -36,31 +38,36 @@ export default class ThreeContainer extends Component {
       camera.updateProjectionMatrix();
     });
 
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    const axis = new THREE.AxisHelper(10);
+    scene.add(axis);
 
-    // create the shape
+    // *******************************************************************
+
+    // create shapes
     const geometry = new THREE.BoxGeometry(1,1,1);
 
     // create a material, colour or image texture
-    const material = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
+    const material = new THREE.MeshNormalMaterial({color: 0xFFFFFF, wireframe: false});
 
     const cube1 = new THREE.Mesh( geometry, material);
 
     const cube2 = new THREE.Mesh( geometry, material);
-    cube2.position.x = -4;
+    cube2.position.x = 3;
 
     const cube3 = new THREE.Mesh( geometry, material);
-    cube3.position.x = -8;
+    cube3.position.x = -3;
 
     scene.add(cube1);
     scene.add(cube2);
     scene.add(cube3);
 
-    camera.position.z = 10;
+    // *******************************************************************
 
-    // create light
-    const ambientLight = new THREE.AmbientLight(0xFFFFFF, 5.0);
-    scene.add(ambientLight);
+    // set up the initial camera position and orbit controls
+    camera.position.z = 10;
+    camera.lookAt(scene.position);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     // add raycaster and mouse as 2D vector
     var raycaster = new THREE.Raycaster();
@@ -96,6 +103,10 @@ export default class ThreeContainer extends Component {
     window.addEventListener( 'touchstart', onDocumentTouchStart, false );
     // window.addEventListener( 'mousemove', onMouseMove, false );
 
+    // *******************************************************************
+
+    window.requestAnimationFrame(render);
+
     // game logic
     const update = function() {
       cube1.rotation.x += 0.01;
@@ -106,17 +117,12 @@ export default class ThreeContainer extends Component {
 
       cube3.rotation.x += 0.01;
       cube3.rotation.y += 0.005;
-
     };
 
     // draw scene
     function render() {
-
       renderer.render( scene, camera );
-
     };
-
-    window.requestAnimationFrame(render);
 
     // run game loop (update, render, repeat)
     const GameLoop = function() {
@@ -130,9 +136,9 @@ export default class ThreeContainer extends Component {
   }
 
   render () {
-      return (
-        <div>
-        </div>
-      );
+    return (
+      <div>
+      </div>
+    );
   }
 }
