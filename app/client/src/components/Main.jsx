@@ -40,15 +40,15 @@ export default class Main extends Component {
         direction: 'right'
     };
     this.handlePush = this.handlePush.bind(this);
-    // this.getSelectedKeywords = this.getSelectedKeywords.bind(this);
+    this.getLocationsOnKeywords = this.getLocationsOnKeywords.bind(this);
   }
 
   // get keywords and locations from database
   // sets corresponding states when fetched
   componentDidMount() {
     axios.all([
-      axios.get('keywords'),
-      axios.get('locations')
+      axios.get('api/keywords'),
+      axios.get('api/locations')
     ])
     .then(axios.spread((keywordsRes, locationsRes) => {
       this.setState({
@@ -73,12 +73,15 @@ export default class Main extends Component {
   // handles user's keyword selection
   // the value is an array of keyword id in database
   // tracks locations correlated to keywords
-  // getLocationsOnKeywords = (e, {value}) => {
-  //   console.log(value)
-  //   console.log(this.state.locationsList[0])
-  //   value.forEach( (item) => {
-  //     console.log(item)
-  //   })
+  getLocationsOnKeywords = (e, {value}) => {
+    axios.post('api/locations/highlighted', {test: 'hello123'})
+    .then(response => {
+      alert(response);
+    })
+    .catch(error => console.log(error));
+    // value.forEach( (item) => {
+    //   console.log(item)
+    // })
     // this.setState({
     //   ...this.state,
     //   keywordsSelected: value
@@ -88,7 +91,7 @@ export default class Main extends Component {
     // console.log(this.state.keywordsSelected);
     // let keyword_name = e.target.textContent;
     // console.log(keyword_name);
-  // }
+  }
 
   render() {
     const { keywordsList, locationsList, locationSelected, visible, animation, direction } = this.state
@@ -115,7 +118,7 @@ export default class Main extends Component {
                   selection
                   placeholder='What can Victoria offer you today? ...'
                   options={options}
-                  onChange={this.getSelectedKeywords}
+                  onChange={this.getLocationsOnKeywords}
                   className="main-dropdown"
                 /> }
               <Button className="btn-building" onClick={this.handlePush('overlay', 'right')}>Show</Button>
