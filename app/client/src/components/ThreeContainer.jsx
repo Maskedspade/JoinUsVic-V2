@@ -25,8 +25,8 @@ export default class ThreeContainer extends Component {
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // append 'canvas' tag inside the 'main-model' div
-    const mainWrapper = document.getElementsByClassName('main-model')[0];
-    mainWrapper.appendChild(renderer.domElement);
+    const mainModel = document.getElementsByClassName('main-model')[0];
+    mainModel.appendChild(renderer.domElement);
 
     window.addEventListener('resize', function() {
       const width = window.innerWidth;
