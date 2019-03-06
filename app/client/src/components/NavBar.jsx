@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Menu, Image } from 'semantic-ui-react';
 
+import '../App.css';
+
 export default class NavBar extends Component {
   state = {}
 
@@ -14,9 +16,10 @@ export default class NavBar extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu>
-        <Menu.Item name='logo'>
-          <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size='tiny'/>
+      <Menu className="nav-wrapper">
+        <Menu.Item />
+        <Menu.Item>
+          <Image src='https://react.semantic-ui.com/images/wireframe/image.png' className="nav-logo"/>
         </Menu.Item>
         <Menu.Menu position='right'>
           <Menu.Item
@@ -32,6 +35,7 @@ export default class NavBar extends Component {
             content='ContactUs'
             onClick={this.handleItemClick}
           />
+          <Menu.Item />
         </Menu.Menu>
       </Menu>
     )

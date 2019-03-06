@@ -21,7 +21,6 @@ class App extends Component {
             funfactList: response.data
         });
     })
-    // TODO: create a 404 page component to handle errors instead of console logging
     .catch(error => console.log(error));
   }
 
