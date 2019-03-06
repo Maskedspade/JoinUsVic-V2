@@ -15,7 +15,7 @@ const DescriptionSidebar = ({ animation, visible, direction, locationSelected })
       direction={direction}
       width='very wide'
     >
-      <LocationDescription location={locationSelected} />
+      {locationSelected && <LocationDescription location={locationSelected} />}
     </Sidebar>
   )
 }
@@ -31,6 +31,7 @@ export default class Main extends Component {
     super(props);
     this.state = {
         keywordsList: [],
+        keywordsSelected: [],
         locationsList: [],
         locationSelected: null,
         selectorShowed: true,
@@ -39,8 +40,11 @@ export default class Main extends Component {
         direction: 'right'
     };
     this.handlePush = this.handlePush.bind(this)
+    this.getSelectedKeywords = this.getSelectedKeywords.bind(this)
   }
 
+  // get keywords and locations from database
+  // sets corresponding states when fetched
   componentDidMount() {
     axios.all([
       axios.get('keywords'),
@@ -56,6 +60,7 @@ export default class Main extends Component {
     .catch(error => console.log(error));
   }
 
+  // handle user clicking on location/building request, deals with anymations
   handlePush = (animation, direction) => () => {
     this.setState({
       selectorShowed: !this.state.selectorShowed,
@@ -65,8 +70,14 @@ export default class Main extends Component {
     })
   }
 
-  render() {
+  // handles user's keyword selection
+  getSelectedKeywords = (e, {value}) => {
+    console.log(value);
+    let keyword_name = e.target.textContent;
+    console.log(keyword_name);
+  }
 
+  render() {
     const { keywordsList, locationsList, locationSelected, visible, animation, direction } = this.state
 
     const options = keywordsList.map( keyword => {
@@ -83,14 +94,17 @@ export default class Main extends Component {
           <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={this.state.locationSelected}/>
           <Sidebar.Pusher>
             <div className="main-model">
-              {this.state.selectorShowed && <Dropdown
-                fluid
-                multiple
-                selection
-                placeholder='What can Victoria offer you today? ...'
-                options={options}
-                className="main-dropdown"
-              /> }
+              <ThreeContainer />
+              {this.state.selectorShowed &&
+                <Dropdown
+                  fluid
+                  multiple
+                  selection
+                  placeholder='What can Victoria offer you today? ...'
+                  options={options}
+                  onChange={this.getSelectedKeywords}
+                  className="main-dropdown"
+                /> }
               <Button className="btn-building" onClick={this.handlePush('overlay', 'right')}>Show</Button>
             </div>
           </Sidebar.Pusher>
