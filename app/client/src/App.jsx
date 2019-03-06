@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('funfacts')
+    axios.get('api/funfacts')
     .then(response => {
         this.setState({
             funfactList: response.data
