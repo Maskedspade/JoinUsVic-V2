@@ -1,0 +1,27 @@
+{
+  "name": "joinusvic",
+  "version": "1.0.0",
+  "description": "LHL-final project",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "engines": {
+    "node": "6.3.1"
+  },
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd ..",
+    "deploy": "cp -a client/build/. public/",
+    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yhfreeman/JoinUsVic-V2.git"
+  },
+  "author": "Lindsey Cai, Yuhan Freeman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yhfreeman/JoinUsVic-V2/issues"
+  },
+  "homepage": "https://github.com/yhfreeman/JoinUsVic-V2#readme"
+}
