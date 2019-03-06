@@ -24,7 +24,7 @@ export default class ThreeContainer extends Component {
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // append 'canvas' tag inside the 'main-wrapper' div
+    // append 'canvas' tag inside the 'main-model' div
     const mainWrapper = document.getElementsByClassName('main-model')[0];
     mainWrapper.appendChild(renderer.domElement);
 
