@@ -22,9 +22,23 @@
   transform: translate(-50%, 0) !important;
 }
 
+%horizontally-aligned {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%) !important;
+}
+
+$colour-interact: #055e5f;
+$colour-highlight: #d35b12;
+$colour-grey-light: #aaa;
+$color-grey-dark: #444;
 
 body {
   position: relative;
+}
+
+.ui.a {
+  color: $colour-interact;
 }
 
 .nav-wrapper {
@@ -43,14 +57,36 @@ body {
   @extend %stretch-to-container;
 
   .main-model {
-    @extend %stretch-to-container
+    @extend %stretch-to-container;
   }
   .btn-building {
-    margin-top: 50px;
+    @extend %vertically-aligned;
+    top: 12em;
   }
   .main-dropdown {
     @extend %vertically-aligned;
     width: 35em !important;
     top: 8em;
+  }
+}
+
+.ui.sidebar {
+  background: white;
+}
+
+.ld-wrapper {
+  @extend %horizontally-aligned;
+  background: white;
+  padding: 0 4em;
+  .p-fade-italic {
+    color: $colour-grey-light;
+    font-style: italic;
+  }
+  .p-desktop {
+    text-indent: 10px;
+  }
+  .p-highlight {
+    color: $colour-highlight;
+    margin: 1em 0;
   }
 }
