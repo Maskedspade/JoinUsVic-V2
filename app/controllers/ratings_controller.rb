@@ -15,7 +15,7 @@ class RatingsController < ApplicationController
 
   # POST /ratings
   def create
-    @rating = Rating.new(list_params)
+    @rating = Rating.new(rating_params)
 
     if @rating.save
       render json: @rating, status: :created
