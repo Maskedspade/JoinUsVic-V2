@@ -31,7 +31,6 @@ export default class Main extends Component {
     super(props);
     this.state = {
         keywordsList: [],
-        keywordsSelected: [],
         locationsList: [],
         locationSelected: null,
         selectorShowed: true,
@@ -74,23 +73,11 @@ export default class Main extends Component {
   // the value is an array of keyword id in database
   // tracks locations correlated to keywords
   getLocationsOnKeywords = (e, {value}) => {
-    axios.post('api/locations/highlighted', {test: 'hello123'})
+    axios.post('api/locations/highlighted', {keywordId: value })
     .then(response => {
-      alert(response);
+      console.log(response)
     })
     .catch(error => console.log(error));
-    // value.forEach( (item) => {
-    //   console.log(item)
-    // })
-    // this.setState({
-    //   ...this.state,
-    //   keywordsSelected: value
-    // }, () => {
-    //   console.log('finished');
-    // })
-    // console.log(this.state.keywordsSelected);
-    // let keyword_name = e.target.textContent;
-    // console.log(keyword_name);
   }
 
   render() {
@@ -106,7 +93,7 @@ export default class Main extends Component {
 
     return (
       <div className="main-wrapper">
-        <Sidebar.Pushable as={Segment}>
+        <Sidebar.Pushable as={Segment} className="main-sidebar">
           <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={this.state.locationSelected}/>
           <Sidebar.Pusher>
             <div className="main-model">
