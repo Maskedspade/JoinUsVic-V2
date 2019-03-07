@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, Sidebar, Segment, Button, Image } from 'semantic-ui-react';
+import { Dropdown, Sidebar, Segment, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import LocationDescription from './LocationDescription';
 import ThreeContainer from './ThreeContainer';
@@ -81,7 +81,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const { keywordsList, locationsList, locationSelected, visible, animation, direction } = this.state
+    const { keywordsList, locationsList, locationSelected, selectorShowed, visible, animation, direction } = this.state
 
     const options = keywordsList.map( keyword => {
         return {
@@ -98,7 +98,7 @@ export default class Main extends Component {
           <Sidebar.Pusher>
             <div className="main-model">
               <ThreeContainer />
-              {this.state.selectorShowed &&
+              {selectorShowed &&
                 <Dropdown
                   fluid
                   multiple

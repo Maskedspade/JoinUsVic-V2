@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Image } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 import '../App.css'
 

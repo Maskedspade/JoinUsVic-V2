@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Divider, Header, Icon, Sidebar, Segment } from 'semantic-ui-react'
+import { Container, Divider, Icon, Sidebar, Segment } from 'semantic-ui-react'
 import FunFactForm from './FunFactForm'
 import PropTypes from 'prop-types'
 

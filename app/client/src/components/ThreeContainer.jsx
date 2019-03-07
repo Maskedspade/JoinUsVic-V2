@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { Dropdown } from 'semantic-ui-react';
-import axios from 'axios';
-
 import THREE from './threeJSimport';
 
 export default class ThreeContainer extends Component {
