@@ -9,26 +9,42 @@ class App extends Component {
     super(props);
 
     this.state = {
-      funfactsList: []
+      funfactsList: [],
+      funfactsDisplayed: false
     };
+
+    this.handleFunfactsDisplay = this.handleFunfactsDisplay.bind(this)
+    this.handleBackToIndex = this.handleBackToIndex.bind(this)
   }
 
   componentDidMount() {
     axios.get('api/funfacts')
     .then(response => {
         this.setState({
-            funfactsList: response.data
-        });
+          funfactsList: response.data
+        })
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
+  }
+
+  handleFunfactsDisplay = (e) => {
+    this.setState({ funfactsDisplayed: true })
+    e.preventDefault()
+  }
+
+  handleBackToIndex = (e) => {
+    this.setState({ funfactsDisplayed: false })
+    e.preventDefault()
   }
 
   render() {
+    const { funfactsList, funfactsDisplayed } = this.state
+
     return (
       <div className="app">
-        <NavBar toggle={this.toggleFunfact} />
+        <NavBar handleFunfactsDisplay={this.handleFunfactsDisplay} handleBackToIndex={this.handleBackToIndex} />
         <Main />
-        {this.state.funfactsList && <FunFacts funfactsList={this.state.funfactsList} />}
+        {funfactsList && funfactsDisplayed && <FunFacts funfactsList={this.state.funfactsList} />}
       </div>
     );
   }
