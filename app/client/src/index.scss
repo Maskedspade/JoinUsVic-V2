@@ -32,7 +32,7 @@ $colour-interact: #055e5f;
 $colour-highlight: #d35b12;
 $colour-grey-light: #eee;
 $colour-grey: #aaa;
-$color-grey-dark: #444;
+$colour-grey-dark: #444;
 
 body {
   position: relative;
@@ -88,7 +88,6 @@ a {
     @extend %vertically-aligned;
     width: 35em !important;
     top: 8em;
-    background: transparent !important;
   }
   .ui.overlay {
     background: white;
@@ -109,5 +108,17 @@ a {
     border-bottom: 1px solid $colour-grey-light;
     margin: 2em 0 0;
     padding: 2em 2em 4em;
+  }
+  .ui.push {
+    background: $colour-interact;
+    padding: 0 2em;
+  }
+  // funfacts page sidebar form
+  .ui.form {
+    margin: 0 auto;
+  }
+  .ff-form-label {
+    color: white !important;
+    font-size: 1.25em !important;
   }
 }

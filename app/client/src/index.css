@@ -72,7 +72,6 @@ a:hover {
 .main-wrapper .main-dropdown {
   width: 35em !important;
   top: 8em;
-  background: transparent !important;
 }
 .main-wrapper .ui.overlay {
   background: white;
@@ -91,6 +90,17 @@ a:hover {
   border-bottom: 1px solid #eee;
   margin: 2em 0 0;
   padding: 2em 2em 4em;
+}
+.ff-wrapper .ui.push {
+  background: #055e5f;
+  padding: 0 2em;
+}
+.ff-wrapper .ui.form {
+  margin: 0 auto;
+}
+.ff-wrapper .ff-form-label {
+  color: white !important;
+  font-size: 1.25em !important;
 }
 
 /*# sourceMappingURL=index.css.map */
