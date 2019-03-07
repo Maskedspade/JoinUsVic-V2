@@ -93,7 +93,7 @@ export default class Main extends Component {
 
     return (
       <div className="main-wrapper">
-        <Sidebar.Pushable as={Segment} className="main-sidebar">
+        <Sidebar.Pushable as={Segment}>
           <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={this.state.locationSelected}/>
           <Sidebar.Pusher>
             <div className="main-model">
