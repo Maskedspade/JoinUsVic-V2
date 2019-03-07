@@ -30,15 +30,32 @@
 
 $colour-interact: #055e5f;
 $colour-highlight: #d35b12;
-$colour-grey-light: #aaa;
+$colour-grey-light: #eee;
+$colour-grey: #aaa;
 $color-grey-dark: #444;
 
 body {
   position: relative;
 }
 
-.ui.a {
+a {
   color: $colour-interact;
+  font-size: 1.25em;
+  &:hover {
+    cursor: pointer;
+  };
+}
+
+.p-fade-italic {
+  color: $colour-grey;
+  font-style: italic;
+}
+.p-desktop {
+  text-indent: 10px;
+}
+.p-highlight {
+  color: $colour-highlight;
+  margin: 1em 0;
 }
 
 .nav-wrapper {
@@ -69,25 +86,25 @@ body {
     top: 8em;
     background: transparent !important;
   }
-}
-
-.ui.sidebar {
-  background: white;
+  .ui.overlay {
+    background: white;
+  }
 }
 
 .ld-wrapper {
   @extend %horizontally-aligned;
   background: white;
   padding: 0 4em;
-  .p-fade-italic {
-    color: $colour-grey-light;
-    font-style: italic;
-  }
-  .p-desktop {
-    text-indent: 10px;
-  }
-  .p-highlight {
-    color: $colour-highlight;
-    margin: 1em 0;
+}
+
+.ff-wrapper {
+  @extend %stretch-to-container;
+  background: white;
+  padding-top: 10em;
+  .ff-container {
+    border-top: 1px solid $colour-grey-light;
+    border-bottom: 1px solid $colour-grey-light;
+    margin: 2em 0;
+    padding: 3em;
   }
 }
