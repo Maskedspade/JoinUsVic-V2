@@ -7,13 +7,6 @@ export default class NavBar extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.handleItemClick = this.handleItemClick.bind(this)
-  }
-
-  handleItemClick = (e, { name }) => {
-    this.setState({
-      activeItem: name
-    })
   }
 
   render() {
@@ -41,10 +34,12 @@ export default class NavBar extends Component {
           />
 
           <Menu.Item
+            as='a'
+            href='mailto:lindsey.cai94@gmail.com'
             name='contactUs'
             active={activeItem === 'contactUs'}
             content='ContactUs'
-            onClick={this.handleItemClick}
+            className="nav-contact-us"
           />
           <Menu.Item />
         </Menu.Menu>
