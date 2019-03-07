@@ -28,3 +28,6 @@ yarn-error.log*
 ../../tmp/pids/
 /log/development.log
 tmp/pids/
+
+# Production
+/public
