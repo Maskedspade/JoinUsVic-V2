@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import { Form, Button, Icon } from 'semantic-ui-react'
+import { Form, Button, Icon, TextArea } from 'semantic-ui-react'
 
 const FormCard = () => {
   return (
     <Form>
       <Form.Field>
-        <label>Your name (optional): </label>
-        <input placeholder='name...' />
+        <label class="ff-form-label">Your name (optional): </label>
+        <input placeholder='Your name...' />
       </Form.Field>
 
       <Form.Field>
-        <label>Fact/Message: </label>
-        <input placeholder='Leave us a fun fact or perhaps a message for us :)' />
+        <label class="ff-form-label">Fact/Message: </label>
+        <TextArea placeholder='Leave us a fun fact or perhaps a message for us :)' />
       </Form.Field>
       <div style={{display: 'flex'}}>
         <Button>
