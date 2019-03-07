@@ -101,8 +101,8 @@ export default class ThreeContainer extends Component {
 
       for ( let i = 0; i < intersects.length; i++ ) {
         if (intersects[i].object.type == 'Mesh') {
-          console.log(intersects[i].object.material);
-        // intersects[i].object.material.wireframe = !intersects[i].object.material.wireframe;
+          // console.log(intersects[i].object.material);
+          intersects[i].object.material.wireframe = !intersects[i].object.material.wireframe;
         }
         // intersects[ i ].object.material.color.set( 0xff0000 );
       }
