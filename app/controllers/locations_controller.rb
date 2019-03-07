@@ -14,8 +14,8 @@ class LocationsController < ApplicationController
   end
 
   def highlight
-    test = params[:test]
-    render json: test
+    keywordId = params[:keywordId]
+    render json: keywordId
   end
 
   private
