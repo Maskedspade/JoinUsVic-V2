@@ -1,32 +1,43 @@
-import React, { Component } from 'react';
-import { Menu, Image } from 'semantic-ui-react';
+import React, { Component } from 'react'
+import { Menu, Image } from 'semantic-ui-react'
 
-import '../App.css';
+import '../App.css'
 
 export default class NavBar extends Component {
-  state = {}
+  constructor(props) {
+    super(props)
+    this.state = {}
+    this.handleItemClick = this.handleItemClick.bind(this)
+  }
 
   handleItemClick = (e, { name }) => {
-    return this.setState({
+    this.setState({
       activeItem: name
     })
   }
 
   render() {
     const { activeItem } = this.state
+    const { handleFunfactsDisplay, handleBackToIndex } = this.props
 
     return (
       <Menu className="nav-wrapper">
-        <Menu.Item />
-        <Menu.Item>
-          <Image src='https://react.semantic-ui.com/images/wireframe/image.png' className="nav-logo"/>
-        </Menu.Item>
+        <Menu.Menu position='left'>
+          <Menu.Item />
+          <Menu.Item
+            name='logo'
+            active={activeItem === 'logo'}
+            content='JoinUs, Vic'
+            onClick={handleBackToIndex}
+          />
+        </Menu.Menu>
+
         <Menu.Menu position='right'>
           <Menu.Item
             name='funfacts'
             active={activeItem === 'funfacts'}
             content='FunFacts'
-            onClick={this.handleItemClick}
+            onClick={handleFunfactsDisplay}
           />
 
           <Menu.Item
