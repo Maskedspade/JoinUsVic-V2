@@ -28,7 +28,7 @@ class App extends Component {
       <div className="app">
         <NavBar toggle={this.toggleFunfact} />
         <Main />
-        {this.state.funfactsList && <FunFacts funfactsList={this.state.funfactsList} />}
+
       </div>
     );
   }
