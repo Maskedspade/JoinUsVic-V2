@@ -46,6 +46,10 @@ a {
   };
 }
 
+.ui.segment {
+  border: none !important;
+}
+
 .p-fade-italic {
   color: $colour-grey;
   font-style: italic;
@@ -100,11 +104,10 @@ a {
 .ff-wrapper {
   @extend %stretch-to-container;
   background: white;
-  padding-top: 10em;
+  padding-top: 8em;
   .ff-container {
-    border-top: 1px solid $colour-grey-light;
     border-bottom: 1px solid $colour-grey-light;
-    margin: 2em 0;
-    padding: 3em;
+    margin: 2em 0 0;
+    padding: 2em 2em 4em;
   }
 }

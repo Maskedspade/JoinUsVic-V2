@@ -38,6 +38,10 @@ a:hover {
   cursor: pointer;
 }
 
+.ui.segment {
+  border: none !important;
+}
+
 .p-fade-italic {
   color: #aaa;
   font-style: italic;
@@ -81,13 +85,12 @@ a:hover {
 
 .ff-wrapper {
   background: white;
-  padding-top: 10em;
+  padding-top: 8em;
 }
 .ff-wrapper .ff-container {
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  margin: 2em 0;
-  padding: 3em;
+  border-bottom: 1px solid #eee;
+  margin: 2em 0 0;
+  padding: 2em 2em 4em;
 }
 
 /*# sourceMappingURL=index.css.map */
