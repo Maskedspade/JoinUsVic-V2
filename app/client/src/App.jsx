@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      funfactList: []
+      funfactsList: []
     };
   }
 
@@ -17,7 +17,7 @@ class App extends Component {
     axios.get('api/funfacts')
     .then(response => {
         this.setState({
-            funfactList: response.data
+            funfactsList: response.data
         });
     })
     .catch(error => console.log(error));
@@ -28,7 +28,7 @@ class App extends Component {
       <div className="app">
         <NavBar toggle={this.toggleFunfact} />
         <Main />
-        <FunFacts funfactList={this.state.funfactList} funfactShow={this.state.funfact_page} />
+        {this.state.funfactsList && <FunFacts funfactsList={this.state.funfactsList} />}
       </div>
     );
   }
