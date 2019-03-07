@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Container, Divider, Header, Icon } from 'semantic-ui-react'
+import { Container, Divider, Header, Icon, Sidebar, Segment } from 'semantic-ui-react'
+import FunFactForm from './FunFactForm'
+import PropTypes from 'prop-types'
 
 const FunFactsBlocks = ( {funfacts} ) => {
   return funfacts.map((funfact, i) => {
@@ -10,13 +12,39 @@ const FunFactsBlocks = ( {funfacts} ) => {
         <Divider />
         <p className="p-desktop">{funfact.description}</p>
       </Container>
-    );
+    )
   })
+}
+
+const FormSidebar = ({ animation, visible, direction, locationSelected }) => {
+  return (
+    <Sidebar
+      inverted
+      vertical
+      animation={animation}
+      visible={visible}
+      direction={direction}
+      width='very wide'
+    >
+      <FunFactForm />
+    </Sidebar>
+  )
+}
+
+FormSidebar.propTypes = {
+  animation: PropTypes.string.isRequired,
+  direction: PropTypes.string.isRequired,
+  visible: PropTypes.bool.isRequired
 }
 
 export default class FunFacts extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      visible: false,
+      animation: 'push',
+      direction: 'left'
+    }
     this.convertName = this.convertName.bind(this)
   }
 
@@ -24,18 +52,32 @@ export default class FunFacts extends Component {
     return name === '@someone@' ? 'Someone' : name
   }
 
-  // add the "Have funfacts for us?" slider
+  handlePush = (animation, direction) => () => {
+    this.setState({
+      animation,
+      direction,
+      visible: !this.state.visible
+    })
+  }
+
   render() {
-    return(
+    const { visible, animation, direction } = this.state
+
+    return (
       <div className="ff-wrapper">
-        <Container>
-          <a>
-            <Icon name="caret right" />
-            Have any fun facts for us?
-          </a>
-        </Container>
-        <FunFactsBlocks funfacts={this.props.funfactsList}/>
+        <Sidebar.Pushable as={Segment}>
+          <FormSidebar animation={animation} visible={visible} direction={direction} />
+          <Sidebar.Pusher>
+            <Container textAlign='justified' className='ff-formlink'>
+              <a onClick={this.handlePush('push', 'left')}>
+                <Icon name="caret right" />
+                Have any fun facts for us?
+              </a>
+            </Container>
+            <FunFactsBlocks funfacts={this.props.funfactsList}/>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
       </div>
-    );
+    )
   }
 }
