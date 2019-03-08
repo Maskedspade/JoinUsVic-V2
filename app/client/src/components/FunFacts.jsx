@@ -62,6 +62,7 @@ export default class FunFacts extends Component {
 
   render() {
     const { visible, animation, direction } = this.state
+    const { funfactsList } = this.props
 
     return (
       <div className="ff-wrapper">
@@ -74,7 +75,7 @@ export default class FunFacts extends Component {
                 Have any fun facts for us?
               </a>
             </Container>
-            <FunFactsBlocks funfacts={this.props.funfactsList}/>
+            <FunFactsBlocks funfacts={funfactsList}/>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </div>

@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { Dropdown, Sidebar, Segment, Button } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import LocationDescription from './LocationDescription';
-import ThreeContainer from './ThreeContainer';
-import axios from 'axios';
+import React, { Component } from 'react'
+import { Dropdown, Sidebar, Segment, Button } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
+import LocationDescription from './LocationDescription'
+import ThreeContainer from './ThreeContainer'
+import MainSelection from './MainSelection'
+import axios from 'axios'
 
 const DescriptionSidebar = ({ animation, visible, direction, locationSelected }) => {
   return (
@@ -28,35 +29,14 @@ DescriptionSidebar.propTypes = {
 
 export default class Main extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-        keywordsList: [],
-        locationsList: [],
-        locationSelected: null,
-        selectorShowed: true,
-        visible: false,
-        animation: 'overlay',
-        direction: 'right'
-    };
-    this.handlePush = this.handlePush.bind(this);
-    this.getLocationsOnKeywords = this.getLocationsOnKeywords.bind(this);
-  }
-
-  // get keywords and locations from database
-  // sets corresponding states when fetched
-  componentDidMount() {
-    axios.all([
-      axios.get('api/keywords'),
-      axios.get('api/locations')
-    ])
-    .then(axios.spread((keywordsRes, locationsRes) => {
-      this.setState({
-          keywordsList: keywordsRes.data,
-          locationsList: locationsRes.data,
-          locationSelected: locationsRes.data[4]
-      });
-    }))
-    .catch(error => console.log(error));
+      selectorShowed: true,
+      visible: false,
+      animation: 'overlay',
+      direction: 'right'
+    }
+    this.handlePush = this.handlePush.bind(this)
   }
 
   // handle user clicking on location/building request, deals with anymations
@@ -69,45 +49,19 @@ export default class Main extends Component {
     })
   }
 
-  // handles user's keyword selection
-  // the value is an array of keyword id in database
-  // tracks locations correlated to keywords
-  getLocationsOnKeywords = (e, {value}) => {
-    axios.post('api/locations/highlighted', {keywordId: value })
-    .then(response => {
-      console.log(response)
-    })
-    .catch(error => console.log(error));
-  }
-
   render() {
-    const { keywordsList, locationsList, locationSelected, selectorShowed, visible, animation, direction } = this.state
+    const { selectorShowed, visible, animation, direction } = this.state
 
-    const options = keywordsList.map( keyword => {
-        return {
-            key:keyword.id,
-            text:keyword.name,
-            value:keyword.id
-        }
-    });
+    const { keywordsList, locationsList, locationSelected } = this.props
 
     return (
       <div className="main-wrapper">
         <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={this.state.locationSelected}/>
+          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={locationSelected}/>
           <Sidebar.Pusher>
             <div className="main-model">
               <ThreeContainer />
-              {selectorShowed &&
-                <Dropdown
-                  fluid
-                  multiple
-                  selection
-                  placeholder='What can Victoria offer you today? ...'
-                  options={options}
-                  onChange={this.getLocationsOnKeywords}
-                  className="main-dropdown"
-                /> }
+              { selectorShowed && <MainSelection keywordsList={ keywordsList } /> }
               <Button className="btn-building" onClick={this.handlePush('overlay', 'right')}>Show</Button>
             </div>
           </Sidebar.Pusher>

@@ -5,12 +5,12 @@ const FormCard = () => {
   return (
     <Form>
       <Form.Field>
-        <label class="ff-form-label">Your name (optional): </label>
+        <label className="ff-form-label">Your name (optional): </label>
         <input placeholder='Your name...' />
       </Form.Field>
 
       <Form.Field>
-        <label class="ff-form-label">Fact/Message: </label>
+        <label className="ff-form-label">Fact/Message: </label>
         <TextArea placeholder='Leave us a fun fact or perhaps a message for us :)' />
       </Form.Field>
       <div style={{display: 'flex'}}>
