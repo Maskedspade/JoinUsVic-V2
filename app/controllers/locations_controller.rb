@@ -1,3 +1,5 @@
+require 'set'
+
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, ]
 
@@ -14,8 +16,15 @@ class LocationsController < ApplicationController
   end
 
   def highlight
-    keywordId = params[:keywordId]
-    render json: keywordId
+    keywordIds = params[:keywordIds]
+    locationSet = Set.new
+    keywordIds.each do |keywordId|
+      kw = Keyword.find(keywordId)
+      kw.locations.each do |location|
+        locationSet.add(location.id)
+      end
+    end
+    render json: locationSet.to_a
   end
 
   private
