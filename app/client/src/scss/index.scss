@@ -53,12 +53,17 @@ a {
   }
   .btn-building {
     @extend %vertically-aligned;
-    top: 12em;
+    bottom: 5em;
   }
   .main-selection {
     @extend %vertically-aligned;
     top: 8em;
+  }
+  .main-selection-buttons {
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 1em;
   }
   .main-dropdown {
     width: 30em !important;
