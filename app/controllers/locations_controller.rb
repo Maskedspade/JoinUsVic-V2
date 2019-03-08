@@ -16,15 +16,15 @@ class LocationsController < ApplicationController
   end
 
   def highlight
-    keywordIds = params[:keywordIds]
+    keywordIds = params[:keywordIds][:keys]
     locationSet = Set.new
     keywordIds.each do |keywordId|
       kw = Keyword.find(keywordId)
       kw.locations.each do |location|
-        locationSet.add(location.id)
+        locationSet << location.id
       end
     end
-    render json: locationSet.to_a
+    render json:locationSet.to_a.join(',')
   end
 
   private
