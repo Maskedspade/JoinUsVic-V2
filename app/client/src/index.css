@@ -1,4 +1,4 @@
-.ff-wrapper, .main-wrapper .main-model, .main-wrapper, .nav-wrapper {
+.ff-wrapper .ff-model, .ff-wrapper, .main-wrapper .main-model, .main-wrapper, .nav-wrapper {
   left: 0;
   right: 0;
 }
@@ -8,7 +8,7 @@
   top: 0;
 }
 
-.ff-wrapper, .main-wrapper .main-model, .main-wrapper {
+.ff-wrapper .ff-model, .ff-wrapper, .main-wrapper .main-model, .main-wrapper {
   position: absolute;
   top: 0;
   bottom: 0;

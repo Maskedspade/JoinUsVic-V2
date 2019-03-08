@@ -1,38 +1,5 @@
-%stretch-to-sides {
-  left: 0;
-  right: 0;
-}
-
-%stick-on-top {
-  @extend %stretch-to-sides;
-  position: fixed;
-  top: 0;
-}
-
-%stretch-to-container {
-  @extend %stretch-to-sides;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-}
-
-%vertically-aligned {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0) !important;
-}
-
-%horizontally-aligned {
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%) !important;
-}
-
-$colour-interact: #055e5f;
-$colour-highlight: #d35b12;
-$colour-grey-light: #eee;
-$colour-grey: #aaa;
-$colour-grey-dark: #444;
+@import 'extensions';
+@import 'colours';
 
 body {
   position: relative;
@@ -104,6 +71,9 @@ a {
   @extend %stretch-to-container;
   background: white;
   padding-top: 8em;
+  .ff-model {
+    @extend %stretch-to-container;
+  }
   .ff-container {
     border-bottom: 1px solid $colour-grey-light;
     margin: 2em 0 0;
