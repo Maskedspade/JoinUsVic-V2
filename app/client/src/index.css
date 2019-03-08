@@ -14,7 +14,7 @@
   bottom: 0;
 }
 
-.main-wrapper .main-dropdown, .main-wrapper .btn-building {
+.main-wrapper .main-selection, .main-wrapper .btn-building {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0) !important;
@@ -32,7 +32,7 @@ body {
 
 a {
   color: #055e5f;
-  font-size: 1.25em;
+  font-size: 1em;
 }
 a:hover {
   cursor: pointer;
@@ -69,9 +69,12 @@ a:hover {
 .main-wrapper .btn-building {
   top: 12em;
 }
-.main-wrapper .main-dropdown {
-  width: 35em !important;
+.main-wrapper .main-selection {
   top: 8em;
+  display: flex;
+}
+.main-wrapper .main-dropdown {
+  width: 30em !important;
 }
 .main-wrapper .ui.overlay {
   background: white;

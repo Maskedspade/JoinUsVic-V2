@@ -7,7 +7,7 @@ body {
 
 a {
   color: $colour-interact;
-  font-size: 1.25em;
+  font-size: 1em;
   &:hover {
     cursor: pointer;
   };
@@ -51,10 +51,13 @@ a {
     @extend %vertically-aligned;
     top: 12em;
   }
-  .main-dropdown {
+  .main-selection {
     @extend %vertically-aligned;
-    width: 35em !important;
     top: 8em;
+    display: flex;
+  }
+  .main-dropdown {
+    width: 30em !important;
   }
   .ui.overlay {
     background: white;
