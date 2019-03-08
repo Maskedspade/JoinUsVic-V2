@@ -5,35 +5,28 @@ import axios from 'axios'
 export default class MainSelection extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      selectedKeywords: []
-    }
     this.getSelectedKeywords = this.getSelectedKeywords.bind(this)
     this.getLocationsOnKeywords = this.getLocationsOnKeywords.bind(this)
   }
 
   getSelectedKeywords = (e, {value}) => {
-    this.setState({
-      selectedKeywords: value
-    })
-    e.preventDefault()
+    this.setState({ value })
   }
 
   // handles user's keyword selection
   // the value is an array of keyword id in database
   // tracks locations correlated to keywords
   getLocationsOnKeywords = (e) => {
-    e.preventDefault()
-    const keys = this.state.selectedKeywords
+    const keys = this.state.value
     axios.post('api/locations/highlighted', { keywordIds: { keys } })
     .then(response => {
-      console.log(response)
+      document.getElementById('messager').dataset.highlights = response.data
     })
     .catch(error => console.log(error))
   }
 
   render() {
-    const { keywordsList } = this.props
+    const { keywordsList, value } = this.props
 
     const options = keywordsList.map( keyword => {
       return {
