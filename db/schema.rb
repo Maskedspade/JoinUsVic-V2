@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190301202540) do
+ActiveRecord::Schema.define(version: 20190308224749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "anchors", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "funfacts", force: :cascade do |t|
     t.string "user_name", default: "@Someone@"
@@ -43,6 +48,8 @@ ActiveRecord::Schema.define(version: 20190301202540) do
     t.string "website", default: "/"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "anchor_id"
+    t.index ["anchor_id"], name: "index_locations_on_anchor_id"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -53,5 +60,6 @@ ActiveRecord::Schema.define(version: 20190301202540) do
   end
 
   add_foreign_key "funfacts", "locations"
+  add_foreign_key "locations", "anchors"
   add_foreign_key "ratings", "locations"
 end
