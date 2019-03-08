@@ -43,7 +43,8 @@ export default class FunFacts extends Component {
     this.state = {
       visible: false,
       animation: 'push',
-      direction: 'left'
+      direction: 'left',
+      expanded: false
     }
     this.convertName = this.convertName.bind(this)
   }
@@ -56,12 +57,13 @@ export default class FunFacts extends Component {
     this.setState({
       animation,
       direction,
-      visible: !this.state.visible
+      visible: !this.state.visible,
+      expanded: !this.state.expanded
     })
   }
 
   render() {
-    const { visible, animation, direction } = this.state
+    const { visible, animation, direction, expanded } = this.state
     const { funfactsList } = this.props
 
     return (
@@ -69,13 +71,21 @@ export default class FunFacts extends Component {
         <Sidebar.Pushable as={Segment}>
           <FormSidebar animation={animation} visible={visible} direction={direction} />
           <Sidebar.Pusher>
-            <Container textAlign='justified' className='ff-formlink'>
-              <a onClick={this.handlePush('push', 'left')}>
-                <Icon name="caret right" />
-                Have any fun facts for us?
-              </a>
-            </Container>
-            <FunFactsBlocks funfacts={funfactsList}/>
+            <div className="ff-model">
+              <Container textAlign='justified' className='ff-formlink'>
+                { expanded ?
+                  ( <a onClick={this.handlePush('push', 'left')}>
+                    <Icon name="caret left" />
+                    Nevermind...
+                  </a> ) :
+                  ( <a onClick={this.handlePush('push', 'left')}>
+                  <Icon name="caret right" />
+                  Have any fun facts for us?
+                </a> )
+                }
+                <FunFactsBlocks funfacts={funfactsList}/>
+              </Container>
+            </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </div>
