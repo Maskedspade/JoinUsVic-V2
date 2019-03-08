@@ -61,9 +61,11 @@ class App extends Component {
     return (
       <div className="app">
       {loading &&
-        <Dimmer active>
-          <Loader indeterminate>Give us a sec...</Loader>
-        </Dimmer>
+        <div className="app-dimmer">
+          <Dimmer active>
+            <Loader indeterminate>Give us a sec...</Loader>
+          </Dimmer>
+        </div>
       }
         <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex }/>
         <Main keywordsList={ keywordsList } locationsList={ locationsList }  locationSelected={ locationSelected }/>
