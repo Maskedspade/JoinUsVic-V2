@@ -47,11 +47,14 @@ export default class ThreeContainer extends Component {
     const material = new THREE.MeshNormalMaterial({color: 0xFFFFFF, wireframe: false});
 
     const cube1 = new THREE.Mesh( geometry, material);
+    cube1.name = 1;
 
     const cube2 = new THREE.Mesh( geometry, material);
+    cube2.name = 2;
     cube2.position.x = 3;
 
     const cube3 = new THREE.Mesh( geometry, material);
+    cube3.name = 3;
     cube3.position.x = -3;
 
     scene.add(cube1);
@@ -67,8 +70,15 @@ export default class ThreeContainer extends Component {
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     // add raycaster and mouse as 2D vector
-    var raycaster = new THREE.Raycaster();
-    var mouse = new THREE.Vector2();
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    function onMouseMove(event) {
+      // calculate mouse position in normalized device coordinates
+      // (-1 to +1) for both components
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+    }
 
     function onDocumentTouchStart(event) {
       event.preventDefault();
@@ -80,25 +90,24 @@ export default class ThreeContainer extends Component {
     }
 
     function onDocumentMouseDown(event) {
-      event.preventDefault();
-
-      mouse.x = (event.clientX / renderer.domElement.width) * 2 - 1;
-      mouse.y = (event.clientY / renderer.domElement.height) * 2 + 1;
-
       // update the picking ray with the camera and mouse position
       raycaster.setFromCamera( mouse, camera );
 
-      var intersects = raycaster.intersectObjects(scene.children);
-      var color = (Math.random() * 0xFFFFFF);
+      // calculate objects intersecting the picking ray
+      const intersects = raycaster.intersectObjects( scene.children );
 
-      for ( var i = 0; i < intersects.length; i++ ) {
-        intersects[ i ].object.material.color.set( 0xff0000 );
+      for ( let i = 0; i < intersects.length; i++ ) {
+        if (intersects[i].object.type == 'Mesh') {
+          // console.log(intersects[i].object.material);
+          intersects[i].object.material.wireframe = !intersects[i].object.material.wireframe;
+        }
+        // intersects[ i ].object.material.color.set( 0xff0000 );
       }
     }
 
+    window.addEventListener( 'mousemove', onMouseMove, false );
     window.addEventListener( 'mousedown', onDocumentMouseDown, false );
     window.addEventListener( 'touchstart', onDocumentTouchStart, false );
-    // window.addEventListener( 'mousemove', onMouseMove, false );
 
     // *******************************************************************
 
@@ -119,11 +128,11 @@ export default class ThreeContainer extends Component {
     // draw scene
     function render() {
       renderer.render( scene, camera );
-    };
+    }
 
     // run game loop (update, render, repeat)
     const GameLoop = function() {
-      requestAnimationFrame( GameLoop );
+      requestAnimationFrame(GameLoop);
 
       update();
       render();

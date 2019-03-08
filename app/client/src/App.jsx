@@ -65,12 +65,11 @@ class App extends Component {
           <Loader indeterminate>Give us a sec...</Loader>
         </Dimmer>
       }
-      <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex }/>
-      <Main keywordsList={ keywordsList } locationsList={ locationsList }  locationSelected={ locationSelected }/>
-      { funfactsDisplayed &&
-      <FunFacts funfactsList={ funfactsList }/>
-      }
-
+        <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex }/>
+        <Main keywordsList={ keywordsList } locationsList={ locationsList }  locationSelected={ locationSelected }/>
+        { funfactsDisplayed &&
+        <FunFacts funfactsList={ funfactsList }/>
+        }
       </div>
     );
   }
