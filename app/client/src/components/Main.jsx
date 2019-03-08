@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
-import { Dropdown, Sidebar, Segment, Button } from 'semantic-ui-react'
+import { Sidebar, Segment, Button } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import LocationDescription from './LocationDescription'
 import ThreeContainer from './ThreeContainer'
 import MainSelection from './MainSelection'
-import axios from 'axios'
 
 const DescriptionSidebar = ({ animation, visible, direction, locationSelected }) => {
   return (
     <Sidebar
-      inverted
-      vertical
+      inverted='true'
+      vertical='true'
       animation={animation}
       visible={visible}
       direction={direction}
@@ -34,7 +33,8 @@ export default class Main extends Component {
       selectorShowed: true,
       visible: false,
       animation: 'overlay',
-      direction: 'right'
+      direction: 'right',
+      expanded: false
     }
     this.handlePush = this.handlePush.bind(this)
   }
@@ -45,12 +45,13 @@ export default class Main extends Component {
       selectorShowed: !this.state.selectorShowed,
       animation,
       direction,
-      visible: !this.state.visible
+      visible: !this.state.visible,
+      expanded: true
     })
   }
 
   render() {
-    const { selectorShowed, visible, animation, direction } = this.state
+    const { selectorShowed, visible, animation, direction, expanded } = this.state
 
     const { keywordsList, locationsList, locationSelected } = this.props
 

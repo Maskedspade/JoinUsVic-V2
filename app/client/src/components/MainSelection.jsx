@@ -13,7 +13,6 @@ export default class MainSelection extends Component {
   }
 
   getSelectedKeywords = (e, {value}) => {
-    console.log(value);
     this.setState({
       selectedKeywords: value
     })
@@ -24,9 +23,9 @@ export default class MainSelection extends Component {
   // the value is an array of keyword id in database
   // tracks locations correlated to keywords
   getLocationsOnKeywords = (e) => {
-    const test = this.state.selectedKeywords
     e.preventDefault()
-    axios.post('api/locations/highlighted', { keywordIds: { test } })
+    const keys = this.state.selectedKeywords
+    axios.post('api/locations/highlighted', { keywordIds: { keys } })
     .then(response => {
       console.log(response)
     })
@@ -45,7 +44,7 @@ export default class MainSelection extends Component {
     })
 
     return (
-      <div>
+      <div className="main-selection">
         <Dropdown
           fluid
           multiple
