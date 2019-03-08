@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dropdown, Button } from 'semantic-ui-react'
+import { Dropdown, Button, Checkbox } from 'semantic-ui-react'
 import axios from 'axios'
 
 export default class MainSelection extends Component {
@@ -47,7 +47,14 @@ export default class MainSelection extends Component {
           onChange={this.getSelectedKeywords}
           className="main-dropdown"
         />
-        <Button onClick={this.getLocationsOnKeywords}>Go</Button>
+        <div className="main-selection-buttons">
+          <Checkbox
+            slider
+            label='Filter'
+            className='main-selection-checkbox'
+          />
+          <Button onClick={this.getLocationsOnKeywords}>Go</Button>
+        </div>
       </div>
     )
   }
