@@ -2,6 +2,7 @@ class Location < ApplicationRecord
   has_many :ratings
   has_many :funfacts
   has_and_belongs_to_many :keywords
+  belongs_to :anchor
 
   validates_presence_of :name, :address, :description
   validates_length_of :address, :minimum => 5
