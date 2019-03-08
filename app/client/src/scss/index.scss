@@ -29,11 +29,15 @@ a {
   margin: 1em 0;
 }
 
+.app-dimmer {
+  z-index: 9999;
+}
+
 .nav-wrapper {
   @extend %stick-on-top;
   height: 4em;
   padding: 0 5em;
-  z-index: 9999;
+  z-index: 9998;
 
   .nav-logo {
     height: 2.5em;
