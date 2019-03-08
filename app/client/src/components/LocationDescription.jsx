@@ -23,8 +23,10 @@ const DescriptionCard = ( {location} ) => {
 
 export default class LocationDescription extends Component {
   render() {
+    const { location } = this.props
+
     return (
-      <DescriptionCard location={this.props.location} />
+      <DescriptionCard location={location} />
     )
   }
 }
