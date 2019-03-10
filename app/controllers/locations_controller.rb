@@ -6,7 +6,6 @@ class LocationsController < ApplicationController
   # GET /locations
   def index
     @locations = Location.order(:id)
-
     render json: @locations
   end
 
@@ -15,22 +14,39 @@ class LocationsController < ApplicationController
     render json: @location
   end
 
+  # GET highlighted locations and anchors based on user keyword selection
   def highlight
-    keywordIds = params[:keywordIds][:keys]
-    locationSet = Set.new
-    keywordIds.each do |keywordId|
-      kw = Keyword.find(keywordId)
-      kw.locations.each do |location|
-        locationSet << location.id
-      end
-    end
-    render json:locationSet.to_a.join(',')
+    filter_it = params[:filtered][:bool]
+    keyword_ids = params[:keywordIds][:keys]
+
+    keyword_to_locations_hash =
+      keyword_to_locations_hash(keyword_ids)
+
+    locations = keyword_to_locations_hash.map{ |keyword, locations| locations }
+
+    filter_it ? (locations_array = locations.reduce(:&)) : (locations_array = locations.flatten.uniq)
+
+    anchors_ids_array = locations_array.map { |location| location.anchor_id }
+    locations_ids_str = locations_array.map(&:id).join(',')
+
+    # TODO anchor_ids
+    render json: { :locations_ids_str => locations_ids_str, :anchors_ids_array => anchors_ids_array
+    }
+
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_location
-      @location = Location.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_location
+    @location = Location.find(params[:id])
+  end
+
+  def keyword_to_locations_hash(keyword_ids)
+    keyword_to_locations_hash = {}
+    keyword_ids.each do |keyword|
+      keyword_to_locations_hash[keyword] = Keyword.find(keyword).locations
     end
+    keyword_to_locations_hash
+  end
 
 end
