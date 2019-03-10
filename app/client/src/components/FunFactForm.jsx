@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Icon, TextArea } from 'semantic-ui-react'
 
-const FormCard = () => {
+const FormCard = ( {handleNevermind} ) => {
   return (
     <Form>
       <Form.Field>
@@ -14,7 +14,7 @@ const FormCard = () => {
         <TextArea placeholder='Leave us a fun fact or perhaps a message for us :)' />
       </Form.Field>
       <div style={{display: 'flex'}}>
-        <Button>
+        <Button onClick={handleNevermind}>
           <Icon name='cancel' />
           Nevermind
         </Button>
@@ -29,8 +29,10 @@ const FormCard = () => {
 
 export default class FunFactForm extends Component {
   render() {
+    const { handleNevermind } = this.props
+
     return(
-      <FormCard />
+      <FormCard handleNevermind={handleNevermind}/>
     )
   }
 }
