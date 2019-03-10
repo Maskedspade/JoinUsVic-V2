@@ -38,6 +38,10 @@ a:hover {
   cursor: pointer;
 }
 
+.error-message {
+  color: red;
+}
+
 .ui.segment {
   border: none !important;
 }
