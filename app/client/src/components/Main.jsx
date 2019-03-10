@@ -15,7 +15,7 @@ const DescriptionSidebar = ({ animation, visible, direction, locationSelected, h
       direction={direction}
       width='very wide'
     >
-      {locationSelected && <LocationDescription location={locationSelected} hideDescription={hideDescription}/>}
+      {locationSelected && <LocationDescription locationSelected={locationSelected} hideDescription={hideDescription}/>}
     </Sidebar>
   )
 }

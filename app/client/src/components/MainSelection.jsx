@@ -7,10 +7,16 @@ export default class MainSelection extends Component {
     super(props)
     this.getSelectedKeywords = this.getSelectedKeywords.bind(this)
     this.getLocationsOnKeywords = this.getLocationsOnKeywords.bind(this)
+    this.allOrFiltered.bind(this)
   }
 
-  getSelectedKeywords = (e, {value}) => {
+  getSelectedKeywords = (e, { value }) => {
     this.setState({ value })
+  }
+
+  allOrFiltered = (e, data) => {
+    let filtered = data.checked
+    this.setState( { filtered } )
   }
 
   // handles user's keyword selection
@@ -18,15 +24,20 @@ export default class MainSelection extends Component {
   // tracks locations correlated to keywords
   getLocationsOnKeywords = (e) => {
     const keys = this.state.value
-    axios.post('api/locations/highlighted', { keywordIds: { keys } })
+    const bool = this.state.filtered
+    axios.post('api/locations/highlighted', { keywordIds: { keys }, filtered: { bool } })
     .then(response => {
-      document.getElementById('messager').dataset.highlights = response.data
+      document.getElementById('messager').dataset.highlights = response.data.anchors_ids_str
+      this.setState({
+        locations_array: response.data.locations_array
+      })
     })
     .catch(error => console.log(error))
+
   }
 
   render() {
-    const { keywordsList, value } = this.props
+    const { keywordsList, value, filtered } = this.props
 
     const options = keywordsList.map( keyword => {
       return {
@@ -51,6 +62,7 @@ export default class MainSelection extends Component {
           <Checkbox
             slider
             label='Filter'
+            onChange={this.allOrFiltered}
             className='main-selection-checkbox'
           />
           <Button onClick={this.getLocationsOnKeywords}>Go</Button>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Item, Icon } from 'semantic-ui-react';
+import { Item, Icon, Menu, Tab } from 'semantic-ui-react';
 
 const DescriptionCard = ( {location, hideDescription} ) => {
   return (
@@ -22,11 +22,33 @@ const DescriptionCard = ( {location, hideDescription} ) => {
 }
 
 export default class LocationDescription extends Component {
+  constructor() {
+    super()
+    this.state = {
+      panes: []
+    }
+  }
+
+  loopThroughLocations = (locationSelected) => {
+    locationSelected.forEach((location) => {
+      this.state.panes.push(
+        {
+          menuItem: {key: location.id, content:location.name},
+          render: () =>
+            <Tab.Pane>
+
+            </Tab.Pane>
+        }
+      )
+    })
+  }
+
+
   render() {
-    const { location, hideDescription } = this.props
+    const { locationSelected, hideDescription } = this.props
 
     return (
-      <DescriptionCard location={location} hideDescription={hideDescription}/>
+      <DescriptionCard location={locationSelected} hideDescription={hideDescription}/>
     )
   }
 }
