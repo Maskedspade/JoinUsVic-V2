@@ -190,7 +190,6 @@ loc13 = Location.create!({
 # KEY TO LOCATION
 
 puts 'Setting locations to keywords...'
-key1.locations << loc1
 key1.locations << loc2
 key1.locations << loc3
 key1.locations << loc9
