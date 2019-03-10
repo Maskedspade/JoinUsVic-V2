@@ -22,6 +22,7 @@ export default class ThreeContainer extends Component {
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
     const renderer = new THREE.WebGLRenderer();
+    const loader = new THREE.GLTFLoader();
     renderer.setClearColor(0x000000);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -47,11 +48,6 @@ export default class ThreeContainer extends Component {
 
     const observer = new MutationObserver(cb);
     observer.observe(messager, config);
-
-
-
-
-
 
     // ** DYNAMIC: adjust renderer and camera according to the event of window resizing **
     window.addEventListener('resize', function() {
@@ -155,6 +151,18 @@ export default class ThreeContainer extends Component {
       cube3.rotation.x += 0.01;
       cube3.rotation.y += 0.005;
     };
+
+
+    loader.load( '/public/test', function ( gltf ) {
+      console.log('STARTING TO RENDER THIS LARGE MODEL');
+
+      scene.add( gltf.scene );
+
+    }, undefined, function ( error ) {
+
+      console.error( error );
+
+    } );
 
     // draw scene
     function render() {
