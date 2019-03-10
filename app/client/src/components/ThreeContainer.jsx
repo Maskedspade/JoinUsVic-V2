@@ -23,6 +23,7 @@ export default class ThreeContainer extends Component {
 
     const renderer = new THREE.WebGLRenderer();
     const loader = new THREE.GLTFLoader();
+
     renderer.setClearColor(0x000000);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -41,7 +42,6 @@ export default class ThreeContainer extends Component {
     const cb = function(mutationsList, observer) {
       for (let mutation of mutationsList) {
         if (mutation.type == 'attributes') {
-          console.log(cube1);
         }
       }
     };
@@ -64,27 +64,27 @@ export default class ThreeContainer extends Component {
     // *******************************************************************
 
     // create shapes
-    const geometry = new THREE.BoxGeometry(1,1,1);
+    // const geometry = new THREE.BoxGeometry(1,1,1);
 
     // create a material, colour or image texture
-    const material1 = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
-    const material2 = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
-    const material3 = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
+    // const material1 = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
+    // const material2 = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
+    // const material3 = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
 
-    const cube1 = new THREE.Mesh( geometry, material1);
-    cube1.name = 1;
+    // const cube1 = new THREE.Mesh( geometry, material1);
+    // cube1.name = 1;
 
-    const cube2 = new THREE.Mesh( geometry, material2);
-    cube2.name = 2;
-    cube2.position.x = 3;
+    // const cube2 = new THREE.Mesh( geometry, material2);
+    // cube2.name = 2;
+    // cube2.position.x = 3;
 
-    const cube3 = new THREE.Mesh( geometry, material3);
-    cube3.name = 3;
-    cube3.position.x = -3;
+    // const cube3 = new THREE.Mesh( geometry, material3);
+    // cube3.name = 3;
+    // cube3.position.x = -3;
 
-    scene.add(cube1);
-    scene.add(cube2);
-    scene.add(cube3);
+    // scene.add(cube1);
+    // scene.add(cube2);
+    // scene.add(cube3);
 
     const light = new THREE.AmbientLight( 0x404040 ); // soft white light
     scene.add(light);
@@ -125,10 +125,10 @@ export default class ThreeContainer extends Component {
       const intersects = raycaster.intersectObjects( scene.children );
 
       for ( let i = 0; i < intersects.length; i++ ) {
-        if (intersects[i].object.type == 'Mesh') {
-          // console.log(intersects[i].object.material);
-        intersects[ i ].object.material.color.set( 0xff0000 );
-        }
+        // if (intersects[i].object.type == 'Mesh') {
+          console.log(intersects[i].object);
+        // intersects[ i ].object.material.color.set( 0xff0000 );
+        // }
       }
     }
 
@@ -142,26 +142,25 @@ export default class ThreeContainer extends Component {
 
     // game logic
     const update = function() {
-      cube1.rotation.x += 0.01;
-      cube1.rotation.y += 0.005;
+      // cube1.rotation.x += 0.01;
+      // cube1.rotation.y += 0.005;
 
-      cube2.rotation.x += 0.01;
-      cube2.rotation.y += 0.005;
+      // cube2.rotation.x += 0.01;
+      // cube2.rotation.y += 0.005;
 
-      cube3.rotation.x += 0.01;
-      cube3.rotation.y += 0.005;
+      // cube3.rotation.x += 0.01;
+      // cube3.rotation.y += 0.005;
     };
 
 
-    loader.load( '/public/test', function ( gltf ) {
-      console.log('STARTING TO RENDER THIS LARGE MODEL');
-
+    loader.load( "model_test.gltf", function ( gltf ) {
       scene.add( gltf.scene );
+
+      GameLoop();
 
     }, undefined, function ( error ) {
 
       console.error( error );
-
     } );
 
     // draw scene
@@ -176,8 +175,6 @@ export default class ThreeContainer extends Component {
       update();
       render();
     };
-
-    GameLoop();
   }
 
   render () {
