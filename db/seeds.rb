@@ -21,7 +21,7 @@ end
 
 ## KEYWORDS
 
-puts "Finding or creating locations..."
+puts "Finding or creating keywords..."
 
 key1 = Keyword.find_or_create_by! name: 'Tourist stuff'
 key2 = Keyword.find_or_create_by! name: 'Kombucha'
@@ -30,9 +30,15 @@ key4 = Keyword.find_or_create_by! name: 'Sunny hangouts'
 key5 = Keyword.find_or_create_by! name: 'Nostalgia'
 key6 = Keyword.find_or_create_by! name: 'Bubble Tea'
 
+## ANCHORS
+
+puts "Creating anchors..."
+
+100.times do
+  Anchor.create!()
+end
 
 ## LOCATIONS
-
 puts "Creating locations..."
 Location.destroy_all
 
@@ -40,11 +46,12 @@ loc1 = Location.create! ({
   name: 'Victoria public',
   address: 'Victoria, BC, Canada',
   description: 'Capital of British Columbia, Canada.',
-  website: 'https://www.victoria.ca/#'
+  website: 'https://www.victoria.ca/#',
+  anchor_id: 1
 })
 
 loc1.funfacts.create!({
-  description: 'Hang around the church area around Pandora and Cook when it gets dark makes your life more colourful.'
+  description: 'Hang around the church area around Pandora and Cook when it gets dark makes your life more colourful.',
 })
 
 loc1.funfacts.create!({
@@ -63,7 +70,8 @@ loc2 = Location.create! ({
   Served daily since its opening in 1908, world famous Tea at the Empress is served in the sophisticated Lobby Lounge. Located on the picturesque West Coast of Canada, Fairmont Empress is the ideal starting point to explore the stunning natural beauty of Vancouver Island.
   Meetings, Events and Weddings:
   Fairmont Empress is Vancouver Island\'s premier venue for top tier functions. With unparalleled facilities, proximity to the Victoria Conference Centre and sustainable meeting options, the Empress is Victoria’s ideal location for discerning planners.  Planning a wedding? Fairmont Empress\' team will create a fairy tale wedding for you right here at Canada\'s castle on the coast.',
-  website: 'https://www.fairmont.com/empress-victoria/'
+  website: 'https://www.fairmont.com/empress-victoria/',
+  anchor_id: 55
 })
 
 loc2.funfacts.create!({
@@ -77,7 +85,8 @@ loc3 = Location.create!({
   address: '501 Belleville Street',
   description: 'Home to the Legislative Assembly of British Columbia where elected representatives – called Members of the Legislative Assembly or MLAs – meet to shape the future of the province by debating and passing the laws that govern British Columbia.
   The Parliament Buildings and surrounding areas are located in the traditional territories of the Lekwungen (pronounced Le-KWUNG-en) people. Now known as the Songhees and Esquimalt First Nations, these Coast Salish people have a rich culture and history dating back thousands of years.',
-  website: 'https://www.leg.bc.ca/learn-about-us/visiting-the-legislature'
+  website: 'https://www.leg.bc.ca/learn-about-us/visiting-the-legislature',
+  anchor_id: 56
 })
 
 loc4 = Location.create!({
@@ -90,14 +99,16 @@ loc4 = Location.create!({
   Beautiful collection of pinball machines. They have the largest selection in BC!
   We use a token based system. Our token machine accepts cash, debit, and tap. Our tokens (better known as ‘Quazars’) are fifty cents a piece. Tokens can also be purchased from anyone of our staff members.
   ',
-  website: 'https://www.quazarsarcade.com/'
+  website: 'https://www.quazarsarcade.com/',
+  anchor_id: 57
 })
 
 loc5 = Location.create!({
   name: 'Market Square',
   address: '#39 - 560 Johnson Street',
   description: 'If you’re looking for local boutiques that offer one-of-a-kind merchandise, you’ve come to the right place. You’ll find the latest fashion trends; home accessories; locally made jewelry; fun gift ideas and more. Choose from a variety of tasty dine-in and take-out restaurants – authentic Belgian waffles, a vegetarian buffet, Neapolitan pizzeria, curries, Mexican, Indonesian, a coffee shop and craft beer eatery.',
-  website: 'https://www.marketsquare.ca/'
+  website: 'https://www.marketsquare.ca/',
+  anchor_id: 58
 })
 
 loc6 = Location.create!({
@@ -106,14 +117,16 @@ loc6 = Location.create!({
   description: 'Have focused on fresh-milled maccha green tea and its tools since 2005. Maccha has inspired our micro-milled tea lattes and a farm direct rotating line of loose teas.
   JagaSilk was created (and is operated and owned) by Miyuki and Jared Nyberg. The adventure began in the summer of 2005, making deliveries from the public transit system. Importing maccha began with a little knowledge and a kernel of an idea.
   With the support of a wealth of local small business owners, managers, and employees, we were able to hone our niche to the specialty cafe, supermarket and restaurant environment. This is where quality, knowledge, and attention to detail in technique and the sharing of knowledge were and are most appreciated.',
-  website: 'http://jagasilk.com/'
+  website: 'http://jagasilk.com/',
+  anchor_id: 59
 })
 
 loc7 = Location.create!({
   name: 'Bastion Square',
   address: '50 - 60 Bastion Square',
   description: 'Bastion Square is located in the heart of downtown. The ceremonial entry arch, located at View and Government Streets, welcomes visitors to the original site of old Fort Victoria. The square looks out on the Inner Harbour and boasts some of the finest restaurants, pubs, and cafes in Victoria. In the summer, its seasonal artisan market and many outdoor patios make it an ideal spot to visit.',
-  website: 'https://www.tourismvictoria.com/bastion-square-public-market'
+  website: 'https://www.tourismvictoria.com/bastion-square-public-market',
+   anchor_id: 60
 })
 
 
@@ -123,7 +136,8 @@ loc8 = Location.create!({
   description: 'Hopping club featuring varied live bands, DJ nights & dance parties in an intimate space.
   Specialties:
    90\'s Night, 80\' Night, etc.',
-  website: 'https:/\/luckybar.ca\/'
+  website: 'https:/\/luckybar.ca\/',
+  anchor_id: 61
 })
 
 loc9 = Location.create!({
@@ -138,19 +152,22 @@ Tours:
 Explore Victoria’s Inner Harbour and discover more about BC’s maritime heritage and culture!
 
 The tour starts at the Maritime Museum of BC and go around the Inner Harbour, up Wharf St., through Bastion Square, down Government St., and back to the Museum. It runs for about an hour and includes the cost of admission.',
-  website: 'https://mmbc.bc.ca/'
+  website: 'https://mmbc.bc.ca/',
+  anchor_id: 62
 })
 
 loc10 = Location.create!({
   name: 'Songhees Hilltop Dog Park',
   address: '100 Saghalie Road',
-  description: 'Dogs are allowed off-leash from 6am to 10pm. The off leash area is the grassy area encircled by the gravel pathway on the west side of the park.'
+  description: 'Dogs are allowed off-leash from 6am to 10pm. The off leash area is the grassy area encircled by the gravel pathway on the west side of the park.',
+  anchor_id: 22
 })
 
 loc11 = Location.create!({
   name: 'The Bubble Tea Place',
   address: '532 Fisgard Street (Chinatown)',
-  description: 'Literally the name. It comes with a lot of bubbles.'
+  description: 'Literally the name. It comes with a lot of bubbles.',
+  anchor_id: 63
 })
 
 
@@ -159,19 +176,20 @@ loc12 = Location.create!({
   address: '1306 Douglas Street',
   description: 'Chatime is a Taiwanese global franchise teahouse chain based in Taiwan. Chatime is the largest teahouse franchise in the world. Its expansion and growth model is through franchising.
   The one in Victoria is right on the main road (Douglas) in the center of the city!',
-  website: 'http://chatime.com/index_nr.html#home'
+  website: 'http://chatime.com/index_nr.html#home',
+  anchor_id: 64
 })
 
 loc13 = Location.create!({
   name: 'Fantan Cafe',
   address: '549 Fisgard Street (Chinatown)',
   description: 'Local, laid-back Chinese nook since 1985 with eclectic decor focusing on noodle dishes & bubble tea.',
+  anchor_id: 65
 })
 
 # KEY TO LOCATION
 
 puts 'Setting locations to keywords...'
-key1.locations << loc1
 key1.locations << loc2
 key1.locations << loc3
 key1.locations << loc9

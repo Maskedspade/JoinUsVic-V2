@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Sidebar, Segment, Button } from 'semantic-ui-react'
+import { Sidebar, Segment, Button, Dimmer } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import LocationDescription from './LocationDescription'
 import ThreeContainer from './ThreeContainer'
 import MainSelection from './MainSelection'
 
-const DescriptionSidebar = ({ animation, visible, direction, locationSelected }) => {
+const DescriptionSidebar = ({ animation, visible, direction, locationSelected, hideDescription }) => {
   return (
     <Sidebar
       inverted='true'
@@ -15,7 +15,7 @@ const DescriptionSidebar = ({ animation, visible, direction, locationSelected })
       direction={direction}
       width='very wide'
     >
-      {locationSelected && <LocationDescription location={locationSelected} />}
+      {locationSelected && <LocationDescription location={locationSelected} hideDescription={hideDescription}/>}
     </Sidebar>
   )
 }
@@ -34,9 +34,11 @@ export default class Main extends Component {
       visible: false,
       animation: 'overlay',
       direction: 'right',
-      expanded: false
+      expanded: false,
+      dimmed: false
     }
     this.handlePush = this.handlePush.bind(this)
+    this.hideDescription = this.hideDescription.bind(this)
   }
 
   // handle user clicking on location/building request, deals with anymations
@@ -50,15 +52,24 @@ export default class Main extends Component {
     })
   }
 
+  hideDescription = () => {
+    this.setState({
+      selectorShowed: true,
+      visible: false,
+      expanded: false
+    })
+  }
+
   render() {
-    const { selectorShowed, visible, animation, direction, expanded } = this.state
+    const { selectorShowed, visible, animation, direction, expanded, dimmed } = this.state
 
     const { keywordsList, locationsList, locationSelected } = this.props
 
     return (
       <div className="main-wrapper">
+        { dimmed && <Dimmer active />}
         <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={locationSelected}/>
+          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={locationSelected} hideDescription={this.hideDescription}/>
           <Sidebar.Pusher>
             <div className="main-model">
               <ThreeContainer />
