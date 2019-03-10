@@ -26,11 +26,10 @@ class LocationsController < ApplicationController
 
     filter_it ? (locations_array = locations.reduce(:&)) : (locations_array = locations.flatten.uniq)
 
-    anchors_ids_array = locations_array.map { |location| location.anchor_id }
-    locations_ids_str = locations_array.map(&:id).join(',')
+    anchors_ids_str = locations_array.map { |location| location.anchor_id }.join(',')
 
     # TODO anchor_ids
-    render json: { :locations_ids_str => locations_ids_str, :anchors_ids_array => anchors_ids_array
+    render json: { :locations_array => locations_array, :anchors_ids_str => anchors_ids_str
     }
 
   end
