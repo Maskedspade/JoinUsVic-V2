@@ -14,7 +14,7 @@ export default class NavBar extends Component {
     const { handleFunfactsDisplay, handleBackToIndex } = this.props
 
     return (
-      <Menu className="nav-wrapper">
+      <Menu fixed='top' className="nav-wrapper">
         <Menu.Menu position='left'>
           <Menu.Item />
           <Menu.Item
