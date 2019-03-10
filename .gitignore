@@ -2,6 +2,7 @@
 /app/client/.env
 
 # dependencies
+/app/client/src/exported_trial.dae
 /app/client/node_modules
 /.pnp
 .pnp.js
