@@ -155,7 +155,6 @@ export default class ThreeContainer extends Component {
     };
 
     const onLoad = gltf => {
-      console.log(gltf);
       scene.add(gltf.scene);
 
       gltf.scene.traverse((children) => {
@@ -210,7 +209,7 @@ export default class ThreeContainer extends Component {
     };
 
     const onProgress = () => {
-      // loader here
+      // undefined for now
     };
 
     const handleError = (error) => {
