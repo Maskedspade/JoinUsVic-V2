@@ -54,8 +54,8 @@ export default class Main extends Component {
       animation,
       direction,
       visible: !visible,
+      panes: []
     })
-    console.log()
     locationsArray.forEach((location) => {
       this.setState(state => {
         const location_info =
@@ -67,7 +67,6 @@ export default class Main extends Component {
             </Tab.Pane>
         }
         const panes = [...state.panes, location_info]
-        // panes = [...new Set(panes)]
         console.log(panes)
         return {
           panes
