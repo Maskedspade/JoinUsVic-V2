@@ -35,26 +35,28 @@ export default class Main extends Component {
       visible: false,
       animation: 'overlay',
       direction: 'right',
-      dimmed: false,
       anchorsIdsStr: '',
       locationsArray: [],
       averageRatingsArray: [],
+      selectedAnchorId: null,
       panes: []
     }
     this.handleLocationSidebar = this.handleLocationSidebar.bind(this)
     this.hideDescription = this.hideDescription.bind(this)
+    this.getSelectedAnchorId = this.getSelectedAnchorId.bind(this)
+    this.getLocationsOnKeywords = this.getLocationsOnKeywords.bind(this)
   }
 
   // handle user clicking on location/building request, deals with anymations
-  handleLocationSidebar = (animation, direction, visible, locationSelected, hideDescription) => () => {
+  handleLocationSidebar = (animation, direction, visible, locationsArray, hideDescription) => () => {
     this.setState({
       selectorShowed: !this.state.selectorShowed,
       animation,
       direction,
       visible: !visible,
     })
-
-    locationSelected.forEach((location) => {
+    console.log()
+    locationsArray.forEach((location) => {
       this.setState(state => {
         const location_info =
         {
@@ -81,20 +83,38 @@ export default class Main extends Component {
     })
   }
 
-  render() {
-    const { selectorShowed, visible, animation, direction, dimmed, anchorsIdsStr, averageRatingsArray, locationsArray, panes } = this.state
+  getLocationsOnKeywords = (anchors, locations, ratings) => {
+    this.setState({
+      anchorsIdsStr: anchors,
+      locationsArray: locations,
+      averageRatingsArray: ratings
+    })
+  }
 
-    const { keywordsList, locationsList, locationSelected, modelLoaded } = this.props
+  getSelectedAnchorId = (anchorId) => {
+    this.setState({
+      selectedAnchorId: anchorId,
+    })
+  }
+
+  render() {
+    const { selectorShowed, visible, animation, direction, anchorsIdsStr, averageRatingsArray, locationsArray, panes, selectedAnchorId } = this.state
+
+    const { keywordsList, locationsList, modelLoaded } = this.props
+
+    console.log(anchorsIdsStr)
+    console.log(locationsArray)
+    console.log(averageRatingsArray)
 
     return (
       <div className="main-wrapper">
         <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={locationSelected} hideDescription={this.hideDescription} panes={panes}/>
+          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationsArray={locationsArray} hideDescription={this.hideDescription} panes={panes}/>
           <Sidebar.Pusher>
             <div className="main-model">
-              <ThreeContainer modelLoaded={modelLoaded} />
-              { selectorShowed && <MainSelection keywordsList={ keywordsList} anchorsIdsStr={anchorsIdsStr} locationsArray={locationsArray} averageRatingsArray={averageRatingsArray}/> }
-              <Button className="btn-building" onClick={this.handleLocationSidebar('overlay', 'right', visible, locationSelected, this.hideDescription)}>Show</Button>
+              <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />
+              { selectorShowed && <MainSelection keywordsList={ keywordsList} getLocationsOnKeywords={this.getLocationsOnKeywords}/> }
+              <Button className="btn-building" onClick={this.handleLocationSidebar('overlay', 'right', visible, locationsArray, this.hideDescription)}>Show</Button>
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>

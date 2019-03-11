@@ -14,7 +14,6 @@ class App extends Component {
       loaded_model: false,
       keywordsList: [],
       locationsList: [],
-      locationSelected: null,
       funfactsList: [],
       funfactsDisplayed: false
     };
@@ -36,7 +35,6 @@ class App extends Component {
           keywordsList: keywordsRes.data,
           locationsList: locationsRes.data,
           funfactsList: funfactsRes.data,
-          locationSelected: [locationsRes.data[5],locationsRes.data[6]],
           loaded_json: true
       })
     }))
@@ -64,11 +62,11 @@ class App extends Component {
   }
 
   render() {
-    const { loaded_json, loaded_model, keywordsList, locationsList,funfactsList, locationSelected, funfactsDisplayed } = this.state
+    const { loaded_json, loaded_model, keywordsList, locationsList,funfactsList, funfactsDisplayed } = this.state
 
     return (
       <div className="app">
-      {!(loaded_json && loaded_model) &&
+      {(loaded_json && loaded_model) &&
         <div className="app-dimmer">
           <Dimmer active>
             <Loader indeterminate>Give us a sec...</Loader>
@@ -76,7 +74,7 @@ class App extends Component {
         </div>
       }
         <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex }/>
-        <Main keywordsList={ keywordsList } locationsList={ locationsList }  locationSelected={ locationSelected } modelLoaded={this.modelLoaded}/>
+        <Main keywordsList={ keywordsList } locationsList={ locationsList } modelLoaded={this.modelLoaded}/>
         { funfactsDisplayed &&
         <FunFacts funfactsList={ funfactsList }/>
         }
