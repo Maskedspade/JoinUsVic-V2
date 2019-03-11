@@ -5,9 +5,9 @@ const DescriptionCard = ( {location, hideDescription} ) => {
   return (
     <Item className="ld-wrapper">
       <Item.Header as='h2'>{location.name}</Item.Header>
-      <Item.Header as='a' href={location.website}>Website
+      {location.website && <Item.Header as='a' href={location.website} target='_blank'>Website
         <Icon name='angle double right' />
-      </Item.Header>
+      </Item.Header>}
       <Item.Meta className="p-fade-italic
       ">{location.address}</Item.Meta>
       <Item.Extra className="p-highlight">Rating: &nbsp;&nbsp; {location.rating}</Item.Extra>
