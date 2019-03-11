@@ -28,7 +28,7 @@ class App extends Component {
       axios.get('api/keywords'),
       axios.get('api/funfacts')
     ])
-    .then(axios.spread((keywordsRes, locationsRes, funfactsRes) => {
+    .then(axios.spread((keywordsRes, funfactsRes) => {
       this.setState({
           keywordsList: keywordsRes.data,
           funfactsList: funfactsRes.data,
@@ -59,8 +59,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('APP GOT RE-RENDERED');
-
     const { loaded_json, loaded_model, keywordsList, funfactsList, funfactsDisplayed } = this.state
 
     return (

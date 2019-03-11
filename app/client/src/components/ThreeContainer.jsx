@@ -7,7 +7,7 @@ export default class ThreeContainer extends Component {
     this.detectWebGLContext();
 
     // an example to change attribute inside 'messager' so as to change color on certain anchors
-    setTimeout(()=>{document.getElementById('messager').dataset.highlights = "1,2"}, 5000);
+    // setTimeout(()=>{document.getElementById('messager').dataset.highlights = "1,2"}, 5000);
   }
 
   detectWebGLContext() {
@@ -208,10 +208,9 @@ export default class ThreeContainer extends Component {
           children.material = new THREE.MeshBasicMaterial({ color: 0xbabebc });
           children.material.side = THREE.DoubleSide;
         }
-
-        this.props.modelLoaded();
-
       });
+
+      this.props.modelLoaded();
 
       GameLoop();
     };
