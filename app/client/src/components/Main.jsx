@@ -101,7 +101,6 @@ export default class Main extends Component {
 
     const { keywordsList, modelLoaded } = this.props
 
-    console.log('MAIN GOT RE-RENDERED')
     // console.log(anchorsIdsStr)
     // console.log(locationsArray)
     // console.log(averageRatingsArray)

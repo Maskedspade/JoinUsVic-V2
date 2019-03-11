@@ -5,9 +5,6 @@ export default class ThreeContainer extends Component {
   componentDidMount() {
 
     this.detectWebGLContext();
-
-    // an example to change attribute inside 'messager' so as to change color on certain anchors
-    // setTimeout(()=>{document.getElementById('messager').dataset.highlights = "1,2"}, 5000);
   }
 
   detectWebGLContext() {
@@ -60,9 +57,21 @@ export default class ThreeContainer extends Component {
     const cb = function(mutationsList, observer) {
       for (let mutation of mutationsList) {
         if (mutation.type == 'attributes') {
+
           let highlights = document.getElementById('messager').dataset.highlights;
           const anchorIds = highlights.split(',')
-          alert(anchorIds);
+
+          // the order might change, depends on where scene children meshes live
+          const childrenMeshes = scene.children[2];
+
+          childrenMeshes.traverse((childMesh) => {
+            const meshName = childMesh.name;
+            if (meshName.substring(0, 6) === "anchor") {
+              if (anchorIds.includes(meshName.substring(6))) {
+                childMesh.material = materialAnchor;
+              }
+            }
+          });
         }
       }
     };
@@ -90,7 +99,7 @@ export default class ThreeContainer extends Component {
     const materialOcean = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
     const materialDock = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
 
-    const light = new THREE.AmbientLight(0x404040, 0.5);
+    const light = new THREE.AmbientLight(0x404040, 2);
     scene.add(light);
 
     // *******************************************************************
@@ -128,13 +137,11 @@ export default class ThreeContainer extends Component {
       raycaster.setFromCamera( mouse, camera );
 
       // calculate objects intersecting the picking ray
-      const intersects = raycaster.intersectObjects(scene.children);
+      const intersects = raycaster.intersectObjects(scene.children[2].children);
 
-      for ( let i = 0; i < intersects.length; i++ ) {
-        // if (intersects[i].object.type == 'Mesh') {
-          console.log(intersects[i].object);
-        // intersects[ i ].object.material.color.set( 0xff0000 );
-        // }
+      if (intersects[0].object.name.substring(0, 6) === "anchor") {
+        console.log(intersects[0].object.name);
+        // intersects[i ].object.material.color.set( 0xff0000 );
       }
     }
 
@@ -211,6 +218,9 @@ export default class ThreeContainer extends Component {
       });
 
       this.props.modelLoaded();
+
+      // an example to change attribute inside 'messager' so as to change color on certain anchors
+      // setTimeout(()=>{document.getElementById('messager').dataset.highlights = "56,64"}, 5000);
 
       GameLoop();
     };
