@@ -51,7 +51,7 @@ export default class ThreeContainer extends Component {
     // append messager tag inside the 'main-model' div in order for canvas children
     // to know when they need to partially highlight themselves
     const messager = document.createElement("div");
-    messager.setAttribute("id", "messager1");
+    messager.setAttribute("id", "messager");
     messager.setAttribute("data-highlights", "0");
     mainModel.appendChild(messager);
 
@@ -202,6 +202,8 @@ export default class ThreeContainer extends Component {
           children.material = new THREE.MeshBasicMaterial({ color: 0xbabebc });
           children.material.side = THREE.DoubleSide;
         }
+
+        this.props.modelLoaded();
 
       });
 
