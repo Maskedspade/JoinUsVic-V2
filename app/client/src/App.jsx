@@ -62,6 +62,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('APP GOT RE-RENDERED');
+
     const { loaded_json, loaded_model, keywordsList, locationsList,funfactsList, funfactsDisplayed } = this.state
 
     return (
