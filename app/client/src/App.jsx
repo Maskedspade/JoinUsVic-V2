@@ -63,7 +63,7 @@ class App extends Component {
 
     return (
       <div className="app">
-      {(loaded_json && loaded_model) &&
+      {!(loaded_json && loaded_model) &&
         <div className="app-dimmer">
           <Dimmer active>
             <Loader indeterminate>Give us a sec...</Loader>
