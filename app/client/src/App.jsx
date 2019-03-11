@@ -13,7 +13,6 @@ class App extends Component {
       loaded_json: false,
       loaded_model: false,
       keywordsList: [],
-      locationsList: [],
       funfactsList: [],
       funfactsDisplayed: false
     };
@@ -27,13 +26,11 @@ class App extends Component {
   componentDidMount() {
     axios.all([
       axios.get('api/keywords'),
-      axios.get('api/locations'),
       axios.get('api/funfacts')
     ])
     .then(axios.spread((keywordsRes, locationsRes, funfactsRes) => {
       this.setState({
           keywordsList: keywordsRes.data,
-          locationsList: locationsRes.data,
           funfactsList: funfactsRes.data,
           loaded_json: true
       })
@@ -64,7 +61,7 @@ class App extends Component {
   render() {
     console.log('APP GOT RE-RENDERED');
 
-    const { loaded_json, loaded_model, keywordsList, locationsList,funfactsList, funfactsDisplayed } = this.state
+    const { loaded_json, loaded_model, keywordsList, funfactsList, funfactsDisplayed } = this.state
 
     return (
       <div className="app">
@@ -76,7 +73,7 @@ class App extends Component {
         </div>
       }
         <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex }/>
-        <Main keywordsList={ keywordsList } locationsList={ locationsList } modelLoaded={this.modelLoaded}/>
+        <Main keywordsList={ keywordsList } modelLoaded={this.modelLoaded}/>
         { funfactsDisplayed &&
         <FunFacts funfactsList={ funfactsList }/>
         }
