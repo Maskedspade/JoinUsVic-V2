@@ -28,7 +28,7 @@ class App extends Component {
       axios.get('api/keywords'),
       axios.get('api/funfacts')
     ])
-    .then(axios.spread((keywordsRes, locationsRes, funfactsRes) => {
+    .then(axios.spread((keywordsRes, funfactsRes) => {
       this.setState({
           keywordsList: keywordsRes.data,
           funfactsList: funfactsRes.data,

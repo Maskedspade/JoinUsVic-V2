@@ -6,6 +6,7 @@ export default class ThreeContainer extends Component {
 
     this.detectWebGLContext();
 
+    // an example to change attribute inside 'messager' so as to change color on certain anchors
     // setTimeout(()=>{document.getElementById('messager').dataset.highlights = "1,2"}, 5000);
   }
 
@@ -59,6 +60,9 @@ export default class ThreeContainer extends Component {
     const cb = function(mutationsList, observer) {
       for (let mutation of mutationsList) {
         if (mutation.type == 'attributes') {
+          let highlights = document.getElementById('messager').dataset.highlights;
+          const anchorIds = highlights.split(',')
+          alert(anchorIds);
         }
       }
     };
@@ -158,6 +162,8 @@ export default class ThreeContainer extends Component {
       scene.add(gltf.scene);
 
       gltf.scene.traverse((children) => {
+        // the name of imported model by default comes with the prefix 'G-'
+        // in order to remove the first 2 characters we do:
         let childName = children.name.split('');
         childName.splice(0, 2);
 
@@ -173,39 +179,38 @@ export default class ThreeContainer extends Component {
           children.material.side = THREE.DoubleSide;
         }
 
-        if (childName.join('') === 'dock') {
+        if (childName.join('') === "dock") {
           children.name = childName.join('');
           children.material = new THREE.MeshBasicMaterial({ color: 0xe7a15e });
           children.material.side = THREE.DoubleSide;
         }
 
-        if (childName.join('') === 'green_patch') {
+        if (childName.join('') === "green_patch") {
           children.name = childName.join('');
           children.material = new THREE.MeshBasicMaterial({ color: 0x5ee7a1 });
           children.material.side = THREE.DoubleSide;
         }
 
-        if (childName.join('').substring(0, 4) === 'grey') {
+        if (childName.join('').substring(0, 4) === "grey") {
           children.name = childName.join('');
           children.material = new THREE.MeshBasicMaterial({ color: 0xb0c8bc });
           children.material.side = THREE.DoubleSide;
         }
 
-        if (childName.join('') === 'land') {
+        if (childName.join('') === "land") {
           children.name = childName.join('');
           children.material = new THREE.MeshBasicMaterial({ color: 0xb0c8bc });
           children.material.side = THREE.DoubleSide;
         }
 
-        if (childName.join('').substring(0, 4) === 'dark') {
+        if (childName.join('').substring(0, 4) === "dark") {
           children.name = childName.join('');
           children.material = new THREE.MeshBasicMaterial({ color: 0xbabebc });
           children.material.side = THREE.DoubleSide;
         }
-
-        this.props.modelLoaded();
-
       });
+
+      this.props.modelLoaded();
 
       GameLoop();
     };
