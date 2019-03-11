@@ -77,8 +77,12 @@ a {
   }
 }
 
-.ld-wrapper {
+.sidebar-tab-menu {
   @extend %horizontally-aligned;
+  margin: 0 auto;
+}
+
+.ld-wrapper {
   background: white;
   padding: 0 4em;
 }

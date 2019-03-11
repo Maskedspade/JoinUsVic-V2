@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Item, Icon, Menu, Tab } from 'semantic-ui-react';
+import { Item, Icon, Menu, Rating } from 'semantic-ui-react';
 
 const DescriptionCard = ( {location, hideDescription} ) => {
   return (
@@ -10,9 +10,12 @@ const DescriptionCard = ( {location, hideDescription} ) => {
       </Item.Header>
       <Item.Meta className="p-fade-italic
       ">{location.address}</Item.Meta>
-      <Item.Extra className="p-highlight">Rating: {location.rating}</Item.Extra>
+      <Item.Extra className="p-highlight">Rating: &nbsp;&nbsp; {location.rating}</Item.Extra>
       <Item.Description className="p-desktop">{location.description}</Item.Description>
-      <Item.Header as='h4' className="p-highlight centered">Rate me: @add stars!@</Item.Header>
+      <Item.Header as='h4' className="p-highlight centered">
+        Rate this location:&nbsp;&nbsp;
+        <Rating icon='star' defaultRating={0} maxRating={5} size='huge'></Rating>
+      </Item.Header>
       <Item.Header as='a' onClick={hideDescription}>
         <Icon name="caret right" />
         HideThis
@@ -22,33 +25,12 @@ const DescriptionCard = ( {location, hideDescription} ) => {
 }
 
 export default class LocationDescription extends Component {
-  constructor() {
-    super()
-    this.state = {
-      panes: []
-    }
-  }
-
-  loopThroughLocations = (locationSelected) => {
-    locationSelected.forEach((location) => {
-      this.state.panes.push(
-        {
-          menuItem: {key: location.id, content:location.name},
-          render: () =>
-            <Tab.Pane>
-
-            </Tab.Pane>
-        }
-      )
-    })
-  }
-
 
   render() {
-    const { locationSelected, hideDescription } = this.props
+    const { location, hideDescription} = this.props
 
     return (
-      <DescriptionCard location={locationSelected} hideDescription={hideDescription}/>
+      <DescriptionCard location={location} hideDescription={hideDescription}/>
     )
   }
 }

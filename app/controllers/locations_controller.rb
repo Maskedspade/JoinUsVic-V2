@@ -26,12 +26,15 @@ class LocationsController < ApplicationController
 
     filter_it ? (locations_array = locations.reduce(:&)) : (locations_array = locations.flatten.uniq)
 
+    average_ratings_array = average_ratings(locations_array)
+
     anchors_ids_str = locations_array.map { |location| location.anchor_id }.join(',')
 
-    # TODO anchor_ids
-    render json: { :locations_array => locations_array, :anchors_ids_str => anchors_ids_str
+    render json: {
+      :locations_array => locations_array,
+      :average_ratings_array => average_ratings_array,
+      :anchors_ids_str => anchors_ids_str
     }
-
   end
 
   private
@@ -46,6 +49,14 @@ class LocationsController < ApplicationController
       keyword_to_locations_hash[keyword] = Keyword.find(keyword).locations
     end
     keyword_to_locations_hash
+  end
+
+  def average_ratings(locations_array)
+    average_ratings_array = []
+    average_ratings_array = locations_array.map { |location|
+      location.ratings ? location.ratings.average(:score) : 0
+    }
+    average_ratings_array
   end
 
 end

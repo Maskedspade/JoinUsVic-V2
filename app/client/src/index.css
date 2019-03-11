@@ -20,7 +20,7 @@
   transform: translate(-50%, 0) !important;
 }
 
-.ld-wrapper {
+.sidebar-tab-menu {
   position: absolute;
   top: 50%;
   transform: translate(0, -50%) !important;
@@ -91,6 +91,10 @@ a:hover {
 }
 .main-wrapper .ui.overlay {
   background: white;
+}
+
+.sidebar-tab-menu {
+  margin: 0 auto;
 }
 
 .ld-wrapper {
