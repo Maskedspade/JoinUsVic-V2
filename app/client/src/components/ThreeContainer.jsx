@@ -140,7 +140,8 @@ export default class ThreeContainer extends Component {
       const intersects = raycaster.intersectObjects(scene.children[2].children);
 
       if (intersects[0].object.name.substring(0, 6) === "anchor") {
-        console.log(intersects[0].object.name);
+        intersects[0].object.name;
+
         // intersects[i ].object.material.color.set( 0xff0000 );
       }
     }
