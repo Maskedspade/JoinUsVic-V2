@@ -99,7 +99,7 @@ export default class Main extends Component {
   render() {
     const { selectorShowed, visible, animation, direction, anchorsIdsStr, averageRatingsArray, locationsArray, panes, selectedAnchorId } = this.state
 
-    const { keywordsList, locationsList, modelLoaded } = this.props
+    const { keywordsList, modelLoaded } = this.props
 
     console.log(anchorsIdsStr)
     console.log(locationsArray)
