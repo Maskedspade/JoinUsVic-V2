@@ -17,14 +17,18 @@ export default class ThreeContainer extends Component {
   }
 
   setupTHREE() {
+    // if (WEBGL.isWebGLAvailable() === false ) {
+    //   document.body.appendChild( WEBGL.getWebGLErrorMessage() );
+    // }
+
     // prepare renderer, camera and scene for webGL canvas
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000);
 
     const renderer = new THREE.WebGLRenderer();
     const loader = new THREE.GLTFLoader();
 
-    renderer.setClearColor(0x000000);
+    renderer.setClearColor(0xdddddd);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // append 'canvas' tag inside the 'main-model' div
@@ -58,41 +62,26 @@ export default class ThreeContainer extends Component {
       camera.updateProjectionMatrix();
     });
 
-    const axis = new THREE.AxisHelper(10);
-    scene.add(axis);
+    const axes = new THREE.AxesHelper(10);
+    scene.add(axes);
 
     // *******************************************************************
-
-    // create shapes
-    // const geometry = new THREE.BoxGeometry(1,1,1);
+    // define colors
 
     // create a material, colour or image texture
-    // const material1 = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
-    // const material2 = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
-    // const material3 = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
+    const materialAnchor = new THREE.MeshLambertMaterial({color: 0xffffa1, wireframe: false});
+    const materialOcean = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
+    const materialDock = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
 
-    // const cube1 = new THREE.Mesh( geometry, material1);
-    // cube1.name = 1;
-
-    // const cube2 = new THREE.Mesh( geometry, material2);
-    // cube2.name = 2;
-    // cube2.position.x = 3;
-
-    // const cube3 = new THREE.Mesh( geometry, material3);
-    // cube3.name = 3;
-    // cube3.position.x = -3;
-
-    // scene.add(cube1);
-    // scene.add(cube2);
-    // scene.add(cube3);
-
-    const light = new THREE.AmbientLight( 0x404040 ); // soft white light
+    const light = new THREE.AmbientLight(0x404040, 0.5);
     scene.add(light);
 
     // *******************************************************************
 
     // set up the initial camera position and orbit controls
-    camera.position.z = 10;
+    camera.position.z = -145.03;
+    camera.position.x = -63.6;
+    camera.position.y = 77.69;
     camera.lookAt(scene.position);
 
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -122,7 +111,7 @@ export default class ThreeContainer extends Component {
       raycaster.setFromCamera( mouse, camera );
 
       // calculate objects intersecting the picking ray
-      const intersects = raycaster.intersectObjects( scene.children );
+      const intersects = raycaster.intersectObjects(scene.children);
 
       for ( let i = 0; i < intersects.length; i++ ) {
         // if (intersects[i].object.type == 'Mesh') {
@@ -152,16 +141,70 @@ export default class ThreeContainer extends Component {
       // cube3.rotation.y += 0.005;
     };
 
+    const onLoad = gltf => {
+      console.log(gltf);
+      scene.add(gltf.scene);
 
-    loader.load( "model_test.gltf", function ( gltf ) {
-      scene.add( gltf.scene );
+      gltf.scene.traverse((children) => {
+        let childName = children.name.split('');
+        childName.splice(0, 2);
+
+        if (childName.join('').substring(0, 6) === "anchor") {
+          children.name = childName.join('');
+          children.material = new THREE.MeshNormalMaterial({ // scene lights not required
+          });
+        }
+
+        if (childName.join('') === "ocean") {
+          children.name = childName.join('');
+          children.material = new THREE.MeshBasicMaterial({ color: 0xa1f1f0 });
+          children.material.side = THREE.DoubleSide;
+        }
+
+        if (childName.join('') === 'dock') {
+          children.name = childName.join('');
+          children.material = new THREE.MeshBasicMaterial({ color: 0xe7a15e });
+          children.material.side = THREE.DoubleSide;
+        }
+
+        if (childName.join('') === 'green_patch') {
+          children.name = childName.join('');
+          children.material = new THREE.MeshBasicMaterial({ color: 0x5ee7a1 });
+          children.material.side = THREE.DoubleSide;
+        }
+
+        if (childName.join('').substring(0, 4) === 'grey') {
+          children.name = childName.join('');
+          children.material = new THREE.MeshBasicMaterial({ color: 0xb0c8bc });
+          children.material.side = THREE.DoubleSide;
+        }
+
+        if (childName.join('') === 'land') {
+          children.name = childName.join('');
+          children.material = new THREE.MeshBasicMaterial({ color: 0xb0c8bc });
+          children.material.side = THREE.DoubleSide;
+        }
+
+        if (childName.join('').substring(0, 4) === 'dark') {
+          children.name = childName.join('');
+          children.material = new THREE.MeshBasicMaterial({ color: 0xbabebc });
+          children.material.side = THREE.DoubleSide;
+        }
+
+      });
 
       GameLoop();
+    };
 
-    }, undefined, function ( error ) {
+    const onProgress = () => {
+      // loader here
+    };
 
-      console.error( error );
-    } );
+    const handleError = (error) => {
+      console.error(error);
+    };
+
+    loader.load( "yhfreeman.gltf", onLoad, onProgress, handleError);
 
     // draw scene
     function render() {
@@ -171,7 +214,6 @@ export default class ThreeContainer extends Component {
     // run game loop (update, render, repeat)
     const GameLoop = function() {
       requestAnimationFrame(GameLoop);
-
       update();
       render();
     };
