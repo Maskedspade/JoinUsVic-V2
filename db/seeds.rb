@@ -36,13 +36,14 @@ key8 = Keyword.find_or_create_by! name: 'For the Yogis'
 
 puts "Creating anchors..."
 
-100.times do
+300.times do
   Anchor.create!()
 end
 
 ## LOCATIONS
 puts "Creating locations..."
 Location.destroy_all
+Funfact.destroy_all
 
 loc1 = Location.create! ({
   name: 'Victoria public',
@@ -194,7 +195,7 @@ loc14 = Location.create!({
   address: 'Unit 5 - 560 Johnson Street, Market Square',
   description: 'Awesome plant-based casual restaurant located in Market Square. Serve yourself and everything will be weighted at the til. Great place to get your plant-based fix in ;).',
   website: 'http://www.greencuisine.com',
-  anchor_id: 58
+  anchor_id: 120
 })
 
 loc15 = Location.create!({
@@ -211,11 +212,87 @@ loc16 = Location.create!({
   name: 'Ashtanga Yoga Victoria',
   address: 'Unit 202 - 560 Johnson Street, Market Square',
   description: 'Release your modern-life stresses, and ease into a stronger you, one breath, one posture and one day at a time, practicing Ashtanga yoga at your own pace.',
-  website: 'http://www.ashtanga-yoga-victoria.com'
+  website: 'http://www.ashtanga-yoga-victoria.com',
   anchor_id: 120
 })
 
+loc17 = Location.create!({
+  name: 'Moksana Yoga Centre',
+  address: '613 Pandora Ave',
+  description: '“The magic art of releasing” ™
+MokSana Yoga & Healing Center was founded in December 2001 with a mandate to provide inspiring yoga classes in a variety of styles. Our center offers drop-in yoga classes, a Yoga-Alliance certified 250-hour Yoga Teacher Training course, continuing education workshops for yoga teachers and students, healing arts practitioners, yoga retreats, and retail.',
+  website: 'https://www.moksanayoga.com/',
+  anchor_id: 274
+})
 
+loc18 = Location.create!({
+  name: 'Medicine NEST: Yoga',
+  address: '532 Herald Street',
+  description: 'Yoga varieties: Lunar Yoga, Meditation + Hatha Yoga, Yintrospection, Elemental Yoga + Tea, Kundalini Yoga, Meditation + Restoration Yoga.
+  All levels welcome. Join for a holistic journey. ',
+  website: 'https://www.medicinenest.ca/',
+  anchor_id: 42
+})
+
+loc19 = Location.create!({
+  name: 'Rebar',
+  address: '50 Bastion Square',
+  description: 'At Rebar, eating modern means being aware: aware of where your food comes from and preparing and serving food responsibly, from seed to table.
+
+Rebar proves that exotic flavours don’t need to traverse the globe to reach your plate, especially since there is a wealth of culinary treasures in our own backyards.',
+  website: 'http://rebarmodernfood.com/#menu',
+  anchor_id: 60
+})
+
+loc20 = Location.create!({
+  name: 'Lotus Pond Vegetarian Restaurant',
+  address: '617 Johnson Street',
+  description: 'Vegetarian lunch buffet from 11am - 2pm. Join for plant-based food!! ',
+  website: 'https://lotuspondvictoria.ca/',
+  anchor_id: 145
+})
+
+loc21 = Location.create!({
+  name: 'The Mint',
+  address: '1414 Douglas Street',
+  description: 'Join the Mint for an early dinner with a relaxed atmosphere and soak up the romance or stay a little later when the lights go down and the music comes up as our resident DJs step in behind the vintage stove turntables. All ages are welcome, although an earlier reservation is recommended for those with small children or those looking for a quieter ambience.',
+  website: 'https://themintvictoria.com/downstairs/food/',
+  anchor_id: 104
+})
+
+loc22 = Location.create!({
+  name: 'Mo:Lé',
+  address: '554 Pandora Street',
+  description: 'Born of a longtime friendship, and a desire to serve excellent food to friends, foodies, hipsters, families, retirees and everyone in between, Mo:Lé Restaurant has grown from a simple eatery into a Victoria institution in just a few years. They make delicious all-day breakfast, brunch and lunch with their secret ingredient: love.',
+  website: 'https://molerestaurant.ca/',
+  anchor_id: 85
+})
+
+loc23 = Location.create!({
+  name: 'Fol Epi',
+  address: '398 Harbour Road, #101',
+  description: 'Despite being called Slow Food, everybody I know that\'s into it is incredibly busy and working fast. We are all a bit obsessive about food. But there\'s an understanding that we are all doing the same thing and still contributing as individuals within the community. -- Fol Epi(About Us)',
+  website: 'http://folepi.ca/',
+  anchor_id: 35
+})
+
+loc24 = Location.create!({
+  name: 'Nourish Kitchen & Cafe',
+  address: '225 Quebec Street',
+  description: 'An 1888 heritage home-turned-restaurant with rooms to mingle & rooms to gather.
+Nourish was created to make people feel Healthy & Happy.
+The kitchen plays with re-imagining natural ingredients. Nourish prepares seasonal dishes that share their fascination with traditional food philosophies & the love of holistic nutrition principles.',
+  website: 'https://www.nourishkitchen.ca/',
+  anchor_id: 260
+})
+
+loc25 = Location.create!({
+  name: 'Chinatown',
+  address: '500 Fisgard Street',
+  description: 'Canada\'s oldest Chinatown, and one of the oldest in North America!',
+  website: 'http://chinatown.library.uvic.ca/',
+  anchor_id: 273
+})
 
 # KEY TO LOCATION
 
@@ -223,21 +300,31 @@ puts 'Setting locations to keywords...'
 key1.locations << loc2
 key1.locations << loc3
 key1.locations << loc9
+key1.locations << loc25
 key2.locations << loc6
 key3.locations << loc10
 key4.locations << loc5
 key4.locations << loc7
 key4.locations << loc10
+key4.locations << loc25
 key5.locations << loc4
 key5.locations << loc8
 key5.locations << loc9
+key5.locations << loc25
 key6.locations << loc11
 key6.locations << loc12
 key6.locations << loc13
 key7.locations << loc14
 key7.locations << loc15
+key7.locations << loc19
+key7.locations << loc20
+key7.locations << loc21
+key7.locations << loc22
+key7.locations << loc23
+key7.locations << loc24
 key8.locations << loc16
-
+key8.locations << loc17
+key8.locations << loc18
 
 
 puts 'Setting ratings for locations...'
@@ -281,5 +368,24 @@ loc14.ratings.create! score: 5
 loc14.ratings.create! score: 4.8
 
 loc15.ratings.create! score: 4
+
+loc16.ratings.create! score: 4.5
+loc16.ratings.create! score: 4.3
+
+loc19.ratings.create! score: 3.5
+loc19.ratings.create! score: 4.0
+loc19.ratings.create! score: 4.1
+loc19.ratings.create! score: 5
+
+loc20.ratings.create! score: 4.3
+
+loc21.ratings.create! score: 4
+loc21.ratings.create! score: 5
+
+loc23.ratings.create! score: 4.3
+
+loc24.ratings.create! score: 5
+
+loc25.ratings.create! score: 5
 
 puts 'DONE POPULATING THE DB!! WHEEEEE!'
