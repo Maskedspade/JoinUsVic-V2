@@ -35,7 +35,6 @@ export default class Main extends Component {
       visible: false,
       animation: 'overlay',
       direction: 'right',
-      expanded: false,
       dimmed: false,
       anchorsIdsStr: '',
       locationsArray: [],
@@ -53,7 +52,6 @@ export default class Main extends Component {
       animation,
       direction,
       visible: !visible,
-      expanded: true
     })
 
     locationSelected.forEach((location) => {
@@ -80,14 +78,13 @@ export default class Main extends Component {
     this.setState({
       selectorShowed: true,
       visible: false,
-      expanded: false
     })
   }
 
   render() {
-    const { selectorShowed, visible, animation, direction, expanded, dimmed, anchorsIdsStr, averageRatingsArray, locationsArray, panes } = this.state
+    const { selectorShowed, visible, animation, direction, dimmed, anchorsIdsStr, averageRatingsArray, locationsArray, panes } = this.state
 
-    const { keywordsList, locationsList, locationSelected } = this.props
+    const { keywordsList, locationsList, locationSelected, modelLoaded } = this.props
 
     return (
       <div className="main-wrapper">
@@ -95,7 +92,7 @@ export default class Main extends Component {
           <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationSelected={locationSelected} hideDescription={this.hideDescription} panes={panes}/>
           <Sidebar.Pusher>
             <div className="main-model">
-              <ThreeContainer />
+              <ThreeContainer modelLoaded={modelLoaded} />
               { selectorShowed && <MainSelection keywordsList={ keywordsList} anchorsIdsStr={anchorsIdsStr} locationsArray={locationsArray} averageRatingsArray={averageRatingsArray}/> }
               <Button className="btn-building" onClick={this.handleLocationSidebar('overlay', 'right', visible, locationSelected, this.hideDescription)}>Show</Button>
             </div>

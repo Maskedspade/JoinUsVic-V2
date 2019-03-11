@@ -10,7 +10,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      loading: true,
+      loaded_json: false,
+      loaded_model: false,
       keywordsList: [],
       locationsList: [],
       locationSelected: null,
@@ -20,6 +21,7 @@ class App extends Component {
 
     this.handleFunfactsDisplay = this.handleFunfactsDisplay.bind(this)
     this.handleBackToIndex = this.handleBackToIndex.bind(this)
+    this.modelLoaded = this.modelLoaded.bind(this)
   }
 
   // load 3 database tables and set loading state
@@ -35,10 +37,16 @@ class App extends Component {
           locationsList: locationsRes.data,
           funfactsList: funfactsRes.data,
           locationSelected: [locationsRes.data[5],locationsRes.data[6]],
-          loading: false
+          loaded_json: true
       })
     }))
     .catch(error => console.log(error))
+  }
+
+  modelLoaded = () => {
+    this.setState({
+      loaded_model: true
+    })
   }
 
   handleFunfactsDisplay = (e) => {
@@ -56,11 +64,11 @@ class App extends Component {
   }
 
   render() {
-    const { loading, keywordsList, locationsList,funfactsList, locationSelected, funfactsDisplayed } = this.state
+    const { loaded_json, loaded_model, keywordsList, locationsList,funfactsList, locationSelected, funfactsDisplayed } = this.state
 
     return (
       <div className="app">
-      {loading &&
+      {!(loaded_json && loaded_model) &&
         <div className="app-dimmer">
           <Dimmer active>
             <Loader indeterminate>Give us a sec...</Loader>
@@ -68,12 +76,12 @@ class App extends Component {
         </div>
       }
         <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex }/>
-        <Main keywordsList={ keywordsList } locationsList={ locationsList }  locationSelected={ locationSelected }/>
+        <Main keywordsList={ keywordsList } locationsList={ locationsList }  locationSelected={ locationSelected } modelLoaded={this.modelLoaded}/>
         { funfactsDisplayed &&
         <FunFacts funfactsList={ funfactsList }/>
         }
       </div>
-    );
+    )
   }
 }
 
