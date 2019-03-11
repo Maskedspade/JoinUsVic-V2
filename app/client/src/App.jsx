@@ -34,7 +34,7 @@ class App extends Component {
           keywordsList: keywordsRes.data,
           locationsList: locationsRes.data,
           funfactsList: funfactsRes.data,
-          locationSelected: locationsRes.data[5],
+          locationSelected: [locationsRes.data[5],locationsRes.data[6]],
           loading: false
       })
     }))
