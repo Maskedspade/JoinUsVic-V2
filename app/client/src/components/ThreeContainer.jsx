@@ -3,24 +3,37 @@ import THREE from './threeJSimport';
 
 export default class ThreeContainer extends Component {
   componentDidMount() {
-    // call the method in order to execute across the state
-    this.setupTHREE();
 
-    // because we don't have access to tag 'canvas' before realy DOM finishes its rendering,
-    // we wait till DOM's rendered and then add inline CSS by appending attribtues to 'canvas' tag
-    const canvas = document.querySelector('canvas');
-    canvas.style.width='100%';
-    canvas.style.height='100%';
+    this.detectWebGLContext();
 
     // setTimeout(()=>{document.getElementById('messager').dataset.highlights = "1,2"}, 5000);
+  }
 
+  detectWebGLContext() {
+    // Create canvas element for testing
+    // The canvas is not added to DOM so it is never displayed
+    const canvas = document.createElement("canvas");
+
+    // Get WebGLRenderingContext from canvas element.
+    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+
+    if (gl && gl instanceof WebGLRenderingContext) {
+      // call the method in order to execute across the state of app
+      this.setupTHREE();
+
+      // because we don't have access to tag 'canvas' before realy DOM finishes its rendering,
+      // we wait till DOM's rendered and then add inline CSS by appending attribtues to 'canvas' tag
+      const canvas = document.querySelector('canvas');
+      canvas.style.width='100%';
+      canvas.style.height='100%';
+
+    } else {
+      // report error should WebGL be absent
+      alert("Failed to get WebGL context. " + "Your browser or device may not support WebGL.");
+    }
   }
 
   setupTHREE() {
-    // if (WEBGL.isWebGLAvailable() === false ) {
-    //   document.body.appendChild( WEBGL.getWebGLErrorMessage() );
-    // }
-
     // prepare renderer, camera and scene for webGL canvas
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000);
