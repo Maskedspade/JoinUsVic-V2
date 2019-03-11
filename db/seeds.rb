@@ -29,6 +29,8 @@ key3 = Keyword.find_or_create_by! name: 'Where the animals go'
 key4 = Keyword.find_or_create_by! name: 'Sunny hangouts'
 key5 = Keyword.find_or_create_by! name: 'Nostalgia'
 key6 = Keyword.find_or_create_by! name: 'Bubble Tea'
+key7 = Keyword.find_or_create_by! name: 'Plant-based-friendly Restaurants/Cafes'
+key8 = Keyword.find_or_create_by! name: 'For the Yogis'
 
 ## ANCHORS
 
@@ -108,7 +110,7 @@ loc5 = Location.create!({
   address: '#39 - 560 Johnson Street',
   description: 'If you’re looking for local boutiques that offer one-of-a-kind merchandise, you’ve come to the right place. You’ll find the latest fashion trends; home accessories; locally made jewelry; fun gift ideas and more. Choose from a variety of tasty dine-in and take-out restaurants – authentic Belgian waffles, a vegetarian buffet, Neapolitan pizzeria, curries, Mexican, Indonesian, a coffee shop and craft beer eatery.',
   website: 'https://www.marketsquare.ca/',
-  anchor_id: 58
+  anchor_id: 120
 })
 
 loc6 = Location.create!({
@@ -187,6 +189,34 @@ loc13 = Location.create!({
   anchor_id: 65
 })
 
+loc14 = Location.create!({
+  name: 'Green Cuisine',
+  address: 'Unit 5 - 560 Johnson Street, Market Square',
+  description: 'Awesome plant-based casual restaurant located in Market Square. Serve yourself and everything will be weighted at the til. Great place to get your plant-based fix in ;).',
+  website: 'http://www.greencuisine.com',
+  anchor_id: 58
+})
+
+loc15 = Location.create!({
+  name: 'Hey Happy Coffee',
+  address: 'Unit 122 - 560 Johnson Street, Market Square',
+  description: 'Hey Happy loves people, they love creativity and most of all they LOVE coffee.
+
+Their coffees are treated with respect and an uncompromising touch. Here, coffee isn’t just a commodity. At Hey Happy they treat it as it truly is, a beverage every bit as complex and profound as the finest wines and spirits in the world. ',
+  website: 'http://www.heyhappycoffee.com',
+  anchor_id: 119
+})
+
+loc16 = Location.create!({
+  name: 'Ashtanga Yoga Victoria',
+  address: 'Unit 202 - 560 Johnson Street, Market Square',
+  description: 'Release your modern-life stresses, and ease into a stronger you, one breath, one posture and one day at a time, practicing Ashtanga yoga at your own pace.',
+  website: 'http://www.ashtanga-yoga-victoria.com'
+  anchor_id: 120
+})
+
+
+
 # KEY TO LOCATION
 
 puts 'Setting locations to keywords...'
@@ -204,6 +234,11 @@ key5.locations << loc9
 key6.locations << loc11
 key6.locations << loc12
 key6.locations << loc13
+key7.locations << loc14
+key7.locations << loc15
+key8.locations << loc16
+
+
 
 puts 'Setting ratings for locations...'
 
@@ -241,5 +276,10 @@ loc12.ratings.create! score: 5
 loc12.ratings.create! score: 4
 
 loc13.ratings.create! score: 4
+
+loc14.ratings.create! score: 5
+loc14.ratings.create! score: 4.8
+
+loc15.ratings.create! score: 4
 
 puts 'DONE POPULATING THE DB!! WHEEEEE!'
