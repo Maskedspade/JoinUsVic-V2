@@ -32,6 +32,9 @@ export default class ThreeContainer extends Component {
   }
 
   setupTHREE() {
+
+    let anchorIds = [];
+
     // prepare renderer, camera and scene for webGL canvas
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000);
@@ -50,7 +53,6 @@ export default class ThreeContainer extends Component {
     // to know when they need to partially highlight themselves
     const messager = document.createElement("div");
     messager.setAttribute("id", "messager");
-    messager.setAttribute("data-highlights", "0");
     mainModel.appendChild(messager);
 
     const config = {attributes: true};
@@ -59,7 +61,7 @@ export default class ThreeContainer extends Component {
         if (mutation.type == 'attributes') {
 
           let highlights = document.getElementById('messager').dataset.highlights;
-          const anchorIds = highlights.split(',')
+          anchorIds = highlights.split(',');
 
           // the order might change, depends on where scene children meshes live
           const childrenMeshes = scene.children[2];
@@ -139,12 +141,18 @@ export default class ThreeContainer extends Component {
       // calculate objects intersecting the picking ray
       const intersects = raycaster.intersectObjects(scene.children[2].children);
 
-      if (intersects[0].object.name.substring(0, 6) === "anchor") {
-        intersects[0].object.name;
+      if (!intersects[0]) {
+        return;
+      }
 
-        // intersects[i ].object.material.color.set( 0xff0000 );
+      if (intersects[0].object.name.substring(0, 6) === "anchor") {
+        if (anchorIds.includes(intersects[0].object.name.substring(6))) {
+          this.props.getSelectedAnchorId(intersects[0].object.name.substring(6));
+        };
       }
     }
+
+    onDocumentMouseDown = onDocumentMouseDown.bind(this);
 
     window.addEventListener( 'mousemove', onMouseMove, false );
     window.addEventListener( 'mousedown', onDocumentMouseDown, false );
