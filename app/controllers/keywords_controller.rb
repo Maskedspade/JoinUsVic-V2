@@ -15,7 +15,7 @@ class KeywordsController < ApplicationController
 
   # POST /keywords
   def create
-    @keyword = Keyword.new(list_params)
+    @keyword = Keyword.new(keyword_params)
 
     if @keyword.save
       render json: @keyword, status: :created
@@ -26,7 +26,7 @@ class KeywordsController < ApplicationController
 
   # PATCH/PUT /keywords/1
   def update
-    if @keyword.update(list_params)
+    if @keyword.update(keyword_params)
       render json: @keyword
     else
       render json: @keyword.errors, status: :unprocessable_entity

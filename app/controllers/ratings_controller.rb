@@ -26,7 +26,7 @@ class RatingsController < ApplicationController
 
   # PATCH/PUT /ratings/1
   def update
-    if @rating.update(list_params)
+    if @rating.update(rating_params)
       render json: @rating
     else
       render json: @rating.errors, status: :unprocessable_entity
