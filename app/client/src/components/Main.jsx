@@ -56,7 +56,9 @@ export default class Main extends Component {
   }
 
   // handle user clicking on location/building request, deals with animations
-  handleLocationSidebar = (animation, direction, visible, locationsArray, hideDescription) => {
+  handleLocationSidebar = (animation, direction, visible, selectedArray, hideDescription) => {
+    const { averageRatingsArray } = this.state
+
     this.setState({
       selectorShowed: !this.state.selectorShowed,
       animation,
@@ -65,14 +67,14 @@ export default class Main extends Component {
       panes: []
     })
     // puts all anchor correlated locations inside of the sidebar tab panes array, sets panes array state
-    locationsArray.forEach((location) => {
+    selectedArray.forEach((location, index) => {
       this.setState(state => {
         const location_info =
         {
           menuItem: {key: location.id, content:location.name},
           render: () =>
             <Tab.Pane attached={false}>
-              <LocationDescription location={location} />
+              <LocationDescription location={location} average_rating={averageRatingsArray[index]}/>
             </Tab.Pane>
         }
         const panes = [...state.panes, location_info]
@@ -127,7 +129,7 @@ export default class Main extends Component {
     return (
       <div className="main-wrapper">
         <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationsArray={selectedArray} hideDescription={this.hideDescription} panes={panes} sidebarLoaded={sidebarLoaded}/>
+          <DescriptionSidebar animation={animation} visible={visible} direction={direction} selectedArray={selectedArray} hideDescription={this.hideDescription} panes={panes} sidebarLoaded={sidebarLoaded}/>
           <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
               <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />

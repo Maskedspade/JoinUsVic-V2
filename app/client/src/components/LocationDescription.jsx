@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Item, Icon, Rating } from 'semantic-ui-react';
 
-const DescriptionCard = ( {location, hideDescription} ) => {
+const DescriptionCard = ( {location, average_rating} ) => {
   return (
     <Item className="ld-wrapper">
       <Item.Header as='h2'>{location.name}</Item.Header>
@@ -10,7 +10,10 @@ const DescriptionCard = ( {location, hideDescription} ) => {
       </Item.Header>}
       <Item.Meta className="p-fade-italic
       ">{location.address}</Item.Meta>
-      <Item.Extra className="p-highlight">Rating: &nbsp;&nbsp; {location.rating}</Item.Extra>
+      <Item.Extra className="p-highlight">Rating: &nbsp;&nbsp;
+        <Rating icon='star' defaultRating={average_rating} maxRating={5} size='large'/>
+        {average_rating}
+      </Item.Extra>
       <Item.Description className="p-desktop">{location.description}</Item.Description>
       <Item.Header as='h4' className="p-highlight centered">
         Rate this location:&nbsp;&nbsp;
@@ -23,10 +26,10 @@ const DescriptionCard = ( {location, hideDescription} ) => {
 export default class LocationDescription extends Component {
 
   render() {
-    const { location, hideDescription} = this.props
+    const { location, average_rating } = this.props
 
     return (
-      <DescriptionCard location={location} />
+      <DescriptionCard location={location} average_rating={average_rating}/>
     )
   }
 }
