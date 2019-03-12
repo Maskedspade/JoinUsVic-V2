@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Sidebar, Segment, Button, Dimmer, Tab } from 'semantic-ui-react'
+import { Sidebar, Segment, Button, Dimmer, Tab, Loader } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import LocationDescription from './LocationDescription'
 import ThreeContainer from './ThreeContainer'
 import MainSelection from './MainSelection'
 
-const DescriptionSidebar = ({ animation, visible, direction, panes }) => {
+const DescriptionSidebar = ({ animation, visible, direction, panes, sidebarLoaded }) => {
   return (
     <Sidebar
       inverted='true'
@@ -15,8 +15,14 @@ const DescriptionSidebar = ({ animation, visible, direction, panes }) => {
       direction={direction}
       width='very wide'
     >
-      {(panes.length > 0) &&
-        <Tab menu={{ secondary: true, pointing: true }} className="sidebar-tab-menu" panes={panes} />}
+      {!sidebarLoaded &&
+        <div className="app-dimmer">
+          <Dimmer active>
+            <Loader inverted content>Getting back to you now...</Loader>
+          </Dimmer>
+        </div>
+      }
+      <Tab menu={{ secondary: true, pointing: true }} className="sidebar-tab-menu" panes={panes} />
     </Sidebar>
   )
 }
@@ -31,6 +37,7 @@ export default class Main extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      sidebarLoaded: false,
       selectorShowed: true,
       visible: false,
       animation: 'overlay',
@@ -73,6 +80,10 @@ export default class Main extends Component {
         }
       })
     })
+
+    this.setState({
+      sidebarLoaded: true
+    })
   }
 
   hideDescription = () => {
@@ -97,14 +108,14 @@ export default class Main extends Component {
   }
 
   render() {
-    const { selectorShowed, visible, animation, direction, anchorsIdsStr, averageRatingsArray, locationsArray, panes, selectedAnchorId } = this.state
+    const { sidebarLoaded, selectorShowed, visible, animation, direction, anchorsIdsStr, averageRatingsArray, locationsArray, panes, selectedAnchorId } = this.state
 
     const { keywordsList, modelLoaded } = this.props
 
     return (
       <div className="main-wrapper">
         <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationsArray={locationsArray} hideDescription={this.hideDescription} panes={panes}/>
+          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationsArray={locationsArray} hideDescription={this.hideDescription} panes={panes} sidebarLoaded={sidebarLoaded}/>
           <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
               <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />
