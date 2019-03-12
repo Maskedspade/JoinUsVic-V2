@@ -77,24 +77,22 @@ export default class FunFacts extends Component {
 
     return (
       <div className="ff-wrapper">
-        <Sidebar.Pushable as={Segment}>
+        <Sidebar.Pushable as={Segment} className="ff-sidebar-pushable">
           <FormSidebar animation={animation} visible={visible} direction={direction} handleNevermind={this.handleNevermind}/>
           <Sidebar.Pusher>
-            <div className="ff-model">
-              <Container textAlign='justified' className='ff-formlink'>
-                { expanded ?
-                  ( <a onClick={this.handlePush('push', 'left')}>
-                    <Icon name="caret left" />
-                    Nevermind...
-                  </a> ) :
-                  ( <a onClick={this.handlePush('push', 'left')}>
-                  <Icon name="caret right" />
-                  Have any fun facts for us?
-                </a> )
-                }
-                <FunFactsBlocks funfacts={funfactsList}/>
-              </Container>
-            </div>
+            <Container textAlign='justified'>
+              { expanded ?
+                ( <a onClick={this.handlePush('push', 'left')}>
+                  <Icon name="caret left" />
+                  Nevermind...
+                </a> ) :
+                ( <a onClick={this.handlePush('push', 'left')}>
+                <Icon name="caret right" />
+                Have any fun facts for us?
+              </a> )
+              }
+              <FunFactsBlocks funfacts={funfactsList}/>
+            </Container>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </div>

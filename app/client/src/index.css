@@ -1,4 +1,4 @@
-.ff-wrapper .ff-model, .ff-wrapper, .main-wrapper .main-model, .main-wrapper, .nav-wrapper {
+.ff-wrapper .ff-sidebar-pushable, .ff-wrapper, .main-wrapper .main-model, .main-wrapper, .nav-wrapper {
   left: 0;
   right: 0;
 }
@@ -8,7 +8,7 @@
   top: 0;
 }
 
-.ff-wrapper .ff-model, .ff-wrapper, .main-wrapper .main-model, .main-wrapper {
+.ff-wrapper .ff-sidebar-pushable, .ff-wrapper, .main-wrapper .main-model, .main-wrapper {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -20,7 +20,7 @@
   transform: translate(-50%, 0) !important;
 }
 
-.sidebar-tab-menu {
+.ff-wrapper .ui.form, .sidebar-tab-menu {
   position: absolute;
   top: 50%;
   transform: translate(0, -50%) !important;
@@ -108,23 +108,27 @@ a:hover {
 
 .ff-wrapper {
   background: white;
-  padding-top: 8em;
+}
+.ff-wrapper .ff-sidebar-pushable {
+  padding-top: 8em !important;
 }
 .ff-wrapper .ff-container {
   border-bottom: 1px solid #eee;
   margin: 2em 0 0;
-  padding: 2em 2em 4em;
+  padding: 2em 0 4em;
+  width: 60% !important;
 }
 .ff-wrapper .ui.push {
+  padding-top: 8em !important;
   background: #055e5f;
   padding: 0 2em;
 }
 .ff-wrapper .ui.form {
-  margin: 0 auto;
+  width: 80%;
 }
 .ff-wrapper .ff-form-label {
   color: white !important;
-  font-size: 1.25em !important;
+  font-size: 1em !important;
 }
 
 /*# sourceMappingURL=index.css.map */

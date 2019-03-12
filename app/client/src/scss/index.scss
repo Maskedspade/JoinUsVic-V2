@@ -94,25 +94,28 @@ a {
 .ff-wrapper {
   @extend %stretch-to-container;
   background: white;
-  padding-top: 8em;
-  .ff-model {
+  .ff-sidebar-pushable {
     @extend %stretch-to-container;
+    padding-top: 8em !important;
   }
   .ff-container {
     border-bottom: 1px solid $colour-grey-light;
     margin: 2em 0 0;
-    padding: 2em 2em 4em;
+    padding: 2em 0 4em;
+    width: 60% !important;
   }
   .ui.push {
+    padding-top: 8em !important;
     background: $colour-interact;
     padding: 0 2em;
   }
   // funfacts page sidebar form
   .ui.form {
-    margin: 0 auto;
+    @extend %horizontally-aligned;
+    width: 80%;
   }
   .ff-form-label {
     color: white !important;
-    font-size: 1.25em !important;
+    font-size: 1em !important;
   }
 }
