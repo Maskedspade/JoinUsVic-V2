@@ -23,6 +23,8 @@ export default class MainSelection extends Component {
   // the value is an array of keyword id in database
   // tracks locations correlated to keywords
   fetchData = (e) => {
+    this.props.callLoader()
+
     const keys = this.state.value
     const bool = this.state.filtered
     axios.post('api/locations/highlighted', { keywordIds: { keys }, filtered: { bool }
@@ -30,6 +32,7 @@ export default class MainSelection extends Component {
     .then(res => {
       document.getElementById('messager').dataset.highlights = res.data.anchors_ids_str
       this.props.getLocationsOnKeywords(res.data.anchors_ids_str, res.data.locations_array, res.data.average_ratings_array)
+      this.props.callLoader()
     })
     .catch(error => console.log(error))
   }

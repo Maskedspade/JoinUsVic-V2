@@ -20,6 +20,7 @@ class App extends Component {
     this.handleFunfactsDisplay = this.handleFunfactsDisplay.bind(this)
     this.handleBackToIndex = this.handleBackToIndex.bind(this)
     this.modelLoaded = this.modelLoaded.bind(this)
+    this.callLoader = this.callLoader.bind(this)
   }
 
   // load 3 database tables and set loading state
@@ -32,7 +33,7 @@ class App extends Component {
       this.setState({
           keywordsList: keywordsRes.data,
           funfactsList: funfactsRes.data,
-          loadedJson: true
+          loadedJson: !this.state.loadedJson
       })
     }))
     .catch(error => console.log(error))
@@ -40,7 +41,7 @@ class App extends Component {
 
   modelLoaded = () => {
     this.setState({
-      loadedModel: true
+      loadedModel: !this.state.loadedModel
     })
   }
 
@@ -58,6 +59,12 @@ class App extends Component {
     e.preventDefault()
   }
 
+  callLoader = () => {
+    this.setState({
+      loadedJson: !this.state.loadedJson
+    })
+  }
+
   render() {
     const { loadedJson, loadedModel, keywordsList, funfactsList, funfactsDisplayed } = this.state
 
@@ -71,7 +78,7 @@ class App extends Component {
         </div>
       }
         <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex }/>
-        <Main keywordsList={ keywordsList } modelLoaded={this.modelLoaded}/>
+        <Main keywordsList={ keywordsList } modelLoaded={this.modelLoaded} callLoader={this.callLoader}/>
         { funfactsDisplayed &&
         <FunFacts funfactsList={ funfactsList }/>
         }

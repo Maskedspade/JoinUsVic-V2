@@ -15,13 +15,7 @@ const DescriptionSidebar = ({ animation, visible, direction, hideDescription, pa
       direction={direction}
       width='very wide'
     >
-      {!sidebarLoaded &&
-        <div className="app-dimmer">
-          <Dimmer active>
-            <Loader inverted content>Getting back to you now...</Loader>
-          </Dimmer>
-        </div>
-      }
+
       <div className="sidebar-tab-menu">
         <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
         <a onClick={hideDescription} className="sidebar-hidethis">
@@ -43,7 +37,6 @@ export default class Main extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      sidebarLoaded: false,
       selectorShowed: true,
       visible: false,
       animation: 'overlay',
@@ -88,10 +81,6 @@ export default class Main extends Component {
         }
       })
     })
-
-    this.setState({
-      sidebarLoaded: true
-    })
   }
 
   // hide sidebar on clicking 'hide this'
@@ -133,8 +122,7 @@ export default class Main extends Component {
   render() {
     const { sidebarLoaded, selectorShowed, visible, animation, direction, anchorsIdsStr, averageRatingsArray, locationsArray, panes, selectedAnchorId, selectedArray } = this.state
 
-    const { keywordsList, modelLoaded} = this.props
-
+    const { keywordsList, modelLoaded, callLoader} = this.props
 
     return (
       <div className="main-wrapper">
@@ -143,7 +131,7 @@ export default class Main extends Component {
           <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
               <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />
-              { selectorShowed && <MainSelection keywordsList={ keywordsList} getLocationsOnKeywords={this.getLocationsOnKeywords}/> }
+              { selectorShowed && <MainSelection keywordsList={ keywordsList} getLocationsOnKeywords={this.getLocationsOnKeywords} callLoader={callLoader}/> }
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
