@@ -15,7 +15,7 @@ class FunfactsController < ApplicationController
 
   # POST /funfacts
   def create
-    @funfact = Funfact.new(list_params)
+    @funfact = Funfact.new(funfact_params)
 
     if @funfact.save
       render json: @funfact, status: :created
@@ -26,7 +26,7 @@ class FunfactsController < ApplicationController
 
   # PATCH/PUT /funfacts/1
   def update
-    if @funfact.update(list_params)
+    if @funfact.update(funfact_params)
       render json: @funfact
     else
       render json: @funfact.errors, status: :unprocessable_entity
@@ -53,4 +53,5 @@ class FunfactsController < ApplicationController
     def funfact_params
       params.require(:funfact).permit(:user_name, :description,)
     end
+
 end
