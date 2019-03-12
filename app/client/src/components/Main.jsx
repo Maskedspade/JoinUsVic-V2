@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Sidebar, Segment, Button, Dimmer, Tab, Loader, Header, Icon } from 'semantic-ui-react'
+import { Sidebar, Segment, Tab, Icon } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import LocationDescription from './LocationDescription'
 import ThreeContainer from './ThreeContainer'
@@ -120,7 +120,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const { sidebarLoaded, selectorShowed, visible, animation, direction, anchorsIdsStr, averageRatingsArray, locationsArray, panes, selectedAnchorId, selectedArray } = this.state
+    const { sidebarLoaded, selectorShowed, visible, animation, direction,averageRatingsArray, panes, selectedArray } = this.state
 
     const { keywordsList, modelLoaded, callLoader} = this.props
 
