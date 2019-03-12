@@ -11,7 +11,7 @@ export default class NavBar extends Component {
 
   render() {
     const { activeItem } = this.state
-    const { handleFunfactsDisplay, handleBackToIndex } = this.props
+    const { handleFunfactsDisplay, handleBackToIndex, handleAboutUsDisplay } = this.props
 
     return (
       <Menu fixed='top' className="nav-wrapper">
@@ -34,12 +34,11 @@ export default class NavBar extends Component {
           />
 
           <Menu.Item
-            as='a'
-            href='mailto:lindsey.cai94@gmail.com'
-            name='contactUs'
-            active={activeItem === 'contactUs'}
-            content='ContactUs'
-            className="nav-contact-us"
+            name='aboutus'
+            active={activeItem === 'aboutus'}
+            content='AboutUs'
+            onClick={handleAboutUsDisplay}
+            className="nav-about-us"
           />
           <Menu.Item />
         </Menu.Menu>
