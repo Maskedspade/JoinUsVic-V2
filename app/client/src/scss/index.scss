@@ -79,12 +79,16 @@ a {
 
 .sidebar-tab-menu {
   @extend %horizontally-aligned;
-  margin: 0 auto;
+  margin: 0 5%;
+  .sidebar-hidethis {
+    position: absolute;
+    margin-top: 1em;
+  }
 }
 
 .ld-wrapper {
   background: white;
-  padding: 0 4em;
+  padding: 0 2em;
 }
 
 .ff-wrapper {

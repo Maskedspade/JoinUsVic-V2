@@ -16,10 +16,6 @@ const DescriptionCard = ( {location, hideDescription} ) => {
         Rate this location:&nbsp;&nbsp;
         <Rating icon='star' defaultRating={0} maxRating={5} size='huge'></Rating>
       </Item.Header>
-      <Item.Header as='a' onClick={hideDescription}>
-        <Icon name="caret right" />
-        HideThis
-      </Item.Header>
     </Item>
   )
 }
@@ -30,7 +26,7 @@ export default class LocationDescription extends Component {
     const { location, hideDescription} = this.props
 
     return (
-      <DescriptionCard location={location} hideDescription={hideDescription}/>
+      <DescriptionCard location={location} />
     )
   }
 }

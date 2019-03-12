@@ -94,12 +94,16 @@ a:hover {
 }
 
 .sidebar-tab-menu {
-  margin: 0 auto;
+  margin: 0 5%;
+}
+.sidebar-tab-menu .sidebar-hidethis {
+  position: absolute;
+  margin-top: 1em;
 }
 
 .ld-wrapper {
   background: white;
-  padding: 0 4em;
+  padding: 0 2em;
 }
 
 .ff-wrapper {

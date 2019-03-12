@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Sidebar, Segment, Button, Dimmer, Tab, Loader } from 'semantic-ui-react'
+import { Sidebar, Segment, Button, Dimmer, Tab, Loader, Header, Icon } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import LocationDescription from './LocationDescription'
 import ThreeContainer from './ThreeContainer'
 import MainSelection from './MainSelection'
 
-const DescriptionSidebar = ({ animation, visible, direction, panes, sidebarLoaded }) => {
+const DescriptionSidebar = ({ animation, visible, direction, hideDescription, panes, sidebarLoaded }) => {
   return (
     <Sidebar
       inverted='true'
@@ -22,7 +22,13 @@ const DescriptionSidebar = ({ animation, visible, direction, panes, sidebarLoade
           </Dimmer>
         </div>
       }
-      <Tab menu={{ secondary: true, pointing: true }} className="sidebar-tab-menu" panes={panes} />
+      <div className="sidebar-tab-menu">
+        <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+        <a onClick={hideDescription} className="sidebar-hidethis">
+          <Icon name="caret right" />
+          HideThis
+        </a>
+      </div>
     </Sidebar>
   )
 }
@@ -71,7 +77,7 @@ export default class Main extends Component {
           menuItem: {key: location.id, content:location.name},
           render: () =>
             <Tab.Pane attached={false}>
-              <LocationDescription location={location} hideDescription={hideDescription}/>
+              <LocationDescription location={location} />
             </Tab.Pane>
         }
         const panes = [...state.panes, location_info]
