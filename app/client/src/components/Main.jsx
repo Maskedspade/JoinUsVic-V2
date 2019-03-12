@@ -116,7 +116,7 @@ export default class Main extends Component {
   render() {
     const { sidebarLoaded, selectorShowed, visible, animation, direction, anchorsIdsStr, averageRatingsArray, locationsArray, panes, selectedAnchorId } = this.state
 
-    const { keywordsList, modelLoaded } = this.props
+    const { keywordsList, modelLoaded} = this.props
 
     return (
       <div className="main-wrapper">
