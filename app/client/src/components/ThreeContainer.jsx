@@ -228,9 +228,6 @@ export default class ThreeContainer extends Component {
 
       this.props.modelLoaded();
 
-      // an example to change attribute inside 'messager' so as to change color on certain anchors
-      // setTimeout(()=>{document.getElementById('messager').dataset.highlights = "56,64"}, 5000);
-
       GameLoop();
     };
 
