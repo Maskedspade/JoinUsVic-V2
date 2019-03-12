@@ -10,8 +10,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      loaded_json: false,
-      loaded_model: false,
+      loadedJson: false,
+      loadedModel: false,
       keywordsList: [],
       funfactsList: [],
       funfactsDisplayed: false
@@ -32,7 +32,7 @@ class App extends Component {
       this.setState({
           keywordsList: keywordsRes.data,
           funfactsList: funfactsRes.data,
-          loaded_json: true
+          loadedJson: true
       })
     }))
     .catch(error => console.log(error))
@@ -40,7 +40,7 @@ class App extends Component {
 
   modelLoaded = () => {
     this.setState({
-      loaded_model: true
+      loadedModel: true
     })
   }
 
@@ -59,11 +59,11 @@ class App extends Component {
   }
 
   render() {
-    const { loaded_json, loaded_model, keywordsList, funfactsList, funfactsDisplayed } = this.state
+    const { loadedJson, loadedModel, keywordsList, funfactsList, funfactsDisplayed } = this.state
 
     return (
       <div className="app">
-      {!(loaded_json && loaded_model) &&
+      {!(loadedJson && loadedModel) &&
         <div className="app-dimmer">
           <Dimmer active>
             <Loader indeterminate>Give us a sec...</Loader>

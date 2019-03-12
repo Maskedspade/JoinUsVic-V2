@@ -47,7 +47,7 @@ export default class Main extends Component {
     this.getLocationsOnKeywords = this.getLocationsOnKeywords.bind(this)
   }
 
-  // handle user clicking on location/building request, deals with anymations
+  // handle user clicking on location/building request, deals with animations
   handleLocationSidebar = (animation, direction, visible, locationsArray, hideDescription) => () => {
     this.setState({
       selectorShowed: !this.state.selectorShowed,
@@ -56,6 +56,7 @@ export default class Main extends Component {
       visible: !visible,
       panes: []
     })
+    // puts all anchor correlated locations inside of the sidebar tab panes array, sets panes array state
     locationsArray.forEach((location) => {
       this.setState(state => {
         const location_info =
@@ -67,7 +68,6 @@ export default class Main extends Component {
             </Tab.Pane>
         }
         const panes = [...state.panes, location_info]
-        console.log(panes)
         return {
           panes
         }
@@ -101,15 +101,11 @@ export default class Main extends Component {
 
     const { keywordsList, modelLoaded} = this.props
 
-    // console.log(anchorsIdsStr)
-    // console.log(locationsArray)
-    // console.log(averageRatingsArray)
-
     return (
       <div className="main-wrapper">
         <Sidebar.Pushable as={Segment}>
           <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationsArray={locationsArray} hideDescription={this.hideDescription} panes={panes}/>
-          <Sidebar.Pusher>
+          <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
               <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />
               { selectorShowed && <MainSelection keywordsList={ keywordsList} getLocationsOnKeywords={this.getLocationsOnKeywords}/> }
