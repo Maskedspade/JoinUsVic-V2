@@ -39,7 +39,7 @@ a:hover {
 }
 
 .error-message {
-  color: red;
+  color: #f55a81;
 }
 
 .ui.segment {
@@ -129,6 +129,15 @@ a:hover {
 .ff-wrapper .ff-form-label {
   color: white !important;
   font-size: 1em !important;
+}
+
+.modal-description {
+  font-size: 1.15em;
+  text-indent: 2em;
+}
+
+.modal-email-link {
+  color: #0fb2b5 !important;
 }
 
 /*# sourceMappingURL=index.css.map */

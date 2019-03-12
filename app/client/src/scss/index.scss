@@ -14,7 +14,7 @@ a {
 }
 
 .error-message {
-  color: red;
+  color: $colour-error;
 }
 
 .ui.segment {
@@ -118,4 +118,12 @@ a {
     color: white !important;
     font-size: 1em !important;
   }
+}
+
+.modal-description {
+  font-size: 1.15em;
+  text-indent: 2em;
+}
+.modal-email-link {
+  color: $colour-interact-dark-bg !important;
 }
