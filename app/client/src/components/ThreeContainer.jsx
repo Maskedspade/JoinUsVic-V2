@@ -27,7 +27,7 @@ export default class ThreeContainer extends Component {
 
     } else {
       // report error should WebGL be absent
-      alert("Failed to get WebGL context. " + "Your browser or device may not support WebGL.");
+      alert("Failed to get WebGL context. Your browser or device may not support WebGL.");
     }
   }
 
@@ -59,12 +59,18 @@ export default class ThreeContainer extends Component {
     const cb = function(mutationsList, observer) {
       for (let mutation of mutationsList) {
         if (mutation.type == 'attributes') {
+          // the order might change, depends on where scene children meshes live
+          const childrenMeshes = scene.children[2];
+
+          childrenMeshes.traverse((childMesh) => {
+            const meshName = childMesh.name;
+            if (meshName.substring(0, 6) === "anchor") {
+              childMesh.material = new THREE.MeshNormalMaterial({});
+            }
+          })
 
           let highlights = document.getElementById('messager').dataset.highlights;
           anchorIds = highlights.split(',');
-
-          // the order might change, depends on where scene children meshes live
-          const childrenMeshes = scene.children[2];
 
           childrenMeshes.traverse((childMesh) => {
             const meshName = childMesh.name;
