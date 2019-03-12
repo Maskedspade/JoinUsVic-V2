@@ -63,7 +63,7 @@ export default class Main extends Component {
   }
 
   // handle user clicking on location/building request, deals with animations
-  handleLocationSidebar = (animation, direction, visible, locationsArray, hideDescription) => () => {
+  handleLocationSidebar = (animation, direction, visible, locationsArray, hideDescription) => {
     this.setState({
       selectorShowed: !this.state.selectorShowed,
       animation,
@@ -94,6 +94,7 @@ export default class Main extends Component {
     })
   }
 
+  // hide sidebar on clicking 'hide this'
   hideDescription = () => {
     this.setState({
       selectorShowed: true,
@@ -101,6 +102,7 @@ export default class Main extends Component {
     })
   }
 
+  // a callback that grabs responses from post request inside of main-selection component
   getLocationsOnKeywords = (anchors, locations, ratings) => {
     this.setState({
       anchorsIdsStr: anchors,
@@ -109,6 +111,7 @@ export default class Main extends Component {
     })
   }
 
+  // gets the anchor id on click of 3d model anchor
   getSelectedAnchorId = (anchorId) => {
     let selected = []
     this.state.locationsArray.forEach(location => {
@@ -120,6 +123,7 @@ export default class Main extends Component {
       selectedAnchorId: anchorId,
       selectedArray: selected
     })
+    this.handleAnchorClick()
   }
 
   handleAnchorClick = () => {
@@ -138,9 +142,8 @@ export default class Main extends Component {
           <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationsArray={selectedArray} hideDescription={this.hideDescription} panes={panes} sidebarLoaded={sidebarLoaded}/>
           <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
-              <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} handleAnchorClick={this.handleAnchorClick}/>
+              <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />
               { selectorShowed && <MainSelection keywordsList={ keywordsList} getLocationsOnKeywords={this.getLocationsOnKeywords}/> }
-              <Button className="btn-building" onClick={this.handleLocationSidebar('overlay', 'right', visible, selectedArray, this.hideDescription)}>Show</Button>
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
