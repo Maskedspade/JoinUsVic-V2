@@ -52,12 +52,14 @@ export default class Main extends Component {
       locationsArray: [],
       averageRatingsArray: [],
       selectedAnchorId: null,
+      selectedArray: [],
       panes: []
     }
     this.handleLocationSidebar = this.handleLocationSidebar.bind(this)
     this.hideDescription = this.hideDescription.bind(this)
     this.getSelectedAnchorId = this.getSelectedAnchorId.bind(this)
     this.getLocationsOnKeywords = this.getLocationsOnKeywords.bind(this)
+    this.handleAnchorClick = this.handleAnchorClick.bind(this)
   }
 
   // handle user clicking on location/building request, deals with animations
@@ -108,25 +110,37 @@ export default class Main extends Component {
   }
 
   getSelectedAnchorId = (anchorId) => {
+    let selected = []
+    this.state.locationsArray.forEach(location => {
+      if (location.anchor_id === Number(anchorId)) {
+        selected.push(location)
+      }
+    })
     this.setState({
       selectedAnchorId: anchorId,
+      selectedArray: selected
     })
   }
 
+  handleAnchorClick = () => {
+    this.handleLocationSidebar('overlay', 'right', this.state.visible, this.state.selectedArray, this.hideDescription)
+  }
+
   render() {
-    const { sidebarLoaded, selectorShowed, visible, animation, direction, anchorsIdsStr, averageRatingsArray, locationsArray, panes, selectedAnchorId } = this.state
+    const { sidebarLoaded, selectorShowed, visible, animation, direction, anchorsIdsStr, averageRatingsArray, locationsArray, panes, selectedAnchorId, selectedArray } = this.state
 
     const { keywordsList, modelLoaded} = this.props
+
 
     return (
       <div className="main-wrapper">
         <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationsArray={locationsArray} hideDescription={this.hideDescription} panes={panes} sidebarLoaded={sidebarLoaded}/>
+          <DescriptionSidebar animation={animation} visible={visible} direction={direction} locationsArray={selectedArray} hideDescription={this.hideDescription} panes={panes} sidebarLoaded={sidebarLoaded}/>
           <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
-              <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />
+              <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} handleAnchorClick={this.handleAnchorClick}/>
               { selectorShowed && <MainSelection keywordsList={ keywordsList} getLocationsOnKeywords={this.getLocationsOnKeywords}/> }
-              <Button className="btn-building" onClick={this.handleLocationSidebar('overlay', 'right', visible, locationsArray, this.hideDescription)}>Show</Button>
+              <Button className="btn-building" onClick={this.handleLocationSidebar('overlay', 'right', visible, selectedArray, this.hideDescription)}>Show</Button>
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
