@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Item, Icon, Menu, Rating } from 'semantic-ui-react';
+import { Item, Icon, Rating } from 'semantic-ui-react';
 
 const DescriptionCard = ( {location, hideDescription} ) => {
   return (
