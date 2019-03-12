@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { Modal, Image, Header } from 'semantic-ui-react'
 
 export default class AboutUs extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     const { aboutUsDisplayed, closeAboutUsDisplay } = this.props
 

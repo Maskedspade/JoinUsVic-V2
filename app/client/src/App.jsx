@@ -96,7 +96,7 @@ class App extends Component {
         </div>
       }
 
-        <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex }/>
+        <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex} handleAboutUsDisplay={this.handleAboutUsDisplay}/>
         <Main keywordsList={ keywordsList } modelLoaded={this.modelLoaded} callLoader={this.callLoader}/>
 
         { funfactsDisplayed &&
