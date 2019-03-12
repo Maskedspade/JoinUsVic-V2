@@ -24,7 +24,6 @@ export default class MainSelection extends Component {
   // tracks locations correlated to keywords
   fetchData = (e) => {
     this.props.callLoader()
-
     const keys = this.state.value
     const bool = this.state.filtered
     axios.post('api/locations/highlighted', { keywordIds: { keys }, filtered: { bool }
@@ -38,7 +37,7 @@ export default class MainSelection extends Component {
   }
 
   render() {
-    const { keywordsList, value, filtered } = this.props
+    const { keywordsList } = this.props
 
     const options = keywordsList.map( keyword => {
       return {
