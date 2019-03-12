@@ -54,7 +54,7 @@ class LocationsController < ApplicationController
   def average_ratings(locations_array)
     average_ratings_array = []
     average_ratings_array = locations_array.map { |location|
-      location.ratings ? location.ratings.average(:score) : 0
+      location.ratings ? location.ratings.average(:score).round(1) : 0.0
     }
     average_ratings_array
   end
