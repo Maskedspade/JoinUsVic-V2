@@ -5,7 +5,7 @@ import LocationDescription from './LocationDescription'
 import ThreeContainer from './ThreeContainer'
 import MainSelection from './MainSelection'
 
-const DescriptionSidebar = ({ animation, visible, direction, hideDescription, panes, sidebarLoaded }) => {
+const DescriptionSidebar = ({ animation, visible, direction, hideDescription, panes }) => {
   return (
     <Sidebar
       inverted='true'
@@ -56,13 +56,11 @@ export default class Main extends Component {
   }
 
   // handle user clicking on location/building request, deals with animations
-  handleLocationSidebar = (animation, direction, visible, selectedArray, hideDescription) => {
-    const { averageRatingsArray } = this.state
+  handleLocationSidebar = () => {
+    const { visible, selectedArray, selectedRatingsArray } = this.state
 
     this.setState({
       selectorShowed: !this.state.selectorShowed,
-      animation,
-      direction,
       visible: !visible,
       panes: []
     })
@@ -74,7 +72,7 @@ export default class Main extends Component {
           menuItem: {key: location.id, content:location.name},
           render: () =>
             <Tab.Pane attached={false}>
-              <LocationDescription location={location} average_rating={averageRatingsArray[index]}/>
+              <LocationDescription location={location} average_rating={selectedRatingsArray[index]}/>
             </Tab.Pane>
         }
         const panes = [...state.panes, location_info]
@@ -104,32 +102,39 @@ export default class Main extends Component {
 
   // gets the anchor id on click of 3d model anchor
   getSelectedAnchorId = (anchorId) => {
+    const { locationsArray, averageRatingsArray } = this.state
+
     let selected = []
-    this.state.locationsArray.forEach(location => {
+    let selectedRatings = []
+    locationsArray.forEach((location, index) => {
       if (location.anchor_id === Number(anchorId)) {
         selected.push(location)
+        selectedRatings.push(averageRatingsArray[index])
       }
     })
     this.setState({
       selectedAnchorId: anchorId,
-      selectedArray: selected
+      selectedArray: selected,
+      selectedRatingsArray: selectedRatings
     })
     this.handleAnchorClick()
   }
 
   handleAnchorClick = () => {
-    this.handleLocationSidebar('overlay', 'right', this.state.visible, this.state.selectedArray, this.hideDescription)
+    const { visible, selectedArray, selectedRatingsArray } = this.state
+
+    this.handleLocationSidebar(visible,selectedArray, selectedRatingsArray, this.hideDescription)
   }
 
   render() {
-    const { sidebarLoaded, selectorShowed, visible, animation, direction,averageRatingsArray, panes, selectedArray } = this.state
+    const { selectorShowed, visible, animation, direction,averageRatingsArray, panes, selectedArray, selectedRatingsArray } = this.state
 
     const { keywordsList, modelLoaded, callLoader} = this.props
 
     return (
       <div className="main-wrapper">
         <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} direction={direction} selectedArray={selectedArray} hideDescription={this.hideDescription} panes={panes} sidebarLoaded={sidebarLoaded}/>
+          <DescriptionSidebar animation={animation} visible={visible} direction={direction} selectedArray={selectedArray} selectedRatingsArray={selectedRatingsArray} hideDescription={this.hideDescription} panes={panes} />
           <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
               <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />
