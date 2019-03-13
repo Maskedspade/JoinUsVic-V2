@@ -83,6 +83,10 @@ a {
   .ui.overlay {
     background: white;
   }
+  #btn-main-selection {
+    background: $colour-interact !important;
+    color: $colour-white !important;
+  }
 }
 
 .sidebar-tab-menu {

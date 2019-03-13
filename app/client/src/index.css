@@ -99,6 +99,10 @@ a:hover {
 .main-wrapper .ui.overlay {
   background: white;
 }
+.main-wrapper #btn-main-selection {
+  background: #055e5f !important;
+  color: #fffcfd !important;
+}
 
 .sidebar-tab-menu {
   margin: 0 5%;
