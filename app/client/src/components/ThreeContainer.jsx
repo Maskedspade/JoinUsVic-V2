@@ -8,6 +8,7 @@ export default class ThreeContainer extends Component {
   }
 
   detectWebGLContext() {
+
     // Create canvas element for testing
     // The canvas is not added to DOM so it is never displayed
     const canvas = document.createElement("canvas");
@@ -57,15 +58,16 @@ export default class ThreeContainer extends Component {
 
     const config = {attributes: true};
     const cb = function(mutationsList, observer) {
+
       for (let mutation of mutationsList) {
         if (mutation.type == 'attributes') {
           // the order might change, depends on where scene children meshes live
-          const childrenMeshes = scene.children[2];
+          const childrenMeshes = scene.children[3];
 
           childrenMeshes.traverse((childMesh) => {
             const meshName = childMesh.name;
             if (meshName.substring(0, 6) === "anchor") {
-              childMesh.material = new THREE.MeshNormalMaterial({});
+              childMesh.material = materialAnchor;
             }
           })
 
@@ -74,9 +76,11 @@ export default class ThreeContainer extends Component {
 
           childrenMeshes.traverse((childMesh) => {
             const meshName = childMesh.name;
+            console.log(meshName);
             if (meshName.substring(0, 6) === "anchor") {
               if (anchorIds.includes(meshName.substring(6))) {
-                childMesh.material = materialAnchor;
+
+                childMesh.material = materialHighlight;
               }
             }
           });
@@ -104,11 +108,21 @@ export default class ThreeContainer extends Component {
 
     // create a material, colour or image texture
     const materialAnchor = new THREE.MeshLambertMaterial({color: 0xffffa1, wireframe: false});
-    const materialOcean = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
-    const materialDock = new THREE.MeshLambertMaterial({color: 0xFFFFFF, wireframe: false});
+    const materialHighlight = new THREE.MeshNormalMaterial({ });
+
+    const materialOcean = new THREE.MeshLambertMaterial({ color: 0xa1f1f0 });
+    const materialDock = new THREE.MeshLambertMaterial({ color: 0xe7a15e });
+    const materialGrey = new THREE.MeshLambertMaterial({ color: 0xb0c8bc });
+    const materialDarkGrey = new THREE.MeshLambertMaterial({ color: 0xbabebc });
+    const materialGreen = new THREE.MeshLambertMaterial({ color: 0x5ee7a1 });
 
     const light = new THREE.AmbientLight(0x404040, 2);
     scene.add(light);
+
+    const pointLight = new THREE.PointLight( 0xFFFFFF, 0.5);
+    pointLight.position.set( 7000, 7000, 6000 );
+    pointLight.castShadow = true;
+    scene.add( pointLight );
 
     // *******************************************************************
 
@@ -129,6 +143,25 @@ export default class ThreeContainer extends Component {
       // (-1 to +1) for both components
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+
+      if (!scene) {
+        return;
+      }
+
+      const intersects = raycaster.intersectObjects(scene.children[2].children)
+      if (intersects[0] && intersects[0].object.name.substring(0, 6) === "anchor") {
+
+        if (anchorIds.includes(intersects[0].object.name.substring(6))) {
+          document.querySelector('*').style.cursor = 'pointer';
+        } else {
+          document.querySelector('*').style.cursor = 'default';
+        }
+
+      } else {
+        document.querySelector('*').style.cursor = 'default';
+      }
     }
 
     function onDocumentTouchStart(event) {
@@ -142,7 +175,7 @@ export default class ThreeContainer extends Component {
 
     function onDocumentMouseDown(event) {
       // update the picking ray with the camera and mouse position
-      raycaster.setFromCamera( mouse, camera );
+      raycaster.setFromCamera(mouse, camera);
 
       // calculate objects intersecting the picking ray
       const intersects = raycaster.intersectObjects(scene.children[2].children);
@@ -152,7 +185,6 @@ export default class ThreeContainer extends Component {
       }
 
       if (intersects[0].object.name.substring(0, 6) === "anchor") {
-        console.log(intersects[0].object)
 
         if (anchorIds.includes(intersects[0].object.name.substring(6))) {
           this.props.getSelectedAnchorId(intersects[0].object.name.substring(6));
@@ -187,50 +219,45 @@ export default class ThreeContainer extends Component {
 
       gltf.scene.traverse((children) => {
 
-          if (children.type !== 'Mesh') {
-            console.log(children);
-          }
+        // the name of imported model by default comes with the prefix 'G-'
+        // in order to remove the first 2 characters we do:
+        let childName = children.name.split('');
+        childName.splice(0, 2);
 
-          // the name of imported model by default comes with the prefix 'G-'
-          // in order to remove the first 2 characters we do:
-          let childName = children.name.split('');
-          childName.splice(0, 2);
+        if (childName.join('').substring(0, 6) === "anchor") {
+          children.name = childName.join('');
+          children.material = materialAnchor;
+        }
 
-          if (childName.join('').substring(0, 6) === "anchor") {
-            children.name = childName.join('');
-            children.material = new THREE.MeshNormalMaterial({ // scene lights not required
-            });
-          }
+        if (childName.join('') === "ocean") {
+          children.name = childName.join('');
+          children.material = materialOcean;
+          children.material.side = THREE.DoubleSide;
+        }
 
-          if (childName.join('') === "ocean") {
-            children.name = childName.join('');
-            children.material = new THREE.MeshBasicMaterial({ color: 0xa1f1f0 });
-            children.material.side = THREE.DoubleSide;
-          }
+        if (childName.join('') === "dock") {
+          children.name = childName.join('');
+          children.material = materialDock;
+          children.material.side = THREE.DoubleSide;
+        }
 
-          if (childName.join('') === "dock") {
-            children.name = childName.join('');
-            children.material = new THREE.MeshBasicMaterial({ color: 0xe7a15e });
-            children.material.side = THREE.DoubleSide;
-          }
+        if (childName.join('') === "green_patch") {
+          children.name = childName.join('');
+          children.material = materialGreen;
+          children.material.side = THREE.DoubleSide;
+        }
 
-          if (childName.join('') === "green_patch") {
-            children.name = childName.join('');
-            children.material = new THREE.MeshBasicMaterial({ color: 0x5ee7a1 });
-            children.material.side = THREE.DoubleSide;
-          }
+        if (childName.join('').substring(0, 4) === "grey") {
+          children.name = childName.join('');
+          children.material = materialGrey;
+          children.material.side = THREE.DoubleSide;
+        }
 
-          if (childName.join('').substring(0, 4) === "grey") {
-            children.name = childName.join('');
-            children.material = new THREE.MeshBasicMaterial({ color: 0xb0c8bc });
-            children.material.side = THREE.DoubleSide;
-          }
-
-          if (childName.join('').substring(0, 4) === "dark") {
-            children.name = childName.join('');
-            children.material = new THREE.MeshBasicMaterial({ color: 0xbabebc });
-            children.material.side = THREE.DoubleSide;
-          }
+        if (childName.join('').substring(0, 4) === "dark") {
+          children.name = childName.join('');
+          children.material = materialDarkGrey;
+          children.material.side = THREE.DoubleSide;
+        }
 
       });
 
