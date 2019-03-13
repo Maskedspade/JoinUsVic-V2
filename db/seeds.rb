@@ -156,7 +156,7 @@ Explore Victoria’s Inner Harbour and discover more about BC’s maritime herit
 
 The tour starts at the Maritime Museum of BC and go around the Inner Harbour, up Wharf St., through Bastion Square, down Government St., and back to the Museum. It runs for about an hour and includes the cost of admission.',
   website: 'https://mmbc.bc.ca/',
-  anchor_id: 62
+  anchor_id: 218
 })
 
 loc10 = Location.create!({
