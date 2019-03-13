@@ -80,7 +80,7 @@ export default class ThreeContainer extends Component {
 
           childrenMeshes.traverse((childMesh) => {
             const meshName = childMesh.name;
-            console.log(meshName);
+
             if (meshName.substring(0, 6) === "anchor") {
               if (anchorIds.includes(meshName.substring(6))) {
 
@@ -236,27 +236,17 @@ export default class ThreeContainer extends Component {
     }
 
     function onDocumentTouchStart(event) {
+      console.log('TOUCH -HAHAHA')
       event.preventDefault();
 
       event.clientX = event.touches[0].clientX;
       event.clientY = event.touches[0].clientY;
 
       onDocumentMouseDown(event);
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     function onDocumentMouseDown(event) {
+      console.log('CLICK');
       mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
       mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
       // update the picking ray with the camera and mouse position
@@ -295,7 +285,7 @@ export default class ThreeContainer extends Component {
 
     can.addEventListener( 'mousemove', onMouseMove, false );
     can.addEventListener( 'mousedown', onDocumentMouseDown, false );
-    can.addEventListener( 'touchstart', onDocumentTouchStart, false);
+    can.addEventListener( 'touchstart', onDocumentTouchStart, false );
 
     // *******************************************************************
 
@@ -369,8 +359,6 @@ export default class ThreeContainer extends Component {
       });
 
       this.props.modelLoaded();
-
-      console.log(scene.children);
 
 
       // let waterGeo = scene.children[5].children[225].geometry;
