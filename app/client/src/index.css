@@ -94,7 +94,7 @@ a:hover {
   margin-top: 1em;
 }
 .main-wrapper .main-dropdown {
-  width: 30em !important;
+  min-width: 600px;
 }
 .main-wrapper .ui.overlay {
   background: white;
