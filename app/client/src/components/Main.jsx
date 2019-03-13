@@ -5,11 +5,11 @@ import LocationDescription from './LocationDescription'
 import ThreeContainer from './ThreeContainer'
 import MainSelection from './MainSelection'
 
-const DescriptionSidebar = ({ animation, visible, direction, hideDescription, panes, inverted, vertical }) => {
+const DescriptionSidebar = ({ animation, visible, direction, hideDescription, panes }) => {
   return (
     <Sidebar
-      inverted={inverted}
-      vertical={vertical}
+      inverted='true'
+      vertical='true'
       animation={animation}
       visible={visible}
       direction={direction}
@@ -135,7 +135,7 @@ export default class Main extends Component {
     return (
       <div className="main-wrapper">
         <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} direction={direction} selectedArray={selectedArray} selectedRatingsArray={selectedRatingsArray} hideDescription={this.hideDescription} inverted='true' vertial='true' panes={panes} />
+          <DescriptionSidebar animation={animation} visible={visible} direction={direction} selectedArray={selectedArray} selectedRatingsArray={selectedRatingsArray} hideDescription={this.hideDescription} panes={panes} />
           <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
               <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />
