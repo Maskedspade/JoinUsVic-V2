@@ -12,13 +12,23 @@ export default class AboutUs extends Component {
         basic
         size='medium'
       >
-        <Header>A Disclaimer for You</Header>
+        <Header>AboutUs</Header>
         <Modal.Content image>
-          <Image wrapped size='huge' src='https://i.pinimg.com/originals/80/bf/8c/80bf8c61bd32d5bda30923d1510baab3.jpg'/>
+          <Image wrapped size='huge' src='http://www.athomeinlove.com/wp-content/uploads/2018/04/victoria-bc.jpg'/>
           <Modal.Description className='modal-description'>
-          Hey! It's Lindsey and Yuhan! Great to see you here <span role="img" aria-label="emoji">😃</span>.
-          <br/>We made this web app to showcase some of the fun places in Victoria to do fun things, coming from us - the two people that don't go out all that much <span role="img" aria-label="emoji">🤯</span>.
-          <br/>So please don't take us seriously, but still enjoy the interactive 3D model experience. Hopefully you can learn a thing or two even when the model is completely outdated later on *cough*
+          <br/>Wanna find out more about downtownVictoria,
+          <br/>but got tired of the same ol' results from Google?
+          <br/>
+          <br/>You've come to the right place.
+          <br/>
+          <br/>We are all about sharing insights and stories of the city...
+          <br/>through a fun and interactive 3D model!
+          <br/>
+          <br/>While this model comes with no guarantee in precise geographic information, it is 100% committed to absorting first-hand experience and providing you with the most insightful information about downtown Victoria.
+          <br/>We have both generic and special (aka quirky) keywords to describe fun spots in downtown Victoria, and we collect fun facts about the city as well.
+          <br/>
+          <br/>Whether you are a local or visitor, foodie or hispter,
+          <br/>this app will help you find what you need - just give us the keywords!
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
@@ -27,14 +37,6 @@ export default class AboutUs extends Component {
             href='mailto:lindsey.cai94@gmail.com,yhfreeman12@gmail.com'
             content='EmailUs'
             className='modal-email-link'
-          />
-          <Button
-            as='a'
-            inverted
-            icon='github'
-            size='huge'
-            href='https://github.com/Maskedspade'
-            target='_blank'
           />
         </Modal.Actions>
       </Modal>
