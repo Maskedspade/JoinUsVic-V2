@@ -15,16 +15,14 @@ export default class NavBar extends Component {
 
     return (
       <Menu fixed='top' className="nav-wrapper">
-        <Menu.Menu>
-          <Menu.Item />
-          <Menu.Item
-            onClick={handleBackToIndex}>
-            <Image
-              src='https://i.ibb.co/1Q0q4LY/Branding.png'
-              compact
-              />
-          </Menu.Item>
-        </Menu.Menu>
+        <Menu.Item />
+        <Menu.Item
+          onClick={handleBackToIndex}>
+          <Image
+            src='https://i.ibb.co/1Q0q4LY/Branding.png'
+            compact
+            />
+        </Menu.Item>
 
         <Menu.Menu position='right'>
           <Menu.Item
