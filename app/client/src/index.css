@@ -77,7 +77,7 @@ a:hover {
   height: 2.5em;
   width: 4em;
 }
-.nav-wrapper .nav-about-us {
+.nav-wrapper #nav-about-us {
   color: #055e5f !important;
 }
 
@@ -100,8 +100,11 @@ a:hover {
   background: white;
 }
 .main-wrapper #btn-main-selection {
-  background: #055e5f !important;
-  color: #fffcfd !important;
+  background: #055e5f;
+  color: #fffcfd;
+}
+.main-wrapper #btn-main-selection:hover {
+  background: #044445;
 }
 
 .sidebar-tab-menu {
@@ -140,6 +143,14 @@ a:hover {
 .ff-wrapper .ff-form-label {
   color: white !important;
   font-size: 1em !important;
+}
+.ff-wrapper #btn-form-submit {
+  color: #fffcfd;
+  background: transparent;
+  border: 2px solid #fffcfd;
+}
+.ff-wrapper #btn-form-submit:hover {
+  background: #044445;
 }
 
 .modal-description {

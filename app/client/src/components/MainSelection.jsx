@@ -65,7 +65,7 @@ export default class MainSelection extends Component {
             onChange={this.allOrFiltered}
             className='main-selection-checkbox'
           />
-          <Button onClick={this.fetchData}>Go</Button>
+          <Button onClick={this.fetchData} id='btn-main-selection'>Go</Button>
         </div>
       </div>
     )

@@ -15,9 +15,10 @@ export default class NavBar extends Component {
 
     return (
       <Menu fixed='top' className="nav-wrapper">
-        <Menu.Menu position='left'>
+        <Menu.Menu>
           <Menu.Item />
-          <Menu.Item>
+          <Menu.Item
+            onClick={handleBackToIndex}>
             <Image
               src='https://i.ibb.co/1Q0q4LY/Branding.png'
               compact
@@ -38,7 +39,7 @@ export default class NavBar extends Component {
             active={activeItem === 'aboutus'}
             content='AboutUs'
             onClick={handleAboutUsDisplay}
-            className="nav-about-us"
+            id="nav-about-us"
           />
           <Menu.Item />
         </Menu.Menu>

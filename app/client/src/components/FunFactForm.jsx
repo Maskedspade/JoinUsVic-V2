@@ -27,9 +27,11 @@ const FormCard = ( {handleNevermind, handleFormSubmit, getUserName, getMessage} 
           content='Nevermind'
           onClick={handleNevermind}
         />
-        <Button type='submit'
+        <Button
+          type='submit'
           icon='paper plane'
           content='Send'
+          id='btn-form-submit'
         />
       </div>
     </Form>
