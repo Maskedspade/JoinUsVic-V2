@@ -152,6 +152,8 @@ export default class ThreeContainer extends Component {
       }
 
       if (intersects[0].object.name.substring(0, 6) === "anchor") {
+        console.log(intersects[0].object)
+
         if (anchorIds.includes(intersects[0].object.name.substring(6))) {
           this.props.getSelectedAnchorId(intersects[0].object.name.substring(6));
         };
@@ -184,52 +186,52 @@ export default class ThreeContainer extends Component {
       scene.add(gltf.scene);
 
       gltf.scene.traverse((children) => {
-        // the name of imported model by default comes with the prefix 'G-'
-        // in order to remove the first 2 characters we do:
-        let childName = children.name.split('');
-        childName.splice(0, 2);
 
-        if (childName.join('').substring(0, 6) === "anchor") {
-          children.name = childName.join('');
-          children.material = new THREE.MeshNormalMaterial({ // scene lights not required
-          });
-        }
+          if (children.type !== 'Mesh') {
+            console.log(children);
+          }
 
-        if (childName.join('') === "ocean") {
-          children.name = childName.join('');
-          children.material = new THREE.MeshBasicMaterial({ color: 0xa1f1f0 });
-          children.material.side = THREE.DoubleSide;
-        }
+          // the name of imported model by default comes with the prefix 'G-'
+          // in order to remove the first 2 characters we do:
+          let childName = children.name.split('');
+          childName.splice(0, 2);
 
-        if (childName.join('') === "dock") {
-          children.name = childName.join('');
-          children.material = new THREE.MeshBasicMaterial({ color: 0xe7a15e });
-          children.material.side = THREE.DoubleSide;
-        }
+          if (childName.join('').substring(0, 6) === "anchor") {
+            children.name = childName.join('');
+            children.material = new THREE.MeshNormalMaterial({ // scene lights not required
+            });
+          }
 
-        if (childName.join('') === "green_patch") {
-          children.name = childName.join('');
-          children.material = new THREE.MeshBasicMaterial({ color: 0x5ee7a1 });
-          children.material.side = THREE.DoubleSide;
-        }
+          if (childName.join('') === "ocean") {
+            children.name = childName.join('');
+            children.material = new THREE.MeshBasicMaterial({ color: 0xa1f1f0 });
+            children.material.side = THREE.DoubleSide;
+          }
 
-        if (childName.join('').substring(0, 4) === "grey") {
-          children.name = childName.join('');
-          children.material = new THREE.MeshBasicMaterial({ color: 0xb0c8bc });
-          children.material.side = THREE.DoubleSide;
-        }
+          if (childName.join('') === "dock") {
+            children.name = childName.join('');
+            children.material = new THREE.MeshBasicMaterial({ color: 0xe7a15e });
+            children.material.side = THREE.DoubleSide;
+          }
 
-        if (childName.join('') === "land") {
-          children.name = childName.join('');
-          children.material = new THREE.MeshBasicMaterial({ color: 0xb0c8bc });
-          children.material.side = THREE.DoubleSide;
-        }
+          if (childName.join('') === "green_patch") {
+            children.name = childName.join('');
+            children.material = new THREE.MeshBasicMaterial({ color: 0x5ee7a1 });
+            children.material.side = THREE.DoubleSide;
+          }
 
-        if (childName.join('').substring(0, 4) === "dark") {
-          children.name = childName.join('');
-          children.material = new THREE.MeshBasicMaterial({ color: 0xbabebc });
-          children.material.side = THREE.DoubleSide;
-        }
+          if (childName.join('').substring(0, 4) === "grey") {
+            children.name = childName.join('');
+            children.material = new THREE.MeshBasicMaterial({ color: 0xb0c8bc });
+            children.material.side = THREE.DoubleSide;
+          }
+
+          if (childName.join('').substring(0, 4) === "dark") {
+            children.name = childName.join('');
+            children.material = new THREE.MeshBasicMaterial({ color: 0xbabebc });
+            children.material.side = THREE.DoubleSide;
+          }
+
       });
 
       this.props.modelLoaded();
@@ -245,7 +247,7 @@ export default class ThreeContainer extends Component {
       console.error(error);
     };
 
-    loader.load( "yhfreeman.gltf", onLoad, onProgress, handleError);
+    loader.load( "joinusvic_model.gltf", onLoad, onProgress, handleError);
 
     // draw scene
     function render() {
