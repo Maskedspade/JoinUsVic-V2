@@ -150,7 +150,7 @@ export default class ThreeContainer extends Component {
         return;
       }
 
-      const intersects = raycaster.intersectObjects(scene.children[2].children)
+      const intersects = raycaster.intersectObjects(scene.children[3].children)
       if (intersects[0] && intersects[0].object.name.substring(0, 6) === "anchor") {
 
         if (anchorIds.includes(intersects[0].object.name.substring(6))) {
@@ -178,7 +178,7 @@ export default class ThreeContainer extends Component {
       raycaster.setFromCamera(mouse, camera);
 
       // calculate objects intersecting the picking ray
-      const intersects = raycaster.intersectObjects(scene.children[2].children);
+      const intersects = raycaster.intersectObjects(scene.children[3].children);
 
       if (!intersects[0]) {
         return;
