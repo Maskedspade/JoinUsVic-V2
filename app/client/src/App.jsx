@@ -50,7 +50,6 @@ class App extends Component {
   }
 
   handleFunfactsDisplay = (e) => {
-    console.log('handle funfacts display')
     this.setState({
       funfactsDisplayed: true
     })
