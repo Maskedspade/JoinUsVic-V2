@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import THREE from './threeJSimport';
+// import * as dat from 'dat.gui';
 
 export default class ThreeContainer extends Component {
   componentDidMount() {
@@ -34,6 +35,7 @@ export default class ThreeContainer extends Component {
 
   setupTHREE() {
 
+
     let anchorIds = [];
 
     // prepare renderer, camera and scene for webGL canvas
@@ -61,8 +63,9 @@ export default class ThreeContainer extends Component {
 
       for (let mutation of mutationsList) {
         if (mutation.type == 'attributes') {
+
           // the order might change, depends on where scene children meshes live
-          const childrenMeshes = scene.children[3];
+          const childrenMeshes = scene.children[5];
 
           childrenMeshes.traverse((childMesh) => {
             const meshName = childMesh.name;
@@ -116,13 +119,72 @@ export default class ThreeContainer extends Component {
     const materialDarkGrey = new THREE.MeshLambertMaterial({ color: 0xbabebc });
     const materialGreen = new THREE.MeshLambertMaterial({ color: 0x5ee7a1 });
 
-    const light = new THREE.AmbientLight(0x404040, 2);
-    scene.add(light);
+    // Add Sky
+    const sky = new THREE.Sky();
+    sky.scale.setScalar( 450000 );
+    scene.add( sky );
 
-    const directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.5);
-    directionalLight.position.set( 700, 700, 600 );
-    directionalLight.castShadow = true;
-    scene.add( directionalLight);
+    // Add Sun Helper
+    const sunSphere = new THREE.Mesh(
+      new THREE.SphereBufferGeometry( 20000, 16, 8 ),
+      new THREE.MeshBasicMaterial( { color: 0xffffff } )
+    );
+    sunSphere.position.y = - 700000;
+    sunSphere.visible = false;
+    scene.add( sunSphere );
+
+    const effectController  = {
+      turbidity: 10,
+      rayleigh: 2,
+      mieCoefficient: 0.025,
+      mieDirectionalG: 0.562,
+      luminance: 0.9,
+      inclination: 0.334, // elevation / inclination
+      azimuth: 0.2798, // Facing front,
+      sun: ! false
+    };
+
+    const distance = 400000;
+
+    let uniforms = sky.material.uniforms;
+    uniforms[ "turbidity" ].value = effectController.turbidity;
+    uniforms[ "rayleigh" ].value = effectController.rayleigh;
+    uniforms[ "luminance" ].value = effectController.luminance;
+    uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
+    uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
+
+    let theta = Math.PI * ( effectController.inclination - 0.5 );
+    let phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
+    sunSphere.position.x = distance * Math.cos( phi );
+    sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+    sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+    sunSphere.visible = effectController.sun;
+    uniforms[ "sunPosition" ].value.copy( sunSphere.position );
+    renderer.render( scene, camera );
+
+
+    const hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
+    hemiLight.color.setHSL( 0.6, 1, 0.6 );
+    hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
+    hemiLight.position.set( 0, 50, 0 );
+    scene.add( hemiLight );
+
+    const dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
+    dirLight.color.setHSL( 0.1, 1, 0.95 );
+    dirLight.position.set( - 1, 1.75, 1 );
+    dirLight.position.multiplyScalar( 30 );
+    scene.add( dirLight );
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+    var d = 50;
+    dirLight.shadow.camera.left = - d;
+    dirLight.shadow.camera.right = d;
+    dirLight.shadow.camera.top = d;
+    dirLight.shadow.camera.bottom = - d;
+    dirLight.shadow.camera.far = 3500;
+    dirLight.shadow.bias = - 0.0001;
+
 
     // *******************************************************************
 
@@ -152,12 +214,11 @@ export default class ThreeContainer extends Component {
       if (!scene.children) {
         return;
       }
-
-      if (!scene.children) {
+      if (!scene.children[5]) {
         return;
       }
 
-      const intersects = raycaster.intersectObjects(scene.children[3].children)
+      const intersects = raycaster.intersectObjects(scene.children[5].children)
       if (intersects[0] && intersects[0].object.name.substring(0, 6) === "anchor") {
 
         if (anchorIds.includes(intersects[0].object.name.substring(6))) {
@@ -185,7 +246,7 @@ export default class ThreeContainer extends Component {
       raycaster.setFromCamera(mouse, camera);
 
       // calculate objects intersecting the picking ray
-      const intersects = raycaster.intersectObjects(scene.children[3].children);
+      const intersects = raycaster.intersectObjects(scene.children[5].children);
 
       if (!intersects[0]) {
         return;
@@ -211,14 +272,7 @@ export default class ThreeContainer extends Component {
 
     // game logic
     const update = function() {
-      // cube1.rotation.x += 0.01;
-      // cube1.rotation.y += 0.005;
 
-      // cube2.rotation.x += 0.01;
-      // cube2.rotation.y += 0.005;
-
-      // cube3.rotation.x += 0.01;
-      // cube3.rotation.y += 0.005;
     };
 
     const onLoad = gltf => {
@@ -269,6 +323,7 @@ export default class ThreeContainer extends Component {
       });
 
       this.props.modelLoaded();
+      // console.log(scene);
 
       GameLoop();
     };
