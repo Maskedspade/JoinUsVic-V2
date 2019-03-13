@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { Sidebar, Segment, Tab, Icon } from 'semantic-ui-react'
+import { Sidebar, Segment, Tab, Icon, Button } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import LocationDescription from './LocationDescription'
 import ThreeContainer from './ThreeContainer'
 import MainSelection from './MainSelection'
 
-const DescriptionSidebar = ({ animation, visible, direction, hideDescription, panes }) => {
+const DescriptionSidebar = ({ animation, visible, direction, hideDescription, panes, inverted, vertical }) => {
   return (
     <Sidebar
-      inverted='true'
-      vertical='true'
+      inverted={inverted}
+      vertical={vertical}
       animation={animation}
       visible={visible}
       direction={direction}
@@ -18,10 +18,10 @@ const DescriptionSidebar = ({ animation, visible, direction, hideDescription, pa
 
       <div className="sidebar-tab-menu">
         <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
-        <a onClick={hideDescription} className="sidebar-hidethis">
+        <Button onClick={hideDescription} id="sidebar-hidethis">
           <Icon name="caret right" />
           HideThis
-        </a>
+        </Button>
       </div>
     </Sidebar>
   )
@@ -57,7 +57,7 @@ export default class Main extends Component {
 
   // handle user clicking on location/building request, deals with animations
   handleLocationSidebar = () => {
-    window.addEventListener ("touchmove", function (event) { event.preventDefault (); }, {passive: false});
+    window.addEventListener ("touchstart", function (event) { event.preventDefault (); }, {passive: false});
     const { visible, selectedArray, selectedRatingsArray } = this.state
 
     this.setState({
@@ -135,7 +135,7 @@ export default class Main extends Component {
     return (
       <div className="main-wrapper">
         <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} direction={direction} selectedArray={selectedArray} selectedRatingsArray={selectedRatingsArray} hideDescription={this.hideDescription} panes={panes} />
+          <DescriptionSidebar animation={animation} visible={visible} direction={direction} selectedArray={selectedArray} selectedRatingsArray={selectedRatingsArray} hideDescription={this.hideDescription} panes={panes} inverted='true' vertical='true' />
           <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
               <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />

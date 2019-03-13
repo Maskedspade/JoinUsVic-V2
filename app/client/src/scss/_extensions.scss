@@ -1,3 +1,4 @@
+@import 'colours';
 %stretch-to-sides {
   left: 0;
   right: 0;
@@ -26,4 +27,9 @@
   position: absolute;
   top: 50%;
   transform: translate(0, -50%) !important;
+}
+
+%btn-to-link {
+  background: transparent !important;
+  color: $colour-interact !important;
 }

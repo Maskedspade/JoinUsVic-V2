@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Divider, Icon, Sidebar, Segment } from 'semantic-ui-react'
+import { Container, Divider, Icon, Sidebar, Segment, Button } from 'semantic-ui-react'
 import FunFactForm from './FunFactForm'
 import PropTypes from 'prop-types'
 
@@ -79,14 +79,14 @@ export default class FunFacts extends Component {
           <Sidebar.Pusher>
             <Container textAlign='justified'>
               { visible ?
-                ( <a onClick={this.handlePush('push', 'left')}>
+                ( <Button id="ff-sidebar-link" onClick={this.handlePush('push', 'left')}>
                   <Icon name="caret left" />
                   Nevermind...
-                </a> ) :
-                ( <a onClick={this.handlePush('push', 'left')}>
+                </Button> ) :
+                ( <Button id="ff-sidebar-link" onClick={this.handlePush('push', 'left')}>
                 <Icon name="caret right" />
                 Have any fun facts for us?
-              </a> )
+              </Button> )
               }
               <FunFactsBlocks funfacts={funfactsList}/>
             </Container>
