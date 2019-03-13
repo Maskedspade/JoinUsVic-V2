@@ -57,6 +57,7 @@ export default class Main extends Component {
 
   // handle user clicking on location/building request, deals with animations
   handleLocationSidebar = () => {
+    window.addEventListener ("touchmove", function (event) { event.preventDefault (); }, {passive: false});
     const { visible, selectedArray, selectedRatingsArray } = this.state
 
     this.setState({
