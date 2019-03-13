@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 const FunFactsBlocks = ( {funfacts} ) => {
   return funfacts.map((funfact, i) => {
     return (
-      <Container textAlign='justified' className="ff-container">
+      <Container key={i} textAlign='justified' className="ff-container">
         <b className="p-highlight">{funfact.user_name} says: </b>
         <p className="p-fade-italic">{funfact.created_at}</p>
         <Divider />
