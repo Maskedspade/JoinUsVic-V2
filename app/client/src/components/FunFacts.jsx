@@ -19,8 +19,8 @@ const FunFactsBlocks = ( {funfacts} ) => {
 const FormSidebar = ({ animation, visible, direction, locationSelected, handleNevermind }) => {
   return (
     <Sidebar
-      inverted
-      vertical
+      inverted='true'
+      vertical='true'
       animation={animation}
       visible={visible}
       direction={direction}
