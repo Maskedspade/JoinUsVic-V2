@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import THREE from './threeJSimport';
-// import * as dat from 'dat.gui';
+import * as dat from 'dat.gui';
 
 export default class ThreeContainer extends Component {
   componentDidMount() {
@@ -189,7 +189,7 @@ export default class ThreeContainer extends Component {
     // *******************************************************************
 
     // set up the initial camera position and orbit controls
-    camera.position.z = -145.03;
+    camera.position.z = -245.03;
     camera.position.x = -63.6;
     camera.position.y = 77.69;
     camera.lookAt(scene.position);
@@ -323,7 +323,10 @@ export default class ThreeContainer extends Component {
       });
 
       this.props.modelLoaded();
-      // console.log(scene);
+
+
+      // let waterGeo = scene.children[225].geometry;
+      // console.log(waterGeo, 'ATTENTION');
 
       GameLoop();
     };
