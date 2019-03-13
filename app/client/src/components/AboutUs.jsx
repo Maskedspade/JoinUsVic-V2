@@ -20,9 +20,9 @@ export default class AboutUs extends Component {
         <Modal.Content image>
           <Image wrapped size='huge' src='https://i.pinimg.com/originals/80/bf/8c/80bf8c61bd32d5bda30923d1510baab3.jpg'/>
           <Modal.Description className='modal-description'>
-          Hey! It's Lindsey and Yuhan! Great to see you here <span role="img" aria-label="emoji">😃</span>. <br/>We just wanted to let you know that this 3D model of Victoria is by no means the latest update or the most precise, but it is certainly a master piece by Yuhan during her architecture studies.
-          <br/>We made this web app to showcase some of the fun places to do fun things, coming from us - the two people that don't go out all that much <span role="img" aria-label="emoji">🤯</span>.
-          <br/>So please don't take us seriously, but still enjoy the super fun interactive 3D model. Hopefully you can learn a thing or two even when the model is completely outdated later on *cough*
+          Hey! It's Lindsey and Yuhan! Great to see you here <span role="img" aria-label="emoji">😃</span>.
+          <br/>We made this web app to showcase some of the fun places in Victoria to do fun things, coming from us - the two people that don't go out all that much <span role="img" aria-label="emoji">🤯</span>.
+          <br/>So please don't take us seriously, but still enjoy the interactive 3D model experience. Hopefully you can learn a thing or two even when the model is completely outdated later on *cough*
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
