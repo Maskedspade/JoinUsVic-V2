@@ -33,7 +33,7 @@ export default class NavBar extends Component {
           />
 
           <Menu.Item
-            name='abou't
+            name='about'
             active={activeItem === 'about'}
             content='About'
             onClick={handleAboutUsDisplay}
