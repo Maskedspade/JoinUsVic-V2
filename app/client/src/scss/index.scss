@@ -13,8 +13,12 @@ a {
   };
 }
 
-.error-message {
+#error-message {
   color: $colour-error;
+}
+
+#success-message {
+  color: $colour-success;
 }
 
 .ui.segment {

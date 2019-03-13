@@ -38,8 +38,12 @@ a:hover {
   cursor: pointer;
 }
 
-.error-message {
+#error-message {
   color: #f55a81;
+}
+
+#success-message {
+  color: #7ed321;
 }
 
 .ui.segment {
