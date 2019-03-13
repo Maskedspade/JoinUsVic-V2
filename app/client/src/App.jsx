@@ -83,7 +83,7 @@ class App extends Component {
   }
 
   render() {
-    const { loadedJson, loadedModel, keywordsList, funfactsList, funfactsDisplayed, aboutUsDisplayed, dimmer } = this.state
+    const { loadedJson, loadedModel, keywordsList, funfactsList, funfactsDisplayed, aboutUsDisplayed } = this.state
 
     return (
       <div className="app">
