@@ -52,7 +52,7 @@ a {
     width: 4em;
   }
 
-  .nav-about-us {
+  #nav-about-us {
     color: $colour-interact !important;
   }
 }
@@ -82,6 +82,13 @@ a {
   }
   .ui.overlay {
     background: white;
+  }
+  #btn-main-selection {
+    background: $colour-interact;
+    color: $colour-white;
+    &:hover {
+      background: $colour-interact-focus;
+    }
   }
 }
 
@@ -125,6 +132,14 @@ a {
   .ff-form-label {
     color: white !important;
     font-size: 1em !important;
+  }
+  #btn-form-submit {
+    color: $colour-white;
+    background: transparent;
+    border: 2px solid $colour-white;
+    &:hover {
+      background: $colour-interact-focus;
+    }
   }
 }
 

@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
-import { Modal, Image, Header } from 'semantic-ui-react'
+import { Modal, Image, Header, Button } from 'semantic-ui-react'
 
 export default class AboutUs extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     const { aboutUsDisplayed, closeAboutUsDisplay } = this.props
 
@@ -31,6 +27,14 @@ export default class AboutUs extends Component {
             href='mailto:lindsey.cai94@gmail.com,yhfreeman12@gmail.com'
             content='EmailUs'
             className='modal-email-link'
+          />
+          <Button
+            as='a'
+            inverted
+            icon='github'
+            size='huge'
+            href='https://github.com/Maskedspade'
+            target='_blank'
           />
         </Modal.Actions>
       </Modal>
