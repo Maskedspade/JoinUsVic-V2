@@ -43,8 +43,7 @@ export default class FunFacts extends Component {
     this.state = {
       visible: false,
       animation: 'push',
-      direction: 'left',
-      expanded: false
+      direction: 'left'
     }
     this.convertName = this.convertName.bind(this)
     this.handlePush = this.handlePush.bind(this)
@@ -59,20 +58,18 @@ export default class FunFacts extends Component {
     this.setState({
       animation,
       direction,
-      visible: !this.state.visible,
-      expanded: !this.state.expanded
+      visible: !this.state.visible
     })
   }
 
   handleNevermind = () => {
     this.setState({
-      visible: false,
-      expanded: false
+      visible: false
     })
   }
 
   render() {
-    const { visible, animation, direction, expanded } = this.state
+    const { visible, animation, direction } = this.state
     const { funfactsList } = this.props
 
     return (
@@ -81,7 +78,7 @@ export default class FunFacts extends Component {
           <FormSidebar animation={animation} visible={visible} direction={direction} handleNevermind={this.handleNevermind}/>
           <Sidebar.Pusher>
             <Container textAlign='justified'>
-              { expanded ?
+              { visible ?
                 ( <a onClick={this.handlePush('push', 'left')}>
                   <Icon name="caret left" />
                   Nevermind...

@@ -3,7 +3,7 @@ class FunfactsController < ApplicationController
 
   # GET /funfacts
   def index
-    @funfacts = Funfact.order(:id)
+    @funfacts = Funfact.all.order("created_at DESC")
 
     render json: @funfacts
   end
@@ -51,7 +51,7 @@ class FunfactsController < ApplicationController
 
     # Only allow a trusted parameter "white funfact" through
     def funfact_params
-      params.require(:funfact).permit(:user_name, :description,)
+      params.require(:funfact).permit(:user_name, :description, :location_id)
     end
 
 end

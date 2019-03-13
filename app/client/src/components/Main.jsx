@@ -8,8 +8,8 @@ import MainSelection from './MainSelection'
 const DescriptionSidebar = ({ animation, visible, direction, hideDescription, panes }) => {
   return (
     <Sidebar
-      inverted='true'
-      vertical='true'
+      inverted
+      vertical
       animation={animation}
       visible={visible}
       direction={direction}
