@@ -56,10 +56,11 @@ class App extends Component {
     e.preventDefault()
   }
 
-  handleAboutUsDisplay = () => {
+  handleAboutUsDisplay = dimmer => () => {
     this.setState({
       funfactsDisplayed: false,
       aboutUsDisplayed: true,
+      dimmer
     })
   }
 
@@ -83,7 +84,7 @@ class App extends Component {
   }
 
   render() {
-    const { loadedJson, loadedModel, keywordsList, funfactsList, funfactsDisplayed, aboutUsDisplayed } = this.state
+    const { loadedJson, loadedModel, keywordsList, funfactsList, funfactsDisplayed, aboutUsDisplayed, dimmer } = this.state
 
     return (
       <div className="app">
@@ -95,14 +96,14 @@ class App extends Component {
         </div>
       }
 
-        <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex} handleAboutUsDisplay={this.handleAboutUsDisplay}/>
+        <NavBar handleFunfactsDisplay={ this.handleFunfactsDisplay } handleBackToIndex={ this.handleBackToIndex} handleAboutUsDisplay={this.handleAboutUsDisplay} />
         <Main keywordsList={ keywordsList } modelLoaded={this.modelLoaded} callLoader={this.callLoader}/>
 
         { funfactsDisplayed &&
         <FunFacts funfactsList={ funfactsList }/>
         }
         { aboutUsDisplayed &&
-        <AboutUs aboutUsDisplayed={aboutUsDisplayed} closeAboutUsDisplay={this.closeAboutUsDisplay}/>
+        <AboutUs aboutUsDisplayed={aboutUsDisplayed} closeAboutUsDisplay={this.closeAboutUsDisplay} dimmer={dimmer}/>
         }
       </div>
     )

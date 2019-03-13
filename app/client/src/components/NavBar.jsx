@@ -36,7 +36,7 @@ export default class NavBar extends Component {
             name='aboutus'
             active={activeItem === 'aboutus'}
             content='AboutUs'
-            onClick={handleAboutUsDisplay}
+            onClick={handleAboutUsDisplay('blurring')}
             id="nav-about-us"
           />
           <Menu.Item />
