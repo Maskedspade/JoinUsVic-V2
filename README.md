@@ -27,7 +27,24 @@ This is Version II of the project. [Version I](https://github.com/yhfreeman/Join
 
 ## Fireframing & Design Phase
 
+Landing Page: 
+![Landing](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/landing-page.png "Landing Page")
+
+Landing Page(selected keywords):
+![Landing-selected](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/landing-page-keyword-selected.png "Landing Page on Keyword select")
+
+Fun Facts Page: 
+![FunFacts](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/funfacts-page.png "Fun Facts Page with Sidebar")
+
 ## Database Design
 
-## Screenshots
+MANY locations    -    MANY keywords
+MANY locations    -    ONE anchor
+MANY ratings      -    ONE location
+MANY funfacts     -    ONE location
+
+ERD:
+![ERD](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/databaseERD.png "Database ERD")
+
+## Screenshots && Gifs
 
