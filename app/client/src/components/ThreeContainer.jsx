@@ -119,10 +119,10 @@ export default class ThreeContainer extends Component {
     const light = new THREE.AmbientLight(0x404040, 2);
     scene.add(light);
 
-    const pointLight = new THREE.PointLight( 0xFFFFFF, 0.5);
-    pointLight.position.set( 7000, 7000, 6000 );
-    pointLight.castShadow = true;
-    scene.add( pointLight );
+    const directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.5);
+    directionalLight.position.set( 700, 700, 600 );
+    directionalLight.castShadow = true;
+    scene.add( directionalLight);
 
     // *******************************************************************
 
@@ -147,6 +147,9 @@ export default class ThreeContainer extends Component {
       raycaster.setFromCamera(mouse, camera);
 
       if (!scene) {
+        return;
+      }
+      if (!scene.children) {
         return;
       }
 
