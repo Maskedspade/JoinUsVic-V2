@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Image } from 'semantic-ui-react'
 
 import '../App.css'
 
@@ -17,12 +17,12 @@ export default class NavBar extends Component {
       <Menu fixed='top' className="nav-wrapper">
         <Menu.Menu position='left'>
           <Menu.Item />
-          <Menu.Item
-            name='logo'
-            active={activeItem === 'logo'}
-            content='JoinUs, Vic'
-            onClick={handleBackToIndex}
-          />
+          <Menu.Item>
+            <Image
+              src='https://i.ibb.co/1Q0q4LY/Branding.png'
+              compact
+              />
+          </Menu.Item>
         </Menu.Menu>
 
         <Menu.Menu position='right'>
