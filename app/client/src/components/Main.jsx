@@ -128,7 +128,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const { selectorShowed, visible, animation, direction,averageRatingsArray, panes, selectedArray, selectedRatingsArray } = this.state
+    const { selectorShowed, visible, animation, direction, panes, selectedArray, selectedRatingsArray } = this.state
 
     const { keywordsList, modelLoaded, callLoader} = this.props
 
