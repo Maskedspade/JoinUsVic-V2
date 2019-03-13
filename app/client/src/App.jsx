@@ -90,7 +90,7 @@ class App extends Component {
       {!(loadedJson && loadedModel) &&
         <div className="app-dimmer">
           <Dimmer active>
-            <Loader indeterminate>Give us a sec...</Loader>
+            <Loader indeterminate>Loading...</Loader>
           </Dimmer>
         </div>
       }
