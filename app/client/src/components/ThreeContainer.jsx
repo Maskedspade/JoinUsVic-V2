@@ -150,6 +150,10 @@ export default class ThreeContainer extends Component {
         return;
       }
 
+      if (!scene.children) {
+        return;
+      }
+
       const intersects = raycaster.intersectObjects(scene.children[3].children)
       if (intersects[0] && intersects[0].object.name.substring(0, 6) === "anchor") {
 
