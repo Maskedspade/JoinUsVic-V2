@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Image, Header, Button } from 'semantic-ui-react'
+import { Modal, Image, Header, Button, Icon } from 'semantic-ui-react'
 
 export default class AboutUs extends Component {
   render() {
@@ -12,32 +12,38 @@ export default class AboutUs extends Component {
         basic
         size='medium'
       >
-        <Header>AboutUs</Header>
+        <Header>This is a Disclaimer</Header>
         <Modal.Content image>
-          <Image wrapped size='huge' src='http://www.athomeinlove.com/wp-content/uploads/2018/04/victoria-bc.jpg'/>
-          <Modal.Description className='modal-description'>
-          <br/>Wanna find out more about downtownVictoria,
-          <br/>but got tired of the same ol' results from Google?
-          <br/>
-          <br/>You've come to the right place.
-          <br/>
-          <br/>We are all about sharing insights and stories of the city...
-          <br/>through a fun and interactive 3D model!
-          <br/>
-          <br/>While this model comes with no guarantee in precise geographic information, it is 100% committed to absorting first-hand experience and providing you with the most insightful information about downtown Victoria.
-          <br/>We have both generic and special (aka quirky) keywords to describe fun spots in downtown Victoria, and we collect fun facts about the city as well.
-          <br/>
-          <br/>Whether you are a local or visitor, foodie or hispter,
-          <br/>this app will help you find what you need - just give us the keywords!
+          <Image wrapped size='huge' src='https://i.pinimg.com/originals/80/bf/8c/80bf8c61bd32d5bda30923d1510baab3.jpg'/>
+          <Modal.Description className='modal-description'>&nbsp;&nbsp;&nbsp;&nbsp;Wanna find out more about downtownVictoria, but got tired of the same ol' results from the internet? You've come to the right place. We are all about sharing insights and stories of the city...through a fun and interactive 3D model - though no guarantee in precise geographic information, it is 100% committed to absorting first-hand experience and providing you with the most insightful Victoria info. <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;We have both generic and special (aka quirky) keywords to describe fun spots in downtown Victoria, and we collect fun facts about the city as well. Whether you are a local or visitor, foodie or hispter, this app will help you find what you need - just give us the keywords!
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Header as='a'
-            icon='paper plane'
-            href='mailto:lindsey.cai94@gmail.com,yhfreeman12@gmail.com'
-            content='EmailUs'
-            className='modal-email-link'
-          />
+          <p>Meet the Devs</p>
+          <Button
+            as='a'
+            inverted
+            size='large'
+            href='https://github.com/Maskedspade'
+            target='_blank'
+            className='modal-btn-github'
+          >
+            <Icon name='github' />
+            Lindsey
+          </Button>
+          <Button
+            as='a'
+            inverted
+            icon='github'
+            size='large'
+            href='https://github.com/yhfreeman'
+            target='_blank'
+            className='modal-btn-github'
+          >
+            <Icon name='github' />
+            Yuhan
+          </Button>
+
         </Modal.Actions>
       </Modal>
     )

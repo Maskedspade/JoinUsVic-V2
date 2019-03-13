@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Container, Divider, Icon, Sidebar, Segment } from 'semantic-ui-react'
+import { Container, Divider, Icon, Sidebar, Segment, Button } from 'semantic-ui-react'
 import FunFactForm from './FunFactForm'
 import PropTypes from 'prop-types'
 
 const FunFactsBlocks = ( {funfacts} ) => {
   return funfacts.map((funfact, i) => {
     return (
-      <Container textAlign='justified' className="ff-container">
+      <Container key={i} textAlign='justified' className="ff-container">
         <b className="p-highlight">{funfact.user_name} says: </b>
         <p className="p-fade-italic">{funfact.created_at}</p>
         <Divider />
@@ -19,8 +19,8 @@ const FunFactsBlocks = ( {funfacts} ) => {
 const FormSidebar = ({ animation, visible, direction, locationSelected, handleNevermind }) => {
   return (
     <Sidebar
-      inverted
-      vertical
+      inverted='true'
+      vertical='true'
       animation={animation}
       visible={visible}
       direction={direction}
@@ -79,14 +79,14 @@ export default class FunFacts extends Component {
           <Sidebar.Pusher>
             <Container textAlign='justified'>
               { visible ?
-                ( <a onClick={this.handlePush('push', 'left')}>
+                ( <Button id="ff-sidebar-link" onClick={this.handlePush('push', 'left')}>
                   <Icon name="caret left" />
                   Nevermind...
-                </a> ) :
-                ( <a onClick={this.handlePush('push', 'left')}>
+                </Button> ) :
+                ( <Button id="ff-sidebar-link" onClick={this.handlePush('push', 'left')}>
                 <Icon name="caret right" />
                 Have any fun facts for us?
-              </a> )
+              </Button> )
               }
               <FunFactsBlocks funfacts={funfactsList}/>
             </Container>

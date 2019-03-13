@@ -20,7 +20,7 @@ export default class NavBar extends Component {
           onClick={handleBackToIndex}>
           <Image
             src='https://i.ibb.co/1Q0q4LY/Branding.png'
-            compact
+            compact='true'
             />
         </Menu.Item>
 
@@ -33,9 +33,9 @@ export default class NavBar extends Component {
           />
 
           <Menu.Item
-            name='aboutus'
-            active={activeItem === 'aboutus'}
-            content='AboutUs'
+            name='about'
+            active={activeItem === 'about'}
+            content='About'
             onClick={handleAboutUsDisplay}
             id="nav-about-us"
           />

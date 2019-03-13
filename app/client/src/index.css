@@ -26,6 +26,11 @@
   transform: translate(0, -50%) !important;
 }
 
+.ff-wrapper #ff-sidebar-link, .sidebar-tab-menu #sidebar-hidethis {
+  background: transparent !important;
+  color: #055e5f !important;
+}
+
 body {
   position: relative;
 }
@@ -93,9 +98,6 @@ a:hover {
   align-items: center;
   margin-top: 1em;
 }
-.main-wrapper .main-dropdown {
-  min-width: 600px;
-}
 .main-wrapper .ui.overlay {
   background: white;
 }
@@ -110,7 +112,7 @@ a:hover {
 .sidebar-tab-menu {
   margin: 0 5%;
 }
-.sidebar-tab-menu .sidebar-hidethis {
+.sidebar-tab-menu #sidebar-hidethis {
   position: absolute;
   margin-top: 1em;
 }
@@ -155,11 +157,12 @@ a:hover {
 
 .modal-description {
   font-size: 1.15em;
-  text-indent: 2em;
+  color: #fffcfd;
 }
 
-.modal-email-link {
-  color: #0fb2b5 !important;
+.modal-btn-github:hover {
+  background: #055e5f !important;
+  border: none !important;
 }
 
 /*# sourceMappingURL=index.css.map */

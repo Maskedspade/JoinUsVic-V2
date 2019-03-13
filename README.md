@@ -25,9 +25,23 @@ This is Version II of the project. [Version I](https://github.com/yhfreeman/Join
   * Open [http://localhost:3000](http://localhost:3000) to view Rails in the browser
   * Open [http://localhost:8080](http://localhost:8080) to view our app in the browser
 
-## Fireframing & Design Phase
+## Fireframing & Design Phase(hover for page info)
+
+![Landing](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/landing-page.png "Landing Page")
+
+![Landing-selected](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/landing-page-keyword-selected.png "Landing Page on Keyword select")
+
+![FunFacts](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/funfacts-page.png "Fun Facts Page with Sidebar")
 
 ## Database Design
 
-## Screenshots
+MANY locations    -    MANY keywords
+MANY locations    -    ONE anchor
+MANY ratings      -    ONE location
+MANY funfacts     -    ONE location
+
+ERD:
+![ERD](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/databaseERD.png "Database ERD")
+
+## Screenshots && Gifs
 

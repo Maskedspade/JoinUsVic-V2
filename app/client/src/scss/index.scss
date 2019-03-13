@@ -92,7 +92,8 @@ a {
 .sidebar-tab-menu {
   @extend %horizontally-aligned;
   margin: 0 5%;
-  .sidebar-hidethis {
+  #sidebar-hidethis {
+    @extend %btn-to-link;
     position: absolute;
     margin-top: 1em;
   }
@@ -130,6 +131,9 @@ a {
     color: white !important;
     font-size: 1em !important;
   }
+  #ff-sidebar-link {
+    @extend %btn-to-link;
+  }
   #btn-form-submit {
     color: $colour-white;
     background: transparent;
@@ -142,8 +146,11 @@ a {
 
 .modal-description {
   font-size: 1.15em;
-  text-indent: 2em;
+  color: $colour-white;
 }
-.modal-email-link {
-  color: $colour-interact-dark-bg !important;
+.modal-btn-github {
+  &:hover {
+    background: $colour-interact !important;
+    border: none !important;
+  }
 }
