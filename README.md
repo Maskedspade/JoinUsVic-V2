@@ -1,4 +1,4 @@
-JoinUsVic is a web app that provides insightful information about downtown Victoria manifested through 3D model rendered by WebGL inside the web browser.
+JoinUsVic is a web app that provides insightful(-ish) information about downtown Victoria manifested through 3D model rendered by WebGL inside the web browser.
 
 ## Project Setup
 
@@ -24,4 +24,10 @@ This is Version II of the project. [Version I](https://github.com/yhfreeman/Join
 ### To View
   * Open [http://localhost:3000](http://localhost:3000) to view Rails in the browser
   * Open [http://localhost:8080](http://localhost:8080) to view our app in the browser
+
+## Fireframing & Design Phase
+
+## Database Design
+
+## Screenshots
 
