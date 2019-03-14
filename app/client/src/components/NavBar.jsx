@@ -15,7 +15,7 @@ export default class NavBar extends Component {
 
     return (
       <Menu fixed='top' className="nav-wrapper">
-        <Menu.Item style={{padding:'0'}}/>
+        <Menu.Item />
         <Menu.Item
           onClick={handleBackToIndex}>
           <img

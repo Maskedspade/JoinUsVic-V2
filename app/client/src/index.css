@@ -75,8 +75,13 @@ a:hover {
 
 .nav-wrapper {
   height: 4em;
-  padding: 0 5em;
+  padding: 0;
   z-index: 9998;
+}
+@media screen and (min-width: 600px) {
+  .nav-wrapper {
+    padding: 0 5em;
+  }
 }
 .nav-wrapper .nav-logo {
   height: 2.5em;
