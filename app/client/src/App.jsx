@@ -14,7 +14,6 @@ class App extends Component {
       loadedJson: false,
       loadedModel: false,
       keywordsList: [],
-      funfactsList: [],
       funfactsDisplayed: false,
       aboutUsDisplayed:false
     };
@@ -29,17 +28,13 @@ class App extends Component {
 
   // load 3 database tables and set loading state
   componentDidMount() {
-    axios.all([
-      axios.get('api/keywords'),
-      axios.get('api/funfacts')
-    ])
-    .then(axios.spread((keywordsRes, funfactsRes) => {
+    axios.get('api/keywords')
+    .then(res => {
       this.setState({
-          keywordsList: keywordsRes.data,
-          funfactsList: funfactsRes.data,
-          loadedJson: !this.state.loadedJson
+        keywordsList: res.data,
+        loadedJson: !this.state.loadedJson
       })
-    }))
+    })
     .catch(error => console.log(error))
   }
 
@@ -72,7 +67,7 @@ class App extends Component {
 
   handleBackToIndex = (e) => {
     this.setState({
-      funfactsDisplayed: false,
+      funfactsDisplayed: false
     })
     e.preventDefault()
   }
@@ -84,7 +79,7 @@ class App extends Component {
   }
 
   render() {
-    const { loadedJson, loadedModel, keywordsList, funfactsList, funfactsDisplayed, aboutUsDisplayed, dimmer } = this.state
+    const { loadedJson, loadedModel, keywordsList,funfactsDisplayed, aboutUsDisplayed, dimmer } = this.state
 
     return (
       <div className="app">
@@ -100,10 +95,10 @@ class App extends Component {
         <Main keywordsList={ keywordsList } modelLoaded={this.modelLoaded} callLoader={this.callLoader}/>
 
         { funfactsDisplayed &&
-        <FunFacts funfactsList={ funfactsList }/>
+          <FunFacts />
         }
         { aboutUsDisplayed &&
-        <AboutUs aboutUsDisplayed={aboutUsDisplayed} closeAboutUsDisplay={this.closeAboutUsDisplay} dimmer={dimmer}/>
+          <AboutUs aboutUsDisplayed={aboutUsDisplayed} closeAboutUsDisplay={this.closeAboutUsDisplay} dimmer={dimmer}/>
         }
       </div>
     )

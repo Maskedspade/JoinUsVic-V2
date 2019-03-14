@@ -77,6 +77,7 @@ export default class FunFactForm extends Component {
         e.target[0].value = ''
         e.target[1].value = ''
         this.formIsSent(msgDiv)
+        this.props.updateFunfacts({user_name: username, description: message, location_id: 1})
       })
       .catch(error => console.log(error))
     }
