@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Divider, Icon, Sidebar, Segment, Button } from 'semantic-ui-react'
+import { Container, Divider, Icon, Sidebar, Button, Responsive } from 'semantic-ui-react'
 import FunFactForm from './FunFactForm'
 import PropTypes from 'prop-types'
 
@@ -16,20 +16,22 @@ const FunFactsBlocks = ( {funfacts} ) => {
   })
 }
 
-const FormSidebar = ({ animation, visible, direction, handleNevermind }) => {
+const FormSidebar = ({ animation, visible, direction, handleNevermind, width, handleScreenChange }) => {
   return (
-    <Sidebar
-      animation={animation}
-      visible={visible}
-      direction={direction}
-      vertical="true"
-      width='wide'
-      id="ff-sidebar"
-    >
-      <FunFactForm
-        handleNevermind={handleNevermind}
-      />
-    </Sidebar>
+    <Responsive fireOnMount onUpdate={handleScreenChange}>
+      <Sidebar
+        animation='push'
+        visible={visible}
+        direction={direction}
+        vertical="true"
+        width={width}
+        id="ff-sidebar"
+      >
+        <FunFactForm
+          handleNevermind={handleNevermind}
+        />
+      </Sidebar>
+    </Responsive>
   )
 }
 
@@ -49,6 +51,7 @@ export default class FunFacts extends Component {
     }
     this.handlePush = this.handlePush.bind(this)
     this.handleNevermind = this.handleNevermind.bind(this)
+    this.handleScreenChange = this.handleScreenChange.bind(this)
   }
 
   handlePush = (animation, direction) => () => {
@@ -65,9 +68,15 @@ export default class FunFacts extends Component {
     })
   }
 
+  handleScreenChange = (e, {width}) => {
+    this.setState({ width })
+  }
+
   render() {
-    const { visible, animation, direction } = this.state
+    const { visible, animation, direction, width } = this.state
     const { funfactsList } = this.props
+
+    const sidebarWidth = width <= Responsive.onlyMobile.minWidth ? 'wide' : 'very wide'
 
     return (
       <div className="ff-wrapper">
@@ -77,6 +86,8 @@ export default class FunFacts extends Component {
             visible={visible}
             direction={direction}
             handleNevermind={this.handleNevermind}
+            handleScreenChange={this.handleScreenChange}
+            width={sidebarWidth}
           />
 
           <Sidebar.Pusher>

@@ -124,6 +124,7 @@ export default class FunFactForm extends Component {
         errorNode.remove()
       if(successNode)
         successNode.remove()
+
     }
 
   render() {
