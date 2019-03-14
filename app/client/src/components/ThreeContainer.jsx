@@ -56,7 +56,7 @@ export default class ThreeContainer extends Component {
     const cb = function(mutationsList, observer) {
 
       for (let mutation of mutationsList) {
-        if (mutation.type == 'attributes') {
+        if (mutation.type === 'attributes') {
 
           // the order might change, depends on where scene children meshes live
           const childrenMeshes = scene.children[4];
