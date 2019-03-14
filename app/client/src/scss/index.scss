@@ -139,6 +139,12 @@ a {
     @extend %btn-to-link;
     margin-top: 8em;
   }
+  #ff-sidebar-hide {
+    @extend %btn-to-link;
+    color: $colour-white !important;
+    padding: 0;
+    margin-bottom: 4em;
+  }
   #btn-form-submit {
     color: $colour-white;
     background: transparent;
