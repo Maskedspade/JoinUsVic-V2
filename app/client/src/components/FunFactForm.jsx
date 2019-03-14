@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import { Form, Button, TextArea } from 'semantic-ui-react'
+import { Form, Button, TextArea, Icon } from 'semantic-ui-react'
 import axios from 'axios'
 
-const FormCard = ( {handleNevermind, handleFormSubmit, getUserName, getMessage} ) => {
+const FormCard = ({ handleNevermind, handleFormSubmit, getUserName, getMessage, handlePush }) => {
   return (
     <Form onSubmit={handleFormSubmit}>
+      <Button id="ff-sidebar-hide" onClick={handlePush('push', 'left')}>
+        <Icon name="caret left" />
+        HideThis
+      </Button>
       <Form.Field>
         <label className="ff-form-label">Your name (optional): </label>
         <input
@@ -129,7 +133,7 @@ export default class FunFactForm extends Component {
   }
 
   render() {
-    const { handleNevermind } = this.props
+    const { handleNevermind, handlePush } = this.props
 
     return(
       <FormCard
@@ -137,6 +141,7 @@ export default class FunFactForm extends Component {
         handleFormSubmit={this.handleFormSubmit}
         getUserName={this.getUserName}
         getMessage={this.getMessage}
+        handlePush={handlePush}
       />
     )
   }

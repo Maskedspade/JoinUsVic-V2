@@ -26,7 +26,7 @@
   transform: translate(0, -50%) !important;
 }
 
-.ff-wrapper #ff-sidebar-link, .sidebar-tab-menu #sidebar-hidethis {
+.ff-wrapper #ff-sidebar-hide, .ff-wrapper #ff-sidebar-link, .sidebar-tab-menu #sidebar-hidethis {
   background: transparent !important;
   color: #055e5f !important;
 }
@@ -158,6 +158,11 @@ a:hover {
 }
 .ff-wrapper #ff-sidebar-link {
   margin-top: 8em;
+}
+.ff-wrapper #ff-sidebar-hide {
+  color: #fffcfd !important;
+  padding: 0;
+  margin-bottom: 4em;
 }
 .ff-wrapper #btn-form-submit {
   color: #fffcfd;
