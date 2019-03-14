@@ -1,4 +1,6 @@
 @import 'colours';
+$break-point: 600px;
+
 %stretch-to-sides {
   left: 0;
   right: 0;
@@ -32,4 +34,11 @@
 %btn-to-link {
   background: transparent !important;
   color: $colour-interact !important;
+}
+
+%sidebar-change {
+  width: 350px !important;
+  @media screen and (min-width: $break-point) {
+    width: 475px !important;
+  }
 }

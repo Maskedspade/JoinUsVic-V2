@@ -82,12 +82,11 @@ a {
     align-items: center;
     margin-top: 1em;
   }
+  .main-sidebar {
+    @extend %sidebar-change;
+  }
   .ui.overlay {
     background: white;
-    width: 350px;
-    @media screen and (min-width: $break-point) {
-      width: 475px;
-    }
   }
   #btn-main-selection {
     background: $colour-interact;
@@ -123,12 +122,9 @@ a {
     width: 60% !important;
   }
   #ff-sidebar {
+    @extend %sidebar-change;
     background: $colour-interact;
     padding: 0 2em;
-    width: 350px;
-    @media screen and (min-width: $break-point) {
-      width: 475px;
-    }
   }
   // funfacts page sidebar form
   .ui.form {

@@ -15,6 +15,7 @@ const DescriptionSidebar = ({ animation, visible, direction, hideDescription, wi
         visible={visible}
         direction={direction}
         width={width}
+        className='main-sidebar'
       >
         <div className="sidebar-tab-menu">
           <Tab menu={{
