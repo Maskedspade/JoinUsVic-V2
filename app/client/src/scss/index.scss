@@ -107,18 +107,13 @@ a {
 .ff-wrapper {
   @extend %stretch-to-container;
   background: white;
-  .ff-sidebar-pushable {
-    @extend %stretch-to-container;
-    padding-top: 8em !important;
-  }
   .ff-container {
     border-bottom: 1px solid $colour-grey-light;
     margin: 2em 0 0;
     padding: 2em 0 4em;
     width: 60% !important;
   }
-  .ui.push {
-    padding-top: 8em !important;
+  #ff-sidebar {
     background: $colour-interact;
     padding: 0 2em;
   }
@@ -133,6 +128,7 @@ a {
   }
   #ff-sidebar-link {
     @extend %btn-to-link;
+    margin-top: 8em;
   }
   #btn-form-submit {
     color: $colour-white;

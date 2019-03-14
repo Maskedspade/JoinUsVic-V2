@@ -17,8 +17,15 @@ const DescriptionSidebar = ({ animation, visible, direction, hideDescription, pa
     >
 
       <div className="sidebar-tab-menu">
-        <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
-        <Button onClick={hideDescription} id="sidebar-hidethis">
+        <Tab menu={{
+            secondary: true,
+            pointing: true
+          }}
+          panes={panes}
+        />
+        <Button
+          onClick={hideDescription}
+          id="sidebar-hidethis">
           <Icon name="caret right" />
           HideThis
         </Button>
@@ -72,7 +79,9 @@ export default class Main extends Component {
           menuItem: {key: location.id, content:location.name},
           render: () =>
             <Tab.Pane attached={false}>
-              <LocationDescription location={location} average_rating={selectedRatingsArray[index]}/>
+              <LocationDescription
+              location={location}
+              average_rating={selectedRatingsArray[index]}/>
             </Tab.Pane>
         }
         const panes = [...state.panes, location_info]
@@ -127,18 +136,35 @@ export default class Main extends Component {
   }
 
   render() {
-    const { selectorShowed, visible, animation, direction,averageRatingsArray, panes, selectedArray, selectedRatingsArray } = this.state
+    const { selectorShowed, visible, animation, direction, panes, selectedArray, selectedRatingsArray } = this.state
 
     const { keywordsList, modelLoaded, callLoader} = this.props
 
     return (
       <div className="main-wrapper">
         <Sidebar.Pushable as={Segment}>
-          <DescriptionSidebar animation={animation} visible={visible} direction={direction} selectedArray={selectedArray} selectedRatingsArray={selectedRatingsArray} hideDescription={this.hideDescription} panes={panes} inverted='true' vertical='true' />
+          <DescriptionSidebar
+            animation={animation}
+            visible={visible}
+            direction={direction}
+            selectedArray={selectedArray}
+            selectedRatingsArray={selectedRatingsArray}
+            hideDescription={this.hideDescription}
+            panes={panes}
+            inverted='true'
+            vertical='true'
+        />
           <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
-              <ThreeContainer modelLoaded={modelLoaded} getSelectedAnchorId={this.getSelectedAnchorId} />
-              { selectorShowed && <MainSelection keywordsList={ keywordsList} getLocationsOnKeywords={this.getLocationsOnKeywords} callLoader={callLoader}/> }
+              <ThreeContainer
+              modelLoaded={modelLoaded}
+              getSelectedAnchorId={this.getSelectedAnchorId} />
+              { selectorShowed &&
+                <MainSelection
+                keywordsList={ keywordsList}
+                getLocationsOnKeywords={this.getLocationsOnKeywords}
+                callLoader={callLoader}/>
+              }
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>

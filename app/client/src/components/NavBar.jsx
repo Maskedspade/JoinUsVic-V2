@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Image } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 import '../App.css'
 
@@ -18,10 +18,10 @@ export default class NavBar extends Component {
         <Menu.Item />
         <Menu.Item
           onClick={handleBackToIndex}>
-          <Image
-            src='https://i.ibb.co/1Q0q4LY/Branding.png'
-            compact='true'
-            />
+          <img
+            src='https://i.ibb.co/tDySBVb/logo.png'
+            style={{width: '4em'}}
+          />
         </Menu.Item>
 
         <Menu.Menu position='right'>
@@ -33,10 +33,10 @@ export default class NavBar extends Component {
           />
 
           <Menu.Item
-            name='about'
-            active={activeItem === 'about'}
-            content='About'
-            onClick={handleAboutUsDisplay}
+            name='aboutus'
+            active={activeItem === 'aboutus'}
+            content='AboutUs'
+            onClick={handleAboutUsDisplay('blurring')}
             id="nav-about-us"
           />
           <Menu.Item />

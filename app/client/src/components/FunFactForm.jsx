@@ -130,7 +130,12 @@ export default class FunFactForm extends Component {
     const { handleNevermind } = this.props
 
     return(
-      <FormCard handleNevermind={handleNevermind} handleFormSubmit={this.handleFormSubmit} getUserName={this.getUserName} getMessage={this.getMessage}/>
+      <FormCard
+        handleNevermind={handleNevermind}
+        handleFormSubmit={this.handleFormSubmit}
+        getUserName={this.getUserName}
+        getMessage={this.getMessage}
+      />
     )
   }
 }

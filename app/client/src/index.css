@@ -1,4 +1,4 @@
-.ff-wrapper .ff-sidebar-pushable, .ff-wrapper, .main-wrapper .main-model, .main-wrapper, .nav-wrapper {
+.ff-wrapper, .main-wrapper .main-model, .main-wrapper, .nav-wrapper {
   left: 0;
   right: 0;
 }
@@ -8,7 +8,7 @@
   top: 0;
 }
 
-.ff-wrapper .ff-sidebar-pushable, .ff-wrapper, .main-wrapper .main-model, .main-wrapper {
+.ff-wrapper, .main-wrapper .main-model, .main-wrapper {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -125,17 +125,13 @@ a:hover {
 .ff-wrapper {
   background: white;
 }
-.ff-wrapper .ff-sidebar-pushable {
-  padding-top: 8em !important;
-}
 .ff-wrapper .ff-container {
   border-bottom: 1px solid #eee;
   margin: 2em 0 0;
   padding: 2em 0 4em;
   width: 60% !important;
 }
-.ff-wrapper .ui.push {
-  padding-top: 8em !important;
+.ff-wrapper #ff-sidebar {
   background: #055e5f;
   padding: 0 2em;
 }
@@ -145,6 +141,9 @@ a:hover {
 .ff-wrapper .ff-form-label {
   color: white !important;
   font-size: 1em !important;
+}
+.ff-wrapper #ff-sidebar-link {
+  margin-top: 8em;
 }
 .ff-wrapper #btn-form-submit {
   color: #fffcfd;
