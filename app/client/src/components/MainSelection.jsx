@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
-import { Dropdown, Button, Checkbox } from 'semantic-ui-react'
+import { Dropdown, Button, Checkbox, Modal } from 'semantic-ui-react'
 import axios from 'axios'
 
 export default class MainSelection extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      selectionModalOpen: false
+    }
     this.getSelectedKeywords = this.getSelectedKeywords.bind(this)
     this.fetchData = this.fetchData.bind(this)
     this.allOrFiltered.bind(this)
+    this.withOrWithoutKeywords = this.withOrWithoutKeywords.bind(this)
+    this.showModal = this.showModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
   }
 
   getSelectedKeywords = (e, { value }) => {
@@ -23,8 +29,8 @@ export default class MainSelection extends Component {
   // the value is an array of keyword id in database
   // tracks locations correlated to keywords
   fetchData = (e) => {
-    this.props.callLoader()
     const keys = this.state.value
+    this.props.callLoader()
     const bool = this.state.filtered
     axios.post('api/locations/highlighted', { keywordIds: { keys }, filtered: { bool }
     })
@@ -36,8 +42,31 @@ export default class MainSelection extends Component {
     .catch(error => console.log(error))
   }
 
+  showModal = size => () => {
+    this.setState({
+      size,
+      selectionModalOpen: true
+    })
+  }
+
+  closeModal = () => this.setState({ selectionModalOpen: false})
+
+  withOrWithoutKeywords = () => {
+    console.log("determining method...")
+    const keys = this.state.value
+    console.log(keys)
+    let method = keys ? this.fetchData : this.showModal('mini')
+    // let method
+    // if (keys)
+    //   method = this.fetchData
+    // else
+    //   method = this.showModal
+    console.log(method)
+  }
+
   render() {
     const { keywordsList } = this.props
+    const { selectionModalOpen, size } = this.state
 
     const options = keywordsList.map( keyword => {
       return {
@@ -65,8 +94,22 @@ export default class MainSelection extends Component {
             onChange={this.allOrFiltered}
             className='main-selection-checkbox'
           />
-          <Button onClick={this.fetchData} id='btn-main-selection'>Go</Button>
+          <Button onClick={this.withOrWithoutKeywords} id='btn-main-selection'>Go</Button>
         </div>
+
+        <Modal size={size} open={selectionModalOpen} close={this.closeModal}>
+          <Modal.Header>
+            Missing keywords selection...
+          </Modal.Header>
+          <Modal.Content>
+            <p>Please give us at least one keyword :) </p>
+          </Modal.Content>
+          <Modal.Actions labelPosition='right'>
+            <Button id="btn-modal-error">
+              Got it
+            </Button>
+          </Modal.Actions>
+        </Modal>
       </div>
     )
   }
