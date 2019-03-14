@@ -37,7 +37,7 @@ $break-point: 600px;
 }
 
 %sidebar-change {
-  width: 350px !important;
+  width: 100vw !important;
   @media screen and (min-width: $break-point) {
     width: 475px !important;
   }

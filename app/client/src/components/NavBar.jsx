@@ -20,6 +20,7 @@ export default class NavBar extends Component {
           onClick={handleBackToIndex}>
           <img
             src='https://i.ibb.co/tDySBVb/logo.png'
+            alt="Logo"
             style={{width: '4em'}}
           />
         </Menu.Item>
