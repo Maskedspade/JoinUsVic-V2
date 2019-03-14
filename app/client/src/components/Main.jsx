@@ -1,36 +1,37 @@
 import React, { Component } from 'react'
-import { Sidebar, Segment, Tab, Icon, Button } from 'semantic-ui-react'
+import { Sidebar, Segment, Tab, Icon, Button, Responsive } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import LocationDescription from './LocationDescription'
 import ThreeContainer from './ThreeContainer'
 import MainSelection from './MainSelection'
 
-const DescriptionSidebar = ({ animation, visible, direction, hideDescription, panes, inverted, vertical }) => {
+const DescriptionSidebar = ({ animation, visible, direction, hideDescription, width, panes, handleScreenChange }) => {
   return (
-    <Sidebar
-      inverted={inverted}
-      vertical={vertical}
-      animation={animation}
-      visible={visible}
-      direction={direction}
-      width='very wide'
-    >
-
-      <div className="sidebar-tab-menu">
-        <Tab menu={{
-            secondary: true,
-            pointing: true
-          }}
-          panes={panes}
-        />
-        <Button
-          onClick={hideDescription}
-          id="sidebar-hidethis">
-          <Icon name="caret right" />
-          HideThis
-        </Button>
-      </div>
-    </Sidebar>
+    <Responsive fireOnMount onUpdate={handleScreenChange}>
+      <Sidebar
+        inverted='true'
+        vertical='true'
+        animation={animation}
+        visible={visible}
+        direction={direction}
+        width={width}
+      >
+        <div className="sidebar-tab-menu">
+          <Tab menu={{
+              secondary: true,
+              pointing: true
+            }}
+            panes={panes}
+          />
+          <Button
+            onClick={hideDescription}
+            id="sidebar-hidethis">
+            <Icon name="caret right" />
+            HideThis
+          </Button>
+        </div>
+      </Sidebar>
+    </Responsive>
   )
 }
 
@@ -60,6 +61,7 @@ export default class Main extends Component {
     this.getSelectedAnchorId = this.getSelectedAnchorId.bind(this)
     this.getLocationsOnKeywords = this.getLocationsOnKeywords.bind(this)
     this.handleAnchorClick = this.handleAnchorClick.bind(this)
+    this.handleScreenChange = this.handleScreenChange.bind(this)
   }
 
   // handle user clicking on location/building request, deals with animations
@@ -135,10 +137,16 @@ export default class Main extends Component {
     this.handleLocationSidebar(visible,selectedArray, selectedRatingsArray, this.hideDescription)
   }
 
+  handleScreenChange = (e, {width}) => {
+    this.setState({ width })
+  }
+
   render() {
-    const { selectorShowed, visible, animation, direction, panes, selectedArray, selectedRatingsArray } = this.state
+    const { selectorShowed, visible, animation, direction, panes, selectedArray, selectedRatingsArray, width } = this.state
 
     const { keywordsList, modelLoaded, callLoader} = this.props
+
+    const sidebarWidth = width <= Responsive.onlyMobile.minWidth ? 'wide' : 'very wide'
 
     return (
       <div className="main-wrapper">
@@ -151,8 +159,8 @@ export default class Main extends Component {
             selectedRatingsArray={selectedRatingsArray}
             hideDescription={this.hideDescription}
             panes={panes}
-            inverted='true'
-            vertical='true'
+            width={sidebarWidth}
+            handleScreenChange={this.handleScreenChange}
         />
           <Sidebar.Pusher dimmed={visible}>
             <div className="main-model">
