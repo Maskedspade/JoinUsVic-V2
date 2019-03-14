@@ -152,10 +152,7 @@ export default class Main extends Component {
     let locationIdsArray = this.state.selectedArray.map(location => location.id)
     let updatedLocationIndex = locationIdsArray.indexOf(locationId)
     let currentAveRatingsArray = this.state.selectedRatingsArray.splice(updatedLocationIndex, 1, newAverageRating)
-<<<<<<< HEAD
 
-=======
->>>>>>> bf376587dfbe652b13d167c7b1976236605adff4
     this.setState({
       selectedRatingsArray: currentAveRatingsArray
     })
