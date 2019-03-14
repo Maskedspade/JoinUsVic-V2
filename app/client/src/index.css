@@ -105,6 +105,12 @@ a:hover {
 }
 .main-wrapper .ui.overlay {
   background: white;
+  width: 350px;
+}
+@media screen and (min-width: 600px) {
+  .main-wrapper .ui.overlay {
+    width: 475px;
+  }
 }
 .main-wrapper #btn-main-selection {
   background: #055e5f;
@@ -139,6 +145,12 @@ a:hover {
 .ff-wrapper #ff-sidebar {
   background: #055e5f;
   padding: 0 2em;
+  width: 350px;
+}
+@media screen and (min-width: 600px) {
+  .ff-wrapper #ff-sidebar {
+    width: 475px;
+  }
 }
 .ff-wrapper .ui.form {
   width: 80%;
