@@ -92,7 +92,7 @@ export default class FunFacts extends Component {
     })
 
     this.setState({
-      visible: false,
+      visible: true,
       funfactsList: list
     })
   }

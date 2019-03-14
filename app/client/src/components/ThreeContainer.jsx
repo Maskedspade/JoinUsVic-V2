@@ -101,10 +101,10 @@ export default class ThreeContainer extends Component {
 
     // create a material, colour or image texture
     const materialAnchor = new THREE.MeshLambertMaterial({color: 0xe4e0dc, wireframe: false});
-    const materialHighlight = new THREE.MeshLambertMaterial({color: 0xEB6614, wireframe: false});
+    const materialHighlight = new THREE.MeshLambertMaterial({color: 0xF1945B, wireframe: false});
 
     const materialOcean = new THREE.MeshLambertMaterial({ color: 0x5f9ea0 });
-    const materialDock = new THREE.MeshLambertMaterial({ color: 0xe5ad9a });
+    const materialDock = new THREE.MeshLambertMaterial({ color: 0xFFDB99 });
     const materialGrey = new THREE.MeshLambertMaterial({ color: 0xcbcbcb });
     const materialDarkGrey = new THREE.MeshLambertMaterial({ color: 0x9a9a9a });
     const materialGreen = new THREE.MeshLambertMaterial({ color: 0x5fa082 });
