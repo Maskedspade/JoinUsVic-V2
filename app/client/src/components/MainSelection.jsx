@@ -6,13 +6,14 @@ export default class MainSelection extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      size: 'mini',
       selectionModalOpen: false
     }
     this.getSelectedKeywords = this.getSelectedKeywords.bind(this)
     this.fetchData = this.fetchData.bind(this)
     this.allOrFiltered.bind(this)
     this.withOrWithoutKeywords = this.withOrWithoutKeywords.bind(this)
-    this.showModal = this.showModal.bind(this)
+    // this.showModal = this.showModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
   }
 
@@ -30,6 +31,14 @@ export default class MainSelection extends Component {
   // tracks locations correlated to keywords
   fetchData = (e) => {
     const keys = this.state.value
+
+    if (!keys) {
+      this.setState({
+        selectionModalOpen: true
+      })
+      return;
+    }
+
     this.props.callLoader()
     const bool = this.state.filtered
     axios.post('api/locations/highlighted', { keywordIds: { keys }, filtered: { bool }
@@ -42,12 +51,12 @@ export default class MainSelection extends Component {
     .catch(error => console.log(error))
   }
 
-  showModal = size => () => {
-    this.setState({
-      size,
-      selectionModalOpen: true
-    })
-  }
+  // showModal = size => () => {
+  //   this.setState({
+  //     size,
+  //     selectionModalOpen: true
+  //   })
+  // }
 
   closeModal = () => this.setState({ selectionModalOpen: false})
 
@@ -55,8 +64,7 @@ export default class MainSelection extends Component {
     console.log("determining method...")
     const keys = this.state.value
     console.log(keys)
-    let method = keys ? this.fetchData : this.showModal('mini')
-    console.log(method)
+    return keys ? this.fetchData : this.showModal('mini')
   }
 
   render() {
@@ -92,7 +100,7 @@ export default class MainSelection extends Component {
           <Button onClick={this.fetchData} id='btn-main-selection'>Go</Button>
         </div>
 
-        <Modal size={size} open={selectionModalOpen} close={this.closeModal}>
+        <Modal size={size} open={selectionModalOpen}>
           <Modal.Header>
             Missing keywords selection...
           </Modal.Header>
@@ -100,7 +108,7 @@ export default class MainSelection extends Component {
             <p>Please give us at least one keyword :) </p>
           </Modal.Content>
           <Modal.Actions labelPosition='right'>
-            <Button id="btn-modal-error">
+            <Button id="btn-modal-error" onClick={this.closeModal}>
               Got it
             </Button>
           </Modal.Actions>
