@@ -20,7 +20,7 @@ export default class AboutUs extends Component {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Icon name='caret right' />
+          <Icon name='caret right' size='large' />
           <Button
             as='a'
             inverted
