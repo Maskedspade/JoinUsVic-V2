@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Divider, Icon, Sidebar, Button, Responsive } from 'semantic-ui-react'
+import { Container, Divider, Icon, Sidebar, Button } from 'semantic-ui-react'
 import FunFactForm from './FunFactForm'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 const FunFactsBlocks = ( {funfacts} ) => {
   return funfacts.map((funfact, i) => {
@@ -16,22 +17,20 @@ const FunFactsBlocks = ( {funfacts} ) => {
   })
 }
 
-const FormSidebar = ({ animation, visible, direction, handleNevermind, width, handleScreenChange }) => {
+const FormSidebar = ({ animation, visible, direction, handleNevermind, updateFunfacts }) => {
   return (
-    <Responsive fireOnMount onUpdate={handleScreenChange}>
-      <Sidebar
-        animation='push'
-        visible={visible}
-        direction={direction}
-        vertical="true"
-        width={width}
-        id="ff-sidebar"
-      >
-        <FunFactForm
-          handleNevermind={handleNevermind}
-        />
-      </Sidebar>
-    </Responsive>
+    <Sidebar
+      animation='push'
+      visible={visible}
+      direction={direction}
+      vertical="true"
+      id="ff-sidebar"
+    >
+      <FunFactForm
+        handleNevermind={handleNevermind}
+        updateFunfacts={updateFunfacts}
+      />
+    </Sidebar>
   )
 }
 
@@ -47,11 +46,23 @@ export default class FunFacts extends Component {
     this.state = {
       visible: false,
       animation: 'push',
-      direction: 'left'
+      direction: 'left',
+      funfactsList: []
     }
     this.handlePush = this.handlePush.bind(this)
     this.handleNevermind = this.handleNevermind.bind(this)
-    this.handleScreenChange = this.handleScreenChange.bind(this)
+    this.updateFunfacts = this.updateFunfacts.bind(this)
+  }
+
+  // load 3 database tables and set loading state
+  componentDidMount() {
+    axios.get('api/funfacts')
+    .then(res => {
+      this.setState({
+        funfactsList: res.data,
+      })
+    })
+    .catch(error => console.log(error))
   }
 
   handlePush = (animation, direction) => () => {
@@ -68,43 +79,42 @@ export default class FunFacts extends Component {
     })
   }
 
-  handleScreenChange = (e, {width}) => {
-    this.setState({ width })
+  updateFunfacts = (newFunfact) => {
+    let oldList = this.state.funfactsList.map((x)=> x)
+    oldList.push(newFunfact)
+    this.setState({
+      funfactsList: oldList
+    })
   }
 
-  render() {
-    const { visible, animation, direction, width } = this.state
-    const { funfactsList } = this.props
 
-    const sidebarWidth = width <= Responsive.onlyMobile.minWidth ? 'wide' : 'very wide'
+  render() {
+    const { visible, animation, direction, funfactsList } = this.state
 
     return (
       <div className="ff-wrapper">
-
-          <FormSidebar
-            animation={animation}
-            visible={visible}
-            direction={direction}
-            handleNevermind={this.handleNevermind}
-            handleScreenChange={this.handleScreenChange}
-            width={sidebarWidth}
-          />
-
-          <Sidebar.Pusher>
-            <Container textAlign='justified'>
-              { visible ?
-                ( <Button id="ff-sidebar-link" onClick={this.handlePush('push', 'left')}>
-                  <Icon name="caret left" />
-                  Nevermind...
-                </Button> ) :
-                ( <Button id="ff-sidebar-link" onClick={this.handlePush('push', 'left')}>
-                <Icon name="caret right" />
-                Have any fun facts for us?
-              </Button> )
-              }
-              <FunFactsBlocks funfacts={funfactsList}/>
-            </Container>
-          </Sidebar.Pusher>
+        <FormSidebar
+          animation={animation}
+          visible={visible}
+          direction={direction}
+          handleNevermind={this.handleNevermind}
+          updateFunfacts={this.updateFunfacts}
+        />
+        <Sidebar.Pusher>
+          <Container textAlign='justified'>
+            { visible ?
+              ( <Button id="ff-sidebar-link" onClick={this.handlePush('push', 'left')}>
+                <Icon name="caret left" />
+                Nevermind...
+              </Button> ) :
+              ( <Button id="ff-sidebar-link" onClick={this.handlePush('push', 'left')}>
+              <Icon name="caret right" />
+              Have any fun facts for us?
+            </Button> )
+            }
+            <FunFactsBlocks funfacts={funfactsList}/>
+          </Container>
+        </Sidebar.Pusher>
 
       </div>
     )
