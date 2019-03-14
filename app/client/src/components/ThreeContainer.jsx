@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import THREE from './threeJSimport';
-import * as dat from 'dat.gui';
 
 export default class ThreeContainer extends Component {
   componentDidMount() {
