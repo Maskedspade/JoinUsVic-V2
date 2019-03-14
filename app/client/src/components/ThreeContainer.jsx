@@ -4,7 +4,6 @@ import * as dat from 'dat.gui';
 
 export default class ThreeContainer extends Component {
   componentDidMount() {
-
     this.detectWebGLContext();
   }
 
@@ -33,15 +32,12 @@ export default class ThreeContainer extends Component {
   }
 
   setupTHREE() {
-
-
     let anchorIds = [];
 
-    // prepare renderer, camera and scene for webGL canvas
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000);
 
-    const renderer = new THREE.WebGLRenderer();
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     const loader = new THREE.GLTFLoader();
 
     renderer.setClearColor(0xdddddd);
@@ -57,8 +53,6 @@ export default class ThreeContainer extends Component {
     messager.setAttribute("id", "messager");
     mainModel.appendChild(messager);
 
-
-
     const config = {attributes: true};
     const cb = function(mutationsList, observer) {
 
@@ -66,7 +60,7 @@ export default class ThreeContainer extends Component {
         if (mutation.type == 'attributes') {
 
           // the order might change, depends on where scene children meshes live
-          const childrenMeshes = scene.children[5];
+          const childrenMeshes = scene.children[4];
 
           childrenMeshes.traverse((childMesh) => {
             const meshName = childMesh.name;
@@ -95,9 +89,6 @@ export default class ThreeContainer extends Component {
     const observer = new MutationObserver(cb);
     observer.observe(messager, config);
 
-
-
-    // ** DYNAMIC: adjust renderer and camera according to the event of window resizing **
     window.addEventListener('resize', function() {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -106,21 +97,18 @@ export default class ThreeContainer extends Component {
       camera.updateProjectionMatrix();
     });
 
-    const axes = new THREE.AxesHelper(10);
-    scene.add(axes);
-
     // *******************************************************************
     // define colors
 
     // create a material, colour or image texture
-    const materialAnchor = new THREE.MeshLambertMaterial({color: 0xffffa1, wireframe: false});
-    const materialHighlight = new THREE.MeshNormalMaterial({ });
+    const materialAnchor = new THREE.MeshLambertMaterial({color: 0xe4e0dc, wireframe: false});
+    const materialHighlight = new THREE.MeshLambertMaterial({color: 0xEB6614, wireframe: false});
 
-    const materialOcean = new THREE.MeshLambertMaterial({ color: 0xa1f1f0 });
-    const materialDock = new THREE.MeshLambertMaterial({ color: 0xe7a15e });
-    const materialGrey = new THREE.MeshLambertMaterial({ color: 0xb0c8bc });
-    const materialDarkGrey = new THREE.MeshLambertMaterial({ color: 0xbabebc });
-    const materialGreen = new THREE.MeshLambertMaterial({ color: 0x5ee7a1 });
+    const materialOcean = new THREE.MeshLambertMaterial({ color: 0x5f9ea0 });
+    const materialDock = new THREE.MeshLambertMaterial({ color: 0xe5ad9a });
+    const materialGrey = new THREE.MeshLambertMaterial({ color: 0xcbcbcb });
+    const materialDarkGrey = new THREE.MeshLambertMaterial({ color: 0x9a9a9a });
+    const materialGreen = new THREE.MeshLambertMaterial({ color: 0x5fa082 });
 
     // Add Sky
     const sky = new THREE.Sky();
@@ -165,7 +153,7 @@ export default class ThreeContainer extends Component {
     uniforms[ "sunPosition" ].value.copy( sunSphere.position );
     renderer.render( scene, camera );
 
-    scene.add( new THREE.AmbientLight( 0xffffff, 0.2 ) );
+    scene.add( new THREE.AmbientLight( 0xffffff, 0.4 ) );
 
     const light = new THREE.PointLight( 0xffffff, 0.7 );
     camera.add( light );
@@ -186,6 +174,8 @@ export default class ThreeContainer extends Component {
     dirLight.shadow.camera.bottom = - d;
     dirLight.shadow.camera.far = 3500;
     dirLight.shadow.bias = - 0.0001;
+
+
 
     // *******************************************************************
 
@@ -217,11 +207,11 @@ export default class ThreeContainer extends Component {
       if (!scene.children) {
         return;
       }
-      if (!scene.children[5]) {
+      if (!scene.children[4]) {
         return;
       }
 
-      const intersects = raycaster.intersectObjects(scene.children[5].children)
+      const intersects = raycaster.intersectObjects(scene.children[4].children)
       if (intersects[0] && intersects[0].object.name.substring(0, 6) === "anchor") {
 
         if (anchorIds.includes(intersects[0].object.name.substring(6))) {
@@ -236,7 +226,6 @@ export default class ThreeContainer extends Component {
     }
 
     function onDocumentTouchStart(event) {
-      console.log('TOUCH -HAHAHA')
       event.preventDefault();
 
       event.clientX = event.touches[0].clientX;
@@ -246,26 +235,27 @@ export default class ThreeContainer extends Component {
     }
 
     function onDocumentMouseDown(event) {
-      console.log('CLICK');
       mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
       mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
       // update the picking ray with the camera and mouse position
       raycaster.setFromCamera(mouse, camera);
 
       if (!scene) {
         return;
       }
+
       if (!scene.children) {
         return;
       }
 
-      if (!scene.children[5].children) {
+      if (!scene.children[4].children) {
         return;
       }
 
 
       // calculate objects intersecting the picking ray
-      const intersects = raycaster.intersectObjects(scene.children[5].children);
+      const intersects = raycaster.intersectObjects(scene.children[4].children);
 
       if (!intersects[0]) {
         return;
@@ -300,14 +290,6 @@ export default class ThreeContainer extends Component {
       scene.add(gltf.scene);
 
       gltf.scene.traverse((children) => {
-        const extrudeSettings = {
-          depth: 16,
-          bevelEnabled: true,
-          bevelSegments: 1,
-          steps: 2,
-          bevelSize: 1,
-          bevelThickness: 1
-        };
 
         // the name of imported model by default comes with the prefix 'G-'
         // in order to remove the first 2 characters we do:
@@ -317,13 +299,6 @@ export default class ThreeContainer extends Component {
         if (childName.join('').substring(0, 6) === "anchor") {
           children.name = childName.join('');
           children.material = materialAnchor;
-
-          // const originalGeo = children.geometry;
-
-          // const newGeo = new THREE.ExtrudeGeometry(originalGeo, extrudeSettings);
-          // newGeo.rotateX( Math.PI );
-
-          // children.geometry = newGeo;
         }
 
         if (childName.join('') === "ocean") {
@@ -360,33 +335,30 @@ export default class ThreeContainer extends Component {
 
       this.props.modelLoaded();
 
+      // var waterGeometry = new THREE.PlaneBufferGeometry( 500, 800 );
+      // waterGeometry.translate(-30, 100, 2.2);
 
-      // let waterGeo = scene.children[5].children[225].geometry;
-      // let waterPos = scene.children[5].children[225].position;
+      scene.children[4].children[225].visible = true;
 
       // const water = new THREE.Water(
-      //   waterGeo,
+      //   waterGeometry,
       //   {
       //     textureWidth: 512,
       //     textureHeight: 512,
-
-      //     waterNormals: new THREE.TextureLoader().load( "waternormals.jpeg", function ( texture ) {
+      //     waterNormals: new THREE.TextureLoader().load( "waternormals.jpg", function ( texture ) {
       //       texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
       //     } ),
-
       //     alpha: 1.0,
-      //     sunDirection: dirLight.position.clone().normalize(),
+      //     sunDirection: light.position.clone().normalize(),
       //     sunColor: 0xffffff,
       //     waterColor: 0x001e0f,
       //     distortionScale: 3.7,
       //     fog: scene.fog !== undefined
       //   }
       // );
+
       // water.rotation.x = - Math.PI / 2;
-      // scene.add( water );
-
-      // scene.children[5].children[225].remove();
-
+      // scene.add(water);
       GameLoop();
     };
 
