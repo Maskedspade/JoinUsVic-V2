@@ -138,6 +138,7 @@ a {
   #ff-sidebar-link {
     @extend %btn-to-link;
     margin-top: 8em;
+    margin-left: 8em;
   }
   #ff-sidebar-hide {
     @extend %btn-to-link;

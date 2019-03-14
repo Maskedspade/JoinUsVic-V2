@@ -17,7 +17,7 @@ const FunFactsBlocks = ( {funfacts} ) => {
   })
 }
 
-const FormSidebar = ({ animation, visible, direction, handleNevermind, updateFunfacts, handlePush }) => {
+const FormSidebar = ({ animation, visible, direction, handleNevermind, updateFunfacts }) => {
   return (
     <Sidebar
       animation='push'
@@ -29,7 +29,6 @@ const FormSidebar = ({ animation, visible, direction, handleNevermind, updateFun
       <FunFactForm
         handleNevermind={handleNevermind}
         updateFunfacts={updateFunfacts}
-        handlePush={handlePush}
       />
     </Sidebar>
   )
@@ -78,6 +77,7 @@ export default class FunFacts extends Component {
   }
 
   handleNevermind = () => {
+    alert('hey');
     this.setState({
       visible: false
     })
@@ -108,7 +108,6 @@ export default class FunFacts extends Component {
           direction={direction}
           handleNevermind={this.handleNevermind}
           updateFunfacts={this.updateFunfacts}
-          handlePush={this.handlePush}
         />
         <Sidebar.Pusher>
           <Container textAlign='justified'>
