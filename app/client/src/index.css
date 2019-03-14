@@ -32,7 +32,7 @@
 }
 
 .ff-wrapper #ff-sidebar, .main-wrapper .main-sidebar {
-  width: 350px !important;
+  width: 100vw !important;
 }
 @media screen and (min-width: 600px) {
   .ff-wrapper #ff-sidebar, .main-wrapper .main-sidebar {
