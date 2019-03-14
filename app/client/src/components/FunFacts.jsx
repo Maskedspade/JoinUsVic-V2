@@ -54,13 +54,16 @@ export default class FunFacts extends Component {
     this.updateFunfacts = this.updateFunfacts.bind(this)
   }
 
-  // load 3 database tables and set loading state
   componentDidMount() {
+    const { callLoader} = this.props;
+
+    callLoader()
     axios.get('api/funfacts')
     .then(res => {
       this.setState({
         funfactsList: res.data,
       })
+      callLoader()
     })
     .catch(error => console.log(error))
   }
@@ -80,14 +83,18 @@ export default class FunFacts extends Component {
   }
 
   updateFunfacts = (newFunfact) => {
-    let oldList = this.state.funfactsList.map((x)=> x)
-    oldList.push(newFunfact)
-    console.log(oldList);
+    let list = this.state.funfactsList.map((x)=> x)
+    list.push(newFunfact)
+
+    list.sort((a,b) => {
+      return b.id - a.id
+    })
+
     this.setState({
-      funfactsList: oldList
+      visible: false,
+      funfactsList: list
     })
   }
-
 
   render() {
     const { visible, animation, direction, funfactsList } = this.state

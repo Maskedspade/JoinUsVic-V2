@@ -95,7 +95,7 @@ class App extends Component {
         <Main keywordsList={ keywordsList } modelLoaded={this.modelLoaded} callLoader={this.callLoader}/>
 
         { funfactsDisplayed &&
-          <FunFacts />
+          <FunFacts callLoader={this.callLoader}/>
         }
         { aboutUsDisplayed &&
           <AboutUs aboutUsDisplayed={aboutUsDisplayed} closeAboutUsDisplay={this.closeAboutUsDisplay} dimmer={dimmer}/>
