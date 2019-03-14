@@ -43,23 +43,37 @@ export default class LocationDescription extends Component {
   constructor(props) {
     super(props)
     this.handleRatingSubmit = this.handleRatingSubmit.bind(this)
+
+    this.state = {
+      initialVisit: true,
+      aveRating: 5
+    }
   }
 
   handleRatingSubmit = (e, {rating}) => {
+    this.props.callLoader()
     axios.post('api/ratings/', {
       rating: { score: rating, location_id: this.props.location.id }
     })
     .then(res => {
-      console.log(res)
+      this.setState({
+        initialVisit: false,
+        aveRating: res.data.new_ave
+      })
+      this.props.callLoader()
+
     })
     .catch(error => console.log(error))
   }
 
   render() {
-    const { location, average_rating } = this.props
+    const { location, average_rating} = this.props
 
     return (
-      <DescriptionCard location={location} average_rating={average_rating} handleRatingSubmit={this.handleRatingSubmit}/>
+      <div>
+      { this.state.initialVisit && <DescriptionCard location={location} average_rating={average_rating} handleRatingSubmit={this.handleRatingSubmit}/>}
+      { !this.state.initialVisit && <DescriptionCard location={location} average_rating={this.state.aveRating} handleRatingSubmit={this.handleRatingSubmit}/>}
+      </div>
     )
   }
 }

@@ -57,6 +57,7 @@ export default class Main extends Component {
       selectedArray: [],
       panes: []
     }
+
     this.handleLocationSidebar = this.handleLocationSidebar.bind(this)
     this.hideDescription = this.hideDescription.bind(this)
     this.getSelectedAnchorId = this.getSelectedAnchorId.bind(this)
@@ -68,6 +69,7 @@ export default class Main extends Component {
   // handle user clicking on location/building request, deals with animations
   handleLocationSidebar = () => {
     const { visible, selectedArray, selectedRatingsArray } = this.state
+    const { callLoader } = this.props
 
     this.setState({
       selectorShowed: !this.state.selectorShowed,
@@ -84,7 +86,7 @@ export default class Main extends Component {
             <Tab.Pane attached={false}>
               <LocationDescription
               location={location}
-              average_rating={selectedRatingsArray[index]}/>
+              average_rating={selectedRatingsArray[index]} callLoader={callLoader}/>
             </Tab.Pane>
         }
         const panes = [...state.panes, location_info]

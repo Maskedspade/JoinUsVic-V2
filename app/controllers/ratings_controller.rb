@@ -17,8 +17,21 @@ class RatingsController < ApplicationController
   def create
     @rating = Rating.new(rating_params)
 
+    loc_id = @rating[:location_id]
+
+    @ratings = []
+
+    Rating.where(:location_id => loc_id).find_each do |rating|
+      @ratings.push(rating[:score])
+    end
+
+    result = @ratings.inject{ |sum, el| sum + el }.to_f / @ratings.size
+    result = result.round(1)
+
     if @rating.save
-      render json: @rating, status: :created
+      render json: {
+      :new_ave => result
+    }, status: :created
     else
       render json: @rating.errors, status: :unprocessable_entity
     end
