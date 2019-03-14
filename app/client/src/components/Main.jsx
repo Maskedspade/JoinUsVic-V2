@@ -64,6 +64,7 @@ export default class Main extends Component {
     this.getLocationsOnKeywords = this.getLocationsOnKeywords.bind(this)
     this.handleAnchorClick = this.handleAnchorClick.bind(this)
     this.handleScreenChange = this.handleScreenChange.bind(this)
+    this.updateAverageRating = this.updateAverageRating.bind(this)
   }
 
   // handle user clicking on location/building request, deals with animations
@@ -86,7 +87,10 @@ export default class Main extends Component {
             <Tab.Pane attached={false}>
               <LocationDescription
               location={location}
-              average_rating={selectedRatingsArray[index]} callLoader={callLoader}/>
+              average_rating={selectedRatingsArray[index]}
+              callLoader={callLoader}
+              updateAverageRating={this.updateAverageRating}
+            />
             </Tab.Pane>
         }
         const panes = [...state.panes, location_info]
@@ -142,6 +146,18 @@ export default class Main extends Component {
 
   handleScreenChange = (e, {width}) => {
     this.setState({ width })
+  }
+
+  updateAverageRating = (newAverageRating, locationId) => {
+    console.log(newAverageRating)
+    console.log(locationId)
+    let locationIdsArray = this.state.selectedArray.map(location => location.id)
+    let updatedLocationIndex = locationIdsArray.indexOf(locationId)
+    let currentAveRatingsArray = this.state.selectedRatingsArray.splice(updatedLocationIndex, 1, newAverageRating)
+    console.log(currentAveRatingsArray)
+    this.setState({
+      selectedRatingsArray: currentAveRatingsArray
+    })
   }
 
   render() {

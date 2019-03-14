@@ -52,16 +52,8 @@ export default class MainSelection extends Component {
   closeModal = () => this.setState({ selectionModalOpen: false})
 
   withOrWithoutKeywords = () => {
-    console.log("determining method...")
     const keys = this.state.value
-    console.log(keys)
-    let method = keys ? this.fetchData : this.showModal('mini')
-    // let method
-    // if (keys)
-    //   method = this.fetchData
-    // else
-    //   method = this.showModal
-    console.log(method)
+    return keys ? this.fetchData : this.showModal('mini')
   }
 
   render() {
@@ -94,7 +86,7 @@ export default class MainSelection extends Component {
             onChange={this.allOrFiltered}
             className='main-selection-checkbox'
           />
-          <Button onClick={this.withOrWithoutKeywords} id='btn-main-selection'>Go</Button>
+          <Button onClick={this.fetchData} id='btn-main-selection'>Go</Button>
         </div>
 
         <Modal size={size} open={selectionModalOpen} close={this.closeModal}>

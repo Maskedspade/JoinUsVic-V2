@@ -67,3 +67,4 @@ class RatingsController < ApplicationController
       params.require(:rating).permit(:score, :location_id)
     end
 end
+

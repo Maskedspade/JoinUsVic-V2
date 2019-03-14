@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Item, Icon, Rating } from 'semantic-ui-react'
 import axios from 'axios'
 
-const DescriptionCard = ( {location, average_rating, handleRatingSubmit} ) => {
+const DescriptionCard = ( {location, average_rating, handleRatingSubmit } ) => {
   return (
     <Item className="ld-wrapper">
       <Item.Header as='h2'>{location.name}</Item.Header>
@@ -17,7 +17,13 @@ const DescriptionCard = ( {location, average_rating, handleRatingSubmit} ) => {
 
       <Item.Extra className="p-highlight">
         Rating: &nbsp;&nbsp;
-        <Rating icon='star' defaultRating={average_rating} maxRating={5} size='large'/>
+        <Rating
+          icon='star'
+          defaultRating={average_rating}
+          maxRating={5}
+          size='large'
+          disabled
+        />
         {average_rating}
       </Item.Extra>
       <Item.Description className="p-desktop">
@@ -43,37 +49,33 @@ export default class LocationDescription extends Component {
   constructor(props) {
     super(props)
     this.handleRatingSubmit = this.handleRatingSubmit.bind(this)
-
-    this.state = {
-      initialVisit: true,
-      aveRating: 5
-    }
   }
 
   handleRatingSubmit = (e, {rating}) => {
+    let successNode = document.getElementById("ld-success-message")
+    if(successNode)
+      successNode.remove()
     this.props.callLoader()
     axios.post('api/ratings/', {
       rating: { score: rating, location_id: this.props.location.id }
     })
     .then(res => {
-      this.setState({
-        initialVisit: false,
-        aveRating: res.data.new_ave
-      })
+      this.props.updateAverageRating(res.data.new_ave, this.props.location.id)
       this.props.callLoader()
-
+      const msgDiv = document.createElement("p")
+      msgDiv.setAttribute("id", "ld-success-message")
+      const successMsg = document.createTextNode("Thank you for your contribution!")
+      document.getElementsByClassName("ld-wrapper")[0].appendChild(msgDiv)
     })
     .catch(error => console.log(error))
   }
 
   render() {
-    const { location, average_rating} = this.props
+    const { location, average_rating } = this.props
 
     return (
-      <div>
-      { this.state.initialVisit && <DescriptionCard location={location} average_rating={average_rating} handleRatingSubmit={this.handleRatingSubmit}/>}
-      { !this.state.initialVisit && <DescriptionCard location={location} average_rating={this.state.aveRating} handleRatingSubmit={this.handleRatingSubmit}/>}
-      </div>
+      <DescriptionCard location={location} average_rating={average_rating} handleRatingSubmit={this.handleRatingSubmit}
+      />
     )
   }
 }
