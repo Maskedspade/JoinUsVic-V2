@@ -43,6 +43,7 @@ export default class AboutUs extends Component {
             <Icon name='github' />
             Yuhan
           </Button>
+
         </Modal.Actions>
       </Modal>
     )
