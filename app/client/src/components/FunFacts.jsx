@@ -82,6 +82,7 @@ export default class FunFacts extends Component {
   updateFunfacts = (newFunfact) => {
     let oldList = this.state.funfactsList.map((x)=> x)
     oldList.push(newFunfact)
+    console.log(oldList);
     this.setState({
       funfactsList: oldList
     })
