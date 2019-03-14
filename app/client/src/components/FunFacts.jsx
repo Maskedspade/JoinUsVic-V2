@@ -16,17 +16,19 @@ const FunFactsBlocks = ( {funfacts} ) => {
   })
 }
 
-const FormSidebar = ({ animation, visible, direction, locationSelected, handleNevermind }) => {
+const FormSidebar = ({ animation, visible, direction, handleNevermind }) => {
   return (
     <Sidebar
-      inverted='true'
-      vertical='true'
       animation={animation}
       visible={visible}
       direction={direction}
-      width='very wide'
+      vertical="true"
+      width='wide'
+      id="ff-sidebar"
     >
-      <FunFactForm handleNevermind={handleNevermind}/>
+      <FunFactForm
+        handleNevermind={handleNevermind}
+      />
     </Sidebar>
   )
 }
@@ -45,13 +47,8 @@ export default class FunFacts extends Component {
       animation: 'push',
       direction: 'left'
     }
-    this.convertName = this.convertName.bind(this)
     this.handlePush = this.handlePush.bind(this)
     this.handleNevermind = this.handleNevermind.bind(this)
-  }
-
-  convertName = ( name ) => {
-    return name === '@someone@' ? 'Someone' : name
   }
 
   handlePush = (animation, direction) => () => {
@@ -74,8 +71,14 @@ export default class FunFacts extends Component {
 
     return (
       <div className="ff-wrapper">
-        <Sidebar.Pushable as={Segment} className="ff-sidebar-pushable">
-          <FormSidebar animation={animation} visible={visible} direction={direction} handleNevermind={this.handleNevermind}/>
+
+          <FormSidebar
+            animation={animation}
+            visible={visible}
+            direction={direction}
+            handleNevermind={this.handleNevermind}
+          />
+
           <Sidebar.Pusher>
             <Container textAlign='justified'>
               { visible ?
@@ -91,7 +94,7 @@ export default class FunFacts extends Component {
               <FunFactsBlocks funfacts={funfactsList}/>
             </Container>
           </Sidebar.Pusher>
-        </Sidebar.Pushable>
+
       </div>
     )
   }
