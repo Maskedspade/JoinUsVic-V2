@@ -56,6 +56,7 @@ export default class LocationDescription extends Component {
     if(successNode)
       successNode.remove()
     this.props.callLoader()
+
     axios.post('api/ratings/', {
       rating: { score: rating, location_id: this.props.location.id }
     })
@@ -74,8 +75,7 @@ export default class LocationDescription extends Component {
     const { location, average_rating } = this.props
 
     return (
-      <DescriptionCard location={location} average_rating={average_rating} handleRatingSubmit={this.handleRatingSubmit}
-      />
+      <DescriptionCard location={location} average_rating={average_rating} handleRatingSubmit={this.handleRatingSubmit}/>
     )
   }
 }
