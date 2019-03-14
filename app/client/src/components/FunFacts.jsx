@@ -82,11 +82,13 @@ export default class FunFacts extends Component {
   updateFunfacts = (newFunfact) => {
     let oldList = this.state.funfactsList.map((x)=> x)
     oldList.push(newFunfact)
+    oldList.sort((a,b) => {
+      return b.id - a.id
+    })
     this.setState({
       funfactsList: oldList
     })
   }
-
 
   render() {
     const { visible, animation, direction, funfactsList } = this.state
