@@ -1,5 +1,11 @@
 JoinUsVic is a web app that provides insightful(-ish) information about downtown Victoria manifested through 3D model rendered by WebGL inside the web browser.
 
+## Screenshots && Gifs
+
+![LandingPage](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/LandingPageGif.gif "LandingPage")
+
+![AboutUsPage](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/AboutUsGif.gif "AboutUsPage")
+
 ## Project Setup
 
 Project Setup based on [Create React App](https://github.com/facebook/create-react-app).
@@ -42,6 +48,4 @@ MANY funfacts     -    ONE location
 
 ERD:
 ![ERD](https://github.com/yhfreeman/JoinUsVic-V2/blob/master/docs/databaseERD.png "Database ERD")
-
-## Screenshots && Gifs
 
