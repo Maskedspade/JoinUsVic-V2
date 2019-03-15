@@ -52,6 +52,14 @@ a:hover {
   cursor: pointer;
 }
 
+.btn-dark {
+  background: #055e5f !important;
+  color: #fffcfd !important;
+}
+.btn-dark:hover {
+  background: #044445 !important;
+}
+
 #error-message {
   color: #f55a81;
 }
@@ -114,13 +122,6 @@ a:hover {
 }
 .main-wrapper .ui.overlay {
   background: white;
-}
-.main-wrapper #btn-main-selection {
-  background: #055e5f;
-  color: #fffcfd;
-}
-.main-wrapper #btn-main-selection:hover {
-  background: #044445;
 }
 
 .sidebar-tab-menu {

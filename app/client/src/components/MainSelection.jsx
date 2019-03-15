@@ -81,7 +81,7 @@ export default class MainSelection extends Component {
             onChange={this.allOrFiltered}
             className='main-selection-checkbox'
           />
-          <Button onClick={this.fetchData} id='btn-main-selection'>Go</Button>
+          <Button className="btn-dark" onClick={this.fetchData}>Go</Button>
         </div>
 
         <Modal size={size} open={selectionModalOpen}>
@@ -92,8 +92,8 @@ export default class MainSelection extends Component {
             <p>Please give us at least one keyword :) </p>
           </Modal.Content>
           <Modal.Actions labelPosition='right'>
-            <Button id="btn-modal-error" onClick={this.closeModal}>
-              Got it
+            <Button className="btn-dark" onClick={this.closeModal}>
+              GotIt
             </Button>
           </Modal.Actions>
         </Modal>
